@@ -7,8 +7,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import static com.pet_space.repositories.GenusPetRepositoryTestData.*;
-import static com.pet_space.repositories.UserEssenceRepositoryTestData.*;
+import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
+import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
+import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_FRED;
+import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_JOHN;
 
 public interface PetRepositoryTestData {
     Pet PET_TIMON = Pet.builder()

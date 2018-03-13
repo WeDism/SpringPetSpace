@@ -1,4 +1,4 @@
-package com.pet_space.repositories.essences;
+package com.pet_space.services;
 
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.FriendsRepository;
@@ -14,15 +14,15 @@ import java.util.UUID;
 
 @Transactional
 @Repository
-public class UserEssenceRepositoryImpl<T extends UserEssence, ID extends UUID> implements UserEssenceCustomRepository<T, ID> {
-    private static final Logger LOG = LoggerFactory.getLogger(UserEssenceRepositoryImpl.class);
+public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(CustomUserEssenceRepositoryImpl.class);
 
     private final UserEssenceRepository userEssenceRepository;
     private final FriendsRepository friendsRepository;
     private final PetRepository petRepository;
 
     @Autowired
-    public UserEssenceRepositoryImpl(UserEssenceRepository userEssenceRepository, FriendsRepository friendsRepository, PetRepository petRepository) {
+    public CustomUserEssenceRepositoryImpl(UserEssenceRepository userEssenceRepository, FriendsRepository friendsRepository, PetRepository petRepository) {
         this.userEssenceRepository = userEssenceRepository;
         this.friendsRepository = friendsRepository;
         this.petRepository = petRepository;
@@ -30,16 +30,15 @@ public class UserEssenceRepositoryImpl<T extends UserEssence, ID extends UUID> i
 
     @Transactional
     @Override
-    @SuppressWarnings("unchecked")
-    public void deleteById(ID id) {
-        this.userEssenceRepository.findById(id).ifPresent(userEssence -> this.delete((T) userEssence));
+    public void deleteCascadeById(UUID id) {
+        this.userEssenceRepository.findById(id).ifPresent(this::deleteCascade);
     }
 
     @Transactional
     @Override
-    public void delete(T entity) {
+    public void deleteCascade(UserEssence entity) {
         entity.getRequestedFriendsFrom().forEach(this.friendsRepository::delete);
         entity.getPets().forEach(this.petRepository::delete);
-        userEssenceRepository.delete(entity);
+        this.userEssenceRepository.delete(entity);
     }
 }
