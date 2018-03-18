@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class Pet implements Serializable {
     private UUID petId;
     private String name;
-    private Double weight;
+    private Float weight;
     private LocalDateTime birthday;
     private UserEssence owner;
     private GenusPet genusPet;
@@ -49,11 +49,11 @@ public class Pet implements Serializable {
         return this;
     }
 
-    public Double getWeight() {
+    public Float getWeight() {
         return this.weight;
     }
 
-    public Pet setWeight(Double weight) {
+    public Pet setWeight(Float weight) {
         this.weight = weight;
         return this;
     }
@@ -125,7 +125,7 @@ public class Pet implements Serializable {
     }
 
     public interface IBuild {
-        IBuild weight(Double weight);
+        IBuild weight(Float weight);
 
         IBuild birthday(LocalDateTime birthday);
 
@@ -164,7 +164,7 @@ public class Pet implements Serializable {
         }
 
         @Override
-        public IBuild weight(Double weight) {
+        public IBuild weight(Float weight) {
             this.pet.setWeight(weight);
             return this;
         }

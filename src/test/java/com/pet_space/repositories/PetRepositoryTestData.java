@@ -5,6 +5,7 @@ import com.pet_space.models.Pet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
@@ -17,7 +18,7 @@ public interface PetRepositoryTestData {
             .name("Timon")
             .owner(USER_ESSENCE_JOHN)
             .genusPet(GENUS_CAT)
-            .weight(5.6)
+            .weight(5.6f)
             .build();
     Pet PET_PERS = Pet.builder()
             .name("Pers")
@@ -35,9 +36,9 @@ public interface PetRepositoryTestData {
             .name("Layma")
             .owner(USER_ESSENCE_FRED)
             .genusPet(GENUS_DOG)
-            .weight(15.5)
+            .weight(15.5f)
             .birthday(LocalDateTime.of(LocalDate.of(2009, 12, 7), LocalTime.now()))
             .build();
 
-    List<Pet> SET_PETS = List.of(PET_LAYMA, PET_PERS, PET_TIMON, PET_TOSH);
+    List<Pet> SET_PETS = Arrays.asList(PET_LAYMA, PET_PERS, PET_TIMON, PET_TOSH);
 }

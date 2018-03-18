@@ -26,7 +26,6 @@ public class UserEssence implements Serializable {
     @Column(nullable = false)
     private String surname;
     private String patronymic;
-    @Column(name = "about_of_self")
     private String aboutOfSelf;
     private RoleEssence role;
     private StatusEssence statusEssence;
@@ -121,6 +120,7 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @Column(name = "about_of_self")
     public String getAboutOfSelf() {
         return this.aboutOfSelf;
     }
