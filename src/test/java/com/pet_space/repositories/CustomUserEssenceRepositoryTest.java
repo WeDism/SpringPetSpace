@@ -1,25 +1,23 @@
 package com.pet_space.repositories;
 
 import com.pet_space.models.essences.UserEssence;
-import org.hamcrest.CoreMatchers;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.pet_space.repositories.GenusPetRepositoryTestData.*;
+import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
+import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
 import static com.pet_space.repositories.PetRepositoryTestData.*;
 import static com.pet_space.repositories.RoleEssenceRepositoryTestData.*;
 import static com.pet_space.repositories.StateFriendRepositoryTestData.*;
 import static com.pet_space.repositories.StatusEssenceRepositoryTestData.*;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class UserEssenceRepositoryAndCustomTest extends DbInit {
+public class CustomUserEssenceRepositoryTest extends DbInit {
 
     @Before
     public void setUp() {
@@ -62,9 +60,9 @@ public class UserEssenceRepositoryAndCustomTest extends DbInit {
         UserEssence userEssenceJohn = essenceOptionalJohn.get();
         UserEssence userEssenceSimon = essenceOptionalSimon.get();
 
-        assertThat(userEssenceFred.getPets(), is(SET_PETS.stream().filter(pet->pet.getOwner().equals(userEssenceFred)).collect(Collectors.toSet())));
-        assertThat(userEssenceJohn.getPets(), is(SET_PETS.stream().filter(pet->pet.getOwner().equals(userEssenceJohn)).collect(Collectors.toSet())));
-        assertThat(userEssenceSimon.getPets(), is(SET_PETS.stream().filter(pet->pet.getOwner().equals(userEssenceSimon)).collect(Collectors.toSet())));
+        assertThat(userEssenceFred.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceFred)).collect(Collectors.toSet())));
+        assertThat(userEssenceJohn.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceJohn)).collect(Collectors.toSet())));
+        assertThat(userEssenceSimon.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceSimon)).collect(Collectors.toSet())));
 
         this.customUserEssenceRepository.deleteCascade(userEssenceFred);
         this.customUserEssenceRepository.deleteCascade(userEssenceJohn);
@@ -79,7 +77,6 @@ public class UserEssenceRepositoryAndCustomTest extends DbInit {
         assertFalse(essenceOptionalSimon.isPresent());
     }
 
-    @After
-    public void cleanUp() {
-    }
+
+
 }
