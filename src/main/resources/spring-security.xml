@@ -7,17 +7,21 @@
                                  http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/user*" access="hasAuthority('USER')"/>
-        <intercept-url pattern="/admin*" access="hasAuthority('ADMIN')"/>
-        <intercept-url pattern="/root*" access="hasAuthority('ROOT')"/>
-        <intercept-url pattern="/**" access="permitAll()"/>
+        <intercept-url pattern="/user/**" access="hasAuthority('USER')"/>
+        <intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')"/>
+        <intercept-url pattern="/root/**" access="hasAuthority('ROOT')"/>
+        <intercept-url pattern="/web_resources/**" access="permitAll()"/>
+        <intercept-url pattern="/login/**" access="permitAll()"/>
         <form-login login-page="/login"
                     default-target-url="/pet_space"
                     authentication-failure-url="/login?error=error"
                     username-parameter="nickname"
                     password-parameter="password"
                     login-processing-url="/login"/>
-        <logout logout-success-url="/login?logout"/>
+        <logout invalidate-session="true"
+                logout-success-url="/login?logout"
+                logout-url="/logout" delete-cookies="JSESSIONID" />
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
@@ -27,7 +31,7 @@
                                        "SELECT nickname, password, TRUE FROM user_essence
                                         WHERE nickname=?"
                                authorities-by-username-query=
-                                       "SELECT  nickname,  'ROLE_' || role AS role FROM user_essence
+                                       "SELECT nickname, role FROM user_essence
                                         WHERE nickname=?"/>
         </authentication-provider>
     </authentication-manager>

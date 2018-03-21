@@ -22,9 +22,7 @@ public class GenusPetRepositoryTest extends DbInit{
     @Test
     public void findById() {
         this.genusPetRepository.save(GENUS_CAT);
-        Optional<GenusPet> optionalCat = this.genusPetRepository.findById("cat");
-        Assert.assertTrue(optionalCat.isPresent());
-        GenusPet cat = optionalCat.get();
+        GenusPet cat = this.genusPetRepository.findOne("cat");
         Assert.assertThat(cat, CoreMatchers.is(GENUS_CAT));
     }
 

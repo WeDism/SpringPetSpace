@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public interface UserEssenceRepository extends CrudRepository<UserEssence, UUID> {
 
-    Optional<UserEssence> findByNickname(String nickname);
+    UserEssence findByNickname(String nickname);
 
 }

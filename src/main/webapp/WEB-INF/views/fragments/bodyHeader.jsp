@@ -7,6 +7,6 @@
         <h3><a href="<c:url value="${homepage}"/>">Home</a></h3>
     </div>
     <div class="col-2 offset-8">
-        <h3><a href="<c:url value="/login?logout"/>">Exit</a></h3>
+        <h3><a href="<c:url value="/logout"/>">Exit</a></h3>
     </div>
 </div>

@@ -37,7 +37,7 @@ public class UserEssenceRepositoryTest extends DbInit {
 
     @Test
     public void findByNickname() {
-        UserEssence byNickname = this.userEssenceRepository.findByNickname(USER_ESSENCE_JOHN.getNickname()).get();
+        UserEssence byNickname = this.userEssenceRepository.findByNickname(USER_ESSENCE_JOHN.getNickname());
         assertThat(byNickname, is(USER_ESSENCE_JOHN));
     }
 

@@ -31,7 +31,7 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
     @Transactional
     @Override
     public void deleteCascadeById(UUID id) {
-        this.userEssenceRepository.findById(id).ifPresent(this::deleteCascade);
+        this.deleteCascade(this.userEssenceRepository.findOne(id));
     }
 
     @Transactional

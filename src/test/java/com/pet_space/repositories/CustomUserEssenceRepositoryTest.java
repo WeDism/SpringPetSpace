@@ -48,17 +48,10 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
 
     @Test
     public void deleteCascade() {
-        Optional<UserEssence> essenceOptionalJohn = this.userEssenceRepository.findById(USER_ESSENCE_JOHN.getUserEssenceId());
-        Optional<UserEssence> essenceOptionalFred = this.userEssenceRepository.findById(USER_ESSENCE_FRED.getUserEssenceId());
-        Optional<UserEssence> essenceOptionalSimon = this.userEssenceRepository.findById(USER_ESSENCE_SIMON.getUserEssenceId());
 
-        assertTrue(essenceOptionalJohn.isPresent());
-        assertTrue(essenceOptionalFred.isPresent());
-        assertTrue(essenceOptionalSimon.isPresent());
-
-        UserEssence userEssenceFred = essenceOptionalFred.get();
-        UserEssence userEssenceJohn = essenceOptionalJohn.get();
-        UserEssence userEssenceSimon = essenceOptionalSimon.get();
+        UserEssence userEssenceFred = this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId());
+        UserEssence userEssenceJohn = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
+        UserEssence userEssenceSimon = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
 
         assertThat(userEssenceFred.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceFred)).collect(Collectors.toSet())));
         assertThat(userEssenceJohn.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceJohn)).collect(Collectors.toSet())));
@@ -68,13 +61,9 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
         this.customUserEssenceRepository.deleteCascade(userEssenceJohn);
         this.customUserEssenceRepository.deleteCascade(userEssenceSimon);
 
-        essenceOptionalJohn = this.userEssenceRepository.findById(USER_ESSENCE_JOHN.getUserEssenceId());
-        essenceOptionalFred = this.userEssenceRepository.findById(USER_ESSENCE_FRED.getUserEssenceId());
-        essenceOptionalSimon = this.userEssenceRepository.findById(USER_ESSENCE_SIMON.getUserEssenceId());
-
-        assertFalse(essenceOptionalJohn.isPresent());
-        assertFalse(essenceOptionalFred.isPresent());
-        assertFalse(essenceOptionalSimon.isPresent());
+        assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId()));
+        assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId()));
+        assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId()));
     }
 
 

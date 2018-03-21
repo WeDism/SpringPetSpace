@@ -40,4 +40,9 @@ public class LoginController implements ServletConfigAware {
         return "login";
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public String redirect() {
+        return "redirect:/login";
+    }
+
 }

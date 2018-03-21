@@ -24,8 +24,8 @@ public class PetSpaceController {
     @RequestMapping(value = "pet_space", method = RequestMethod.GET)
     public String role(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserEssence userEssence = this.userEssenceRepository.findByNickname(auth.getName()).get();
+        UserEssence userEssence = this.userEssenceRepository.findByNickname(auth.getName());
         model.addAttribute("user", userEssence);
-        return "redirect:/" + userEssence.getRole().toString().toLowerCase();
+        return "redirect:/" + userEssence.getRole().getRoleEssenceEnum().name().toLowerCase();
     }
 }
