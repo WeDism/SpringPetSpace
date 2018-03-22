@@ -72,7 +72,9 @@ public class EssenceForSearchFriend implements Iterable<String> {
         };
     }
 
-    public String resultPath() {
+    @Override
+    public String toString() {
         return this.resultString;
     }
+
 }

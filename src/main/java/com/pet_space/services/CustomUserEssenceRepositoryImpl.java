@@ -56,9 +56,9 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
     public List<UserEssence> fiendFriend(UserEssence userEssence, String name, String surname, String patronymic) {
         SessionFactory sessionFactory = this.entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
         try (Session session = sessionFactory.openSession()) {
-            EssenceForSearchFriend essenceForSearchFriend = new EssenceForSearchFriend(name, surname, patronymic);
+            Iterable essenceForSearchFriend = new EssenceForSearchFriend(name, surname, patronymic);
             Iterator<String> iterator = essenceForSearchFriend.iterator();
-            Query query = session.createQuery("from UserEssence ue where " + essenceForSearchFriend.resultPath() + " and ue.userEssenceId != :userEssenceId");
+            Query query = session.createQuery("from UserEssence ue where " + essenceForSearchFriend.toString() + " and ue.userEssenceId != :userEssenceId");
             if (iterator.hasNext()) query.setParameter(0, iterator.next());
             if (iterator.hasNext()) query.setParameter(1, iterator.next());
             if (iterator.hasNext()) query.setParameter(2, iterator.next());
