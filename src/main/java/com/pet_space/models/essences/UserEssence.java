@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class UserEssence implements Serializable {
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     private LocalDateTime birthday;
     private UUID userEssenceId;

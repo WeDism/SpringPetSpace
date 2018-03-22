@@ -44,4 +44,9 @@ public class RoleEssence implements Serializable {
     public int hashCode() {
         return Objects.hash(getRoleEssenceEnum());
     }
+
+    @Override
+    public String toString() {
+        return this.roleEssenceEnum.name();
+    }
 }

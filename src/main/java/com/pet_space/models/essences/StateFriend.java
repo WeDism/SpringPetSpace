@@ -45,4 +45,9 @@ public class StateFriend implements Serializable {
     public int hashCode() {
         return Objects.hash(getStateFriendEnum());
     }
+
+    @Override
+    public String toString() {
+        return this.stateFriendEnum.name();
+    }
 }

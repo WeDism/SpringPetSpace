@@ -10,25 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
-import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
-import static com.pet_space.repositories.PetRepositoryTestData.*;
-import static com.pet_space.repositories.RoleEssenceRepositoryTestData.ROLE_ESSENCE_ADMIN;
-import static com.pet_space.repositories.RoleEssenceRepositoryTestData.ROLE_ESSENCE_ROOT;
-import static com.pet_space.repositories.RoleEssenceRepositoryTestData.ROLE_ESSENCE_USER;
-import static com.pet_space.repositories.StateFriendRepositoryTestData.STATE_FRIEND_APPROVED;
-import static com.pet_space.repositories.StateFriendRepositoryTestData.STATE_FRIEND_REJECTED;
-import static com.pet_space.repositories.StateFriendRepositoryTestData.STATE_FRIEND_REQUESTED;
-import static com.pet_space.repositories.StatusEssenceRepositoryTestData.STATUS_ESSENCE_ACTIVE;
-import static com.pet_space.repositories.StatusEssenceRepositoryTestData.STATUS_ESSENCE_DELETED;
-import static com.pet_space.repositories.StatusEssenceRepositoryTestData.STATUS_ESSENCE_INACTIVE;
-import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_FRED;
-import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_JOHN;
-import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_SIMON;
-
 @Ignore
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)

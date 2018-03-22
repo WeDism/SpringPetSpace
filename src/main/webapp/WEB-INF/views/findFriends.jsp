@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ctg" uri="custom_tags" %>
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
     <script src='<c:url value="/web_resources/js/custom/findFriend.js"/>'></script>
@@ -62,7 +61,7 @@
                             <a href="<c:url value="${homepage}"/>/essence?nickname=<c:out value="${friend.nickname}"/>">${friend.nickname}</a>
                         </td>
                         <td><input class="essence-friend-checkbox" type="checkbox"
-                            <ctg:map_contains essenceMap="${user.requestedFriendsFrom}" userEssence="${friend.userEssenceId}" text="checked=\"true\""/>
+                            <%--<ctg:map_contains essenceMap="${user.requestedFriendsFrom}" userEssence="${friend.userEssenceId}" text="checked=\"true\""/>--%>
                         </td>
                         <td><c:out value="${friend.name}"/></td>
                         <td><c:out value="${friend.surname}"/></td>

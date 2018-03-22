@@ -3,6 +3,7 @@ package com.pet_space.services;
 
 import com.pet_space.models.essences.UserEssence;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CustomUserEssenceRepository {
@@ -11,4 +12,5 @@ public interface CustomUserEssenceRepository {
 
     void deleteCascade(UserEssence entity);
 
+    List<UserEssence> fiendFriend(UserEssence userEssence, String name, String surname, String patronymic);
 }

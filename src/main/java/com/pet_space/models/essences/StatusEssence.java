@@ -45,4 +45,9 @@ public class StatusEssence implements Serializable {
     public int hashCode() {
         return Objects.hash(getStatusEssenceEnum());
     }
+
+    @Override
+    public String toString() {
+        return this.statusEssenceEnum.name();
+    }
 }

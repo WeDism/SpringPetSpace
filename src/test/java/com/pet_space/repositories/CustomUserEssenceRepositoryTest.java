@@ -4,7 +4,7 @@ import com.pet_space.models.essences.UserEssence;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
@@ -15,7 +15,8 @@ import static com.pet_space.repositories.StateFriendRepositoryTestData.*;
 import static com.pet_space.repositories.StatusEssenceRepositoryTestData.*;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.*;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 public class CustomUserEssenceRepositoryTest extends DbInit {
 
@@ -36,14 +37,14 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
         this.genusPetRepository.save(GENUS_CAT);
         this.genusPetRepository.save(GENUS_DOG);
 
-        this.userEssenceRepository.save(USER_ESSENCE_JOHN);
-        this.userEssenceRepository.save(USER_ESSENCE_FRED);
-        this.userEssenceRepository.save(USER_ESSENCE_SIMON);
+        this.userEssenceRepository.save(USER_ESSENCE_JOHN.setUserEssenceId(null));
+        this.userEssenceRepository.save(USER_ESSENCE_FRED.setUserEssenceId(null));
+        this.userEssenceRepository.save(USER_ESSENCE_SIMON.setUserEssenceId(null));
 
-        this.petRepository.save(PET_LAYMA);
-        this.petRepository.save(PET_PERS);
-        this.petRepository.save(PET_TIMON);
-        this.petRepository.save(PET_TOSH);
+        this.petRepository.save(PET_LAYMA.setPetId(null));
+        this.petRepository.save(PET_PERS.setPetId(null));
+        this.petRepository.save(PET_TIMON.setPetId(null));
+        this.petRepository.save(PET_TOSH.setPetId(null));
     }
 
     @Test
@@ -66,6 +67,16 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
         assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId()));
     }
 
+    @Test
+    public void fiendFriend() {
+        List<UserEssence> userEssences = this.customUserEssenceRepository
+                .fiendFriend(USER_ESSENCE_JOHN, USER_ESSENCE_FRED.getName(), USER_ESSENCE_FRED.getSurname(), USER_ESSENCE_FRED.getPatronymic());
+        assertThat(userEssences.size(), is(1));
+        userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_JOHN, USER_ESSENCE_SIMON.getName(), null, null);
+        assertThat(userEssences.size(), is(1));
+        userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, USER_ESSENCE_SIMON.getName(), USER_ESSENCE_SIMON.getSurname(), null);
+        assertThat(userEssences.size(), is(1));
+    }
 
 
 }

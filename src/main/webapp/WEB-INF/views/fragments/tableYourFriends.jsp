@@ -12,30 +12,31 @@
     </tr>
     </thead>
     <tbody data-path-for-state-friend="${pageContext.request.contextPath}${homepage}/friend_controller">
-    <c:forEach items="${user.requestedFriendsFrom()}" var="liteEssence">
-        <tr data-essence-id="${liteEssence.userEssenceId}">
+    <c:set var="user" value="${sessionScope.user}"/>
+    <c:forEach items="${user.getRequestedFriendsFrom()}" var="friend">
+        <tr data-essence-id="${friend.userEssenceId}">
             <td>
-                <a href="<c:url value="${homepage}"/>/essence?nickname=<c:out value="${liteEssence.nickname}"/>">${liteEssence.nickname}</a>
+                <a href="<c:url value="${homepage}"/>/essence?nickname=<c:out value="${friend.nickname}"/>">${friend.nickname}</a>
             </td>
-            <td><c:out value="${liteEssence.name}"/></td>
-            <td><c:out value="${liteEssence.surname}"/></td>
-            <td><c:out value="${liteEssence.role}"/></td>
+            <td><c:out value="${friend.name}"/></td>
+            <td><c:out value="${friend.surname}"/></td>
+            <td><c:out value="${friend.role}"/></td>
             <td>
                 <c:choose>
-                    <c:when test="${user.requestedFriendsTo.containsKey(liteEssence.userEssenceId)}">
+                    <c:when test="${user.getRequestedFriendsTo.containsKey(friend.userEssenceId)}">
                         <select class="action-friends" name="action-friends" required>
                             <c:set var="stateFriendSet"
                                    value="<%=com.pet_space.models.essences.StateFriend.StateFriendEnum.values()%>"/>
                             <c:forEach items="${stateFriendSet}" var="stateFriend" varStatus="status">
                                 <option value="<c:out value="${stateFriend}"/>"
-                                        <c:if test="${user.requestedFriendsTo.get(liteEssence.userEssenceId).equals(stateFriend)}">selected</c:if>>
+                                        <c:if test="${user.getRequestedFriendsTo.get(friend.userEssenceId).equals(stateFriend)}">selected</c:if>>
                                     <c:out value="${stateFriend}"/>
                                 </option>
                             </c:forEach>
                         </select>
                     </c:when>
                     <c:otherwise>
-                        <label><c:out value="${user.requestedFriendsFrom.get(liteEssence.userEssenceId)}"/></label>
+                        <label><c:out value="${sessionScope.user.getRequestedFriendsFrom.get(friend.userEssenceId)}"/></label>
                     </c:otherwise>
                 </c:choose>
             </td>
