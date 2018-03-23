@@ -20,33 +20,6 @@ import static org.junit.Assert.assertThat;
 
 public class CustomUserEssenceRepositoryTest extends DbInit {
 
-    @Before
-    public void setUp() {
-        this.roleEssenceRepository.save(ROLE_ESSENCE_ROOT);
-        this.roleEssenceRepository.save(ROLE_ESSENCE_ADMIN);
-        this.roleEssenceRepository.save(ROLE_ESSENCE_USER);
-
-        this.statusEssenceRepository.save(STATUS_ESSENCE_ACTIVE);
-        this.statusEssenceRepository.save(STATUS_ESSENCE_DELETED);
-        this.statusEssenceRepository.save(STATUS_ESSENCE_INACTIVE);
-
-        this.stateFriendRepository.save(STATE_FRIEND_APPROVED);
-        this.stateFriendRepository.save(STATE_FRIEND_REJECTED);
-        this.stateFriendRepository.save(STATE_FRIEND_REQUESTED);
-
-        this.genusPetRepository.save(GENUS_CAT);
-        this.genusPetRepository.save(GENUS_DOG);
-
-        this.userEssenceRepository.save(USER_ESSENCE_JOHN.setUserEssenceId(null));
-        this.userEssenceRepository.save(USER_ESSENCE_FRED.setUserEssenceId(null));
-        this.userEssenceRepository.save(USER_ESSENCE_SIMON.setUserEssenceId(null));
-
-        this.petRepository.save(PET_LAYMA.setPetId(null));
-        this.petRepository.save(PET_PERS.setPetId(null));
-        this.petRepository.save(PET_TIMON.setPetId(null));
-        this.petRepository.save(PET_TOSH.setPetId(null));
-    }
-
     @Test
     public void deleteCascade() {
 
@@ -68,7 +41,7 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
     }
 
     @Test
-    public void fiendFriend() {
+    public void findFriend() {
         List<UserEssence> userEssences = this.customUserEssenceRepository
                 .fiendFriend(USER_ESSENCE_JOHN, USER_ESSENCE_FRED.getName(), USER_ESSENCE_FRED.getSurname(), USER_ESSENCE_FRED.getPatronymic());
         assertThat(userEssences.size(), is(1));

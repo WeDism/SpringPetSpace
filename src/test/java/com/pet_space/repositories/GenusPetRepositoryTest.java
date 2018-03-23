@@ -11,12 +11,6 @@ import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
 
 public class GenusPetRepositoryTest extends DbInit{
 
-    @Before
-    public void setUp() {
-        this.genusPetRepository.save(GENUS_CAT);
-        this.genusPetRepository.save(GENUS_DOG);
-    }
-
     @Test
     public void findById() {
         this.genusPetRepository.save(GENUS_CAT);

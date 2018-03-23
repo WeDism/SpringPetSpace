@@ -1,7 +1,10 @@
 package com.pet_space.controllers;
 
+import com.pet_space.models.essences.RoleEssence;
+import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
+import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.*;
+import static org.slf4j.LoggerFactory.getLogger;
+
 
 @Controller
 public class PetSpaceController {
-
-    final UserEssenceRepository userEssenceRepository;
+    private static final Logger LOG = getLogger(PetSpaceController.class);
+    private final UserEssenceRepository userEssenceRepository;
 
     @Autowired
     public PetSpaceController(UserEssenceRepository userEssenceRepository) {
@@ -23,10 +29,10 @@ public class PetSpaceController {
     }
 
     @RequestMapping(value = "pet_space", method = RequestMethod.GET)
-    public String role(HttpSession session) {
+    public String getRole(HttpSession session) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserEssence userEssence = this.userEssenceRepository.findByNickname(auth.getName());
-        session.setAttribute("user", userEssence);
+        session.setAttribute(USER.name().toLowerCase(), userEssence);
         return String.format("redirect:/%s/%s", userEssence.getRole().getRoleEssenceEnum().name().toLowerCase(), auth.getName());
     }
 }

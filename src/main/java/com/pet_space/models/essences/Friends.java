@@ -14,6 +14,15 @@ public class Friends implements Serializable {
     private FriendId primaryKey = new FriendId();
     private StateFriend state;
 
+    public Friends() {
+    }
+
+    public Friends(FriendId primaryKey, StateFriend state) {
+        this();
+        this.primaryKey = primaryKey;
+        this.state = state;
+    }
+
     @EmbeddedId
     public FriendId getPrimaryKey() {
         return this.primaryKey;

@@ -11,6 +11,15 @@ public class FriendId implements Serializable {
     private UserEssence userEssence;
     private UserEssence friend;
 
+    public FriendId() {
+    }
+
+    public FriendId(UserEssence userEssence, UserEssence friend) {
+        this();
+        this.userEssence = userEssence;
+        this.friend = friend;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
     public UserEssence getUserEssence() {
         return this.userEssence;

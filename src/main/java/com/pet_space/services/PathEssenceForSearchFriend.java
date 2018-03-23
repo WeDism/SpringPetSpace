@@ -9,39 +9,40 @@ import java.util.List;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-public class EssenceForSearchFriend implements Iterable<String> {
+public class PathEssenceForSearchFriend implements Iterable<String> {
     private String name;
     private String surname;
     private String patronymic;
     private List<String> listParams = new LinkedList<>();
     private String resultString;
     private StringBuilder resultStringBuilder = new StringBuilder();
+    private static final String FIND_EXPRESSION = "LOWER(%s)=LOWER(?)";
     private final List<Runnable> construct = Arrays.asList(
             () -> {
                 if (!isNullOrEmpty(this.name)) {
                     this.listParams.add(this.name);
                     if (this.listParams.size() > 1) this.resultStringBuilder.append(" %1$s ");
-                    this.resultStringBuilder.append("LOWER(name)=LOWER(?)");
+                    this.resultStringBuilder.append(String.format(FIND_EXPRESSION, "name"));
                 }
             },
             () -> {
                 if (!isNullOrEmpty(this.surname)) {
                     this.listParams.add(this.surname);
                     if (this.listParams.size() > 1) this.resultStringBuilder.append(" %1$s ");
-                    this.resultStringBuilder.append("LOWER(surname)=LOWER(?)");
+                    this.resultStringBuilder.append(String.format(FIND_EXPRESSION, "surname"));
                 }
             },
             () -> {
                 if (!isNullOrEmpty(this.patronymic)) {
                     this.listParams.add(this.patronymic);
                     if (this.listParams.size() > 1) this.resultStringBuilder.append(" %1$s ");
-                    this.resultStringBuilder.append("LOWER(patronymic)=LOWER(?)");
+                    this.resultStringBuilder.append(String.format(FIND_EXPRESSION, "patronymic"));
                 }
             }
     );
 
 
-    public EssenceForSearchFriend(String name, String surname, String patronymic) {
+    public PathEssenceForSearchFriend(String name, String surname, String patronymic) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;

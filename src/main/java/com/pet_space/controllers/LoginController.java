@@ -10,7 +10,7 @@ import org.springframework.web.context.ServletConfigAware;
 import javax.servlet.ServletConfig;
 
 @Controller
-@RequestMapping(value = "/login")
+@RequestMapping(value = "login")
 public class LoginController implements ServletConfigAware {
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 
@@ -36,12 +36,12 @@ public class LoginController implements ServletConfigAware {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String loginView() {
+    public String getLoginView() {
         return "login";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String redirect() {
+    public String postRedirect() {
         return "redirect:/login";
     }
 
