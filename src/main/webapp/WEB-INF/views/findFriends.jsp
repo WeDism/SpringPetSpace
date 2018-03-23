@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
     <script src='<c:url value="/web_resources/js/custom/findFriend.js"/>'></script>
@@ -54,7 +55,7 @@
                     <th>Pets</th>
                 </tr>
                 </thead>
-                <tbody data-path-for-essence-friend="${pageContext.request.contextPath}${homepage}/friend_request">
+                <tbody data-path-for-essence-friend="${pageContext.request.contextPath}${homepage}/${fn:toLowerCase(user.role)}/friend_request">
                 <c:forEach items="${friends}" var="friend" varStatus="status">
                     <tr data-essence-id="${friend.userEssenceId}">
                         <td>

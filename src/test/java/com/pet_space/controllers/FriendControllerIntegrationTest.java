@@ -21,7 +21,6 @@ public class FriendControllerIntegrationTest extends ControllerInit {
 
     @Test
     public void postFriendRequest() {
-//        MockHttpSession session = new MockHttpSession();
         UserEssence userEssenceJohn = SerializationUtils.clone(USER_ESSENCE_JOHN).setNickname("JOHN_CLONE");
         Set<Pet> petsJohn = userEssenceJohn.getPets();
         userEssenceJohn.setPets(Collections.emptySet());
@@ -49,6 +48,8 @@ public class FriendControllerIntegrationTest extends ControllerInit {
         this.session.setAttribute(USER.name().toLowerCase(), userEssenceFred);
         assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.OK));
         assertThat(((UserEssence) this.session.getAttribute(USER.name().toLowerCase())).getRequestedFriendsFrom().size(), is(1));
+        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.BAD_REQUEST));
+
     }
 
 }

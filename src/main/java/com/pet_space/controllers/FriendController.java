@@ -70,5 +70,34 @@ public class FriendController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @RequestMapping(value = "friend_request", method = RequestMethod.DELETE)
+    public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, HttpSession session) {
+        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+        UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
+        FriendId friendId = new FriendId(user, friend);
+        Friends friends = this.friendsRepository.findOne(friendId);
+        if (friends != null) {
+            this.friendsRepository.delete(friends.getPrimaryKey());
+            session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
+            return new ResponseEntity(HttpStatus.OK);
+        } else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "friend_request", method = RequestMethod.PUT)
+    public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId,
+                                              HttpSession session, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
+        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+        UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
+        FriendId friendId = new FriendId(friend, user);
+        Friends friends = this.friendsRepository.findOne(friendId);
+        if (friends != null) {
+            this.friendsRepository.save(friends.setState(new StateFriend(stateFriendEnum)));
+            session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
+            return new ResponseEntity(HttpStatus.OK);
+        } else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
 
 }
