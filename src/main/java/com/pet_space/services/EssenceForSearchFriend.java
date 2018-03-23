@@ -20,13 +20,14 @@ public class EssenceForSearchFriend implements Iterable<String> {
             () -> {
                 if (!isNullOrEmpty(this.name)) {
                     this.listParams.add(this.name);
+                    if (this.listParams.size() > 1) this.resultStringBuilder.append(" %1$s ");
                     this.resultStringBuilder.append("LOWER(name)=LOWER(?)");
                 }
             },
             () -> {
                 if (!isNullOrEmpty(this.surname)) {
                     this.listParams.add(this.surname);
-                    if (this.listParams.size() > 0) this.resultStringBuilder.append(" %1$s ");
+                    if (this.listParams.size() > 1) this.resultStringBuilder.append(" %1$s ");
                     this.resultStringBuilder.append("LOWER(surname)=LOWER(?)");
                 }
             },

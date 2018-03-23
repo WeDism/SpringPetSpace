@@ -76,6 +76,10 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
         assertThat(userEssences.size(), is(1));
         userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, USER_ESSENCE_SIMON.getName(), USER_ESSENCE_SIMON.getSurname(), null);
         assertThat(userEssences.size(), is(1));
+        userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, null, null, "test");
+        assertThat(userEssences.size(), is(0));
+        userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, null, "name", "test");
+        assertThat(userEssences.size(), is(0));
     }
 
 
