@@ -23,7 +23,7 @@ public class ControllerInit extends DbInit{
 
     @Autowired
     protected FriendController friendController;
-    @Mock
+    @Autowired
     protected MockHttpSession session;
 
     @Override
