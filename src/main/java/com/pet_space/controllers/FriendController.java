@@ -65,7 +65,7 @@ public class FriendController {
             friends = new Friends(friendId, state);
             this.friendsRepository.save(friends);
             session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.CREATED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

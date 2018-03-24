@@ -38,8 +38,7 @@
         <div class="col">
             <table class="table table-hover">
                 <caption>Genus pet</caption>
-                <c:set var="genusPetSet" value="<%=com.pet_space.storages.GenusPetStorage.getInstance().getAll()%>"/>
-                <c:forEach items="${genusPetSet}" var="genusPet">
+                <c:forEach items="${requestScope.genusPetSet}" var="genusPet">
                     <tr>
                         <td>
                             <c:out value="${genusPet.name}"/>
