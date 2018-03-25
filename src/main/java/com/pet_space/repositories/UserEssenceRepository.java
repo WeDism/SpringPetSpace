@@ -1,10 +1,8 @@
 package com.pet_space.repositories;
 
 import com.pet_space.models.essences.UserEssence;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface UserEssenceRepository extends CrudRepository<UserEssence, UUID> {

@@ -1,8 +1,16 @@
-.c-row{
+.c-row {
     margin-top: +15px;
     margin-bottom: +15px;
 }
-.header-btn{
+
+.header-btn {
     font-size: x-large;
     font-weight: bold;
+}
+
+.error {
+    color: red;
+}
+.congratulate{
+    background-color: limegreen;
 }

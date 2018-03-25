@@ -2,21 +2,31 @@ package com.pet_space.models;
 
 import com.pet_space.models.essences.UserEssence;
 import org.hibernate.annotations.GenericGenerator;
-import org.jetbrains.annotations.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(name = "pk_pet_name_per_user", columnNames = {"name", "user_essence_id"}))
 public class Pet implements Serializable {
     private UUID petId;
+    @NotBlank
+    @Size(min = 2, max = 200, message = "Pet name must be between 2 and 200 characters long.")
     private String name;
     private Float weight;
+    @DateTimeFormat(iso = ISO.DATE_TIME)
     private LocalDateTime birthday;
     private UserEssence owner;
+    @NotNull(message = "Genus pet should be chose")
     private GenusPet genusPet;
     private Set<UserEssence> followersPet = new HashSet<>();
 

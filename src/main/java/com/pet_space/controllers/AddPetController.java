@@ -7,15 +7,20 @@ import com.pet_space.repositories.PetRepository;
 import com.pet_space.repositories.UserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.UUID;
 
+import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequestMapping(value = {"user/add_pet", "admin/add_pet"})
@@ -34,17 +39,32 @@ public class AddPetController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getAddPetView(Model model) {
+    public String getAddPetView(HttpSession session, Model model) {
+        session.removeAttribute("petIsAdded");
         model.addAttribute("genusPet", this.genusPetRepository.findAll());
         return "addPet";
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public String postUserPet(@ModelAttribute Pet pet, HttpSession session) {
+    public String postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, HttpSession session, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("genusPet", this.genusPetRepository.findAll());
+            return "addPet";
+        }
+
+        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+        if (this.petRepository.findByNameAndOwner(pet.getName(), user) != null) {
+            model.addAttribute("genusPet", this.genusPetRepository.findAll());
+            model.addAttribute("genusPetName", String.format("This is %s name you already use", pet.getName()));
+            return "addPet";
+        }
+
         pet.setPetId(UUID.randomUUID());
+        pet.setOwner(user);
         this.petRepository.save(pet);
-        UserEssence user = (UserEssence) session.getAttribute("user");
-        session.setAttribute("user", this.userEssenceRepository.findOne(user.getUserEssenceId()));
-        return user.getRole().toString().toLowerCase() + "/add_pet";
+        session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
+        session.setAttribute("petIsAdded", true);
+        return "addPet";
     }
 }

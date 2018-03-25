@@ -1,8 +1,11 @@
 package com.pet_space.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +14,8 @@ import java.util.Objects;
 public class GenusPet implements Serializable {
 
     @Id
+    @NotBlank
+    @Size(min = 2, max = 200, message = "Genus pet name must be between 2 and 200 characters long.")
     private String name;
 
     public GenusPet() {

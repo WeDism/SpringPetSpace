@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -44,6 +45,7 @@ public class FriendController {
         return "findFriends";
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "find_friend", method = RequestMethod.POST)
     public String postFindFriends(@RequestParam(name = "name") String name,
                                   @RequestParam(name = "surname") String surname,
@@ -66,8 +68,7 @@ public class FriendController {
             this.friendsRepository.save(friends);
             session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
             return new ResponseEntity(HttpStatus.CREATED);
-        } else
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "friend_request", method = RequestMethod.DELETE)

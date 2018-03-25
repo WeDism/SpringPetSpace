@@ -1,7 +1,5 @@
 package com.pet_space.controllers;
 
-import com.pet_space.models.essences.RoleEssence;
-import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;
 import org.slf4j.Logger;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
-import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.*;
+import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 

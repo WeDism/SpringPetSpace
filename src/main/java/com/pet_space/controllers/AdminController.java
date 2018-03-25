@@ -15,7 +15,7 @@ public class AdminController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAdminView(Authentication auth) {
-        return "redirect:/root/" + auth.getName();
+        return "redirect:/admin/" + auth.getName();
     }
 
     @RequestMapping(value = "{nickname}", method = RequestMethod.GET)

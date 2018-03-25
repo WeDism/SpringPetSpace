@@ -1,18 +1,12 @@
 package com.pet_space.repositories;
 
 import com.pet_space.models.essences.UserEssence;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
-import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
-import static com.pet_space.repositories.PetRepositoryTestData.*;
-import static com.pet_space.repositories.RoleEssenceRepositoryTestData.*;
-import static com.pet_space.repositories.StateFriendRepositoryTestData.*;
-import static com.pet_space.repositories.StatusEssenceRepositoryTestData.*;
+import static com.pet_space.repositories.PetRepositoryTestData.SET_PETS;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNull;

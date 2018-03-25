@@ -3,11 +3,9 @@ package com.pet_space.repositories;
 import com.pet_space.models.GenusPet;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
-import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
 
 public class GenusPetRepositoryTest extends DbInit{
 

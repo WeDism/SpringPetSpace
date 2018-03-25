@@ -14,7 +14,7 @@
               action="${pageContext.request.contextPath}${requestScope['javax.servlet.forward.servlet_path']}">
             <div class="row">
                 <div class="col-4 offset-4">
-                    <h2>Seach your friends</h2>
+                    <h2>Search your friends</h2>
                 </div>
             </div>
             <div class="row">

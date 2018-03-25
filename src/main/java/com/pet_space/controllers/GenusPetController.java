@@ -5,13 +5,17 @@ import com.pet_space.repositories.GenusPetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RequestMapping(value = {"admin/add_genus_pet", "root/add_genus_pet"})
@@ -32,15 +36,19 @@ public class GenusPetController {
         return "addGenusPet";
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public String postNewGenusPet(@RequestParam("name") GenusPet genusPet, HttpSession session, Model model) {
+    public String postNewGenusPet(@ModelAttribute("genusPet") @Valid GenusPet genusPet, BindingResult result, HttpSession session, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("genusPetSet", this.genusPetRepository.findAll());
+            return "addGenusPet";
+        }
+
         Optional<GenusPet> genusPetOptional = Optional.ofNullable(this.genusPetRepository.findOne(genusPet.getName()));
         if (!genusPetOptional.isPresent()) {
             this.genusPetRepository.save(genusPet);
-            session.setAttribute("genusPetIsAdded",true);
-        }
-        else
-            session.setAttribute("genusPetIsAdded", false);
+            session.setAttribute("genusPetIsAdded", true);
+        } else session.setAttribute("genusPetIsAdded", false);
         model.addAttribute("genusPetSet", this.genusPetRepository.findAll());
         return "addGenusPet";
     }

@@ -5,7 +5,6 @@ import com.pet_space.models.essences.UserEssence;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.mock.web.MockHttpSession;
 
 import java.util.Collections;
 import java.util.Set;
