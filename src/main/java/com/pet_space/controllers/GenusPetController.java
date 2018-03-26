@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -30,15 +29,14 @@ public class GenusPetController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getGenusPetView(HttpSession session, Model model) {
-        session.removeAttribute("genusPetIsAdded");
+    public String getGenusPetView(Model model) {
         model.addAttribute("genusPetSet", this.genusPetRepository.findAll());
         return "addGenusPet";
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public String postNewGenusPet(@ModelAttribute("genusPet") @Valid GenusPet genusPet, BindingResult result, HttpSession session, Model model) {
+    public String postNewGenusPet(@ModelAttribute("genusPet") @Valid GenusPet genusPet, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("genusPetSet", this.genusPetRepository.findAll());
             return "addGenusPet";
@@ -47,8 +45,8 @@ public class GenusPetController {
         Optional<GenusPet> genusPetOptional = Optional.ofNullable(this.genusPetRepository.findOne(genusPet.getName()));
         if (!genusPetOptional.isPresent()) {
             this.genusPetRepository.save(genusPet);
-            session.setAttribute("genusPetIsAdded", true);
-        } else session.setAttribute("genusPetIsAdded", false);
+            model.addAttribute("genusPetIsAdded", true);
+        } else model.addAttribute("genusPetIsAdded", false);
         model.addAttribute("genusPetSet", this.genusPetRepository.findAll());
         return "addGenusPet";
     }

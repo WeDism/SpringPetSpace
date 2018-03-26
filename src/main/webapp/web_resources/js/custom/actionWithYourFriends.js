@@ -1,7 +1,6 @@
 var changeStateFriend = function () {
     var tr = $(this).closest('tr')[0];
     var path = $(this).closest('tbody')[0];
-    var protocol = window.location.protocol
     $.ajax({
         url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({
             user_essence_id: tr.dataset.essenceId,
@@ -18,9 +17,10 @@ var changeStateFriend = function () {
             $(select).find('[value=' + previewValue + ']')[0].setAttribute('selected', true);
             var options = $(select).children();
             for (var i = 0; options.length; i++) {
-                if (options[i].value == previewValue)
+                if (options[i].value == previewValue) {
                     select.selectedIndex = i;
-                break;
+                    break;
+                }
             }
             alert('Error' + xhr.status);
         }

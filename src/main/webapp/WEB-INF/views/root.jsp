@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
     <script src='<c:url value="/web_resources/js/custom/root.js"/>'></script>
@@ -26,7 +27,9 @@
                     <th>Pets</th>
                 </tr>
                 </thead>
-                <tbody>
+                <c:set var="currentUserRole" value="${fn:toLowerCase(sessionScope.user.role)}"/>
+                <tbody data-path-for-state-friend="${pageContext.request.contextPath}/${currentUserRole}"/>
+                <c:set var="users" value="${sessionScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr data-essence-id="${user.userEssenceId}">
                         <td>
@@ -35,7 +38,7 @@
                             </button>
                         </td>
                         <td>
-                            <a href="<c:url value="${homepage}"/>/essence?nickname=<c:out value="${user.nickname}"/>">${user.nickname}</a>
+                            <a href="${pageContext.request.contextPath}/profile/<c:out value="${user.nickname}"/>">${user.nickname}</a>
                         </td>
                         <td><c:out value="${user.name}"/></td>
                         <td><c:out value="${user.surname}"/></td>
@@ -44,9 +47,9 @@
                         <td>
                             <c:choose>
                                 <c:when test="${'ROOT' != user.role}">
-                                    <select name="user-essence-roles" class="user-essence-roles">
-                                        <c:forEach items="${roles}" var="role" varStatus="status">
-                                            <option value="<c:out value="${role}"/>" <c:if test="${role == user.role}">selected</c:if>>
+                                    <select class="user-essence-roles" name="user-essence-roles">
+                                        <c:forEach items="<%=com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.values()%>" var="role" varStatus="status">
+                                            <option value="<c:out value="${role}"/>" <c:if test="${role == user.role.roleEssenceEnum}">selected</c:if>>
                                                 <c:out value="${role}"/>
                                             </option>
                                         </c:forEach>
@@ -72,7 +75,6 @@
     <div class="row">
         <div class="col-3 offset-7">
             <c:import url="fragments/addGenusPetPart.jsp"/>
-
         </div>
     </div>
 </div>

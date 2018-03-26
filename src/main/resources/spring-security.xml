@@ -7,8 +7,9 @@
                                  http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/user/**" access="hasAuthority('USER')"/>
-        <intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')"/>
+        <intercept-url pattern="/profile/**" access="hasAuthority('USER') or hasAuthority('ADMIN') or hasAuthority('ROOT')"/>
+        <intercept-url pattern="/user/**" access="hasAuthority('USER') or hasAuthority('ROOT')"/>
+        <intercept-url pattern="/admin/**" access="hasAuthority('ADMIN') or hasAuthority('ROOT')"/>
         <intercept-url pattern="/root/**" access="hasAuthority('ROOT')"/>
         <intercept-url pattern="/web_resources/**" access="permitAll()"/>
         <intercept-url pattern="/login/**" access="permitAll()"/>
@@ -20,7 +21,7 @@
                     login-processing-url="/login"/>
         <logout invalidate-session="true"
                 logout-success-url="/login?logout"
-                logout-url="/logout" delete-cookies="JSESSIONID" />
+                logout-url="/logout" delete-cookies="JSESSIONID"/>
         <csrf disabled="true"/>
     </http>
 

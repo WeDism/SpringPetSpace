@@ -25,7 +25,7 @@ import java.util.UUID;
 import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
-@RequestMapping(value = {"admin", "user"})
+@RequestMapping(value = {"admin", "user", "root"})
 @Controller
 public class FriendController {
     private static final Logger LOG = getLogger(FriendController.class);
@@ -38,6 +38,13 @@ public class FriendController {
         this.customUserEssenceRepository = customUserEssenceRepository;
         this.friendsRepository = friendsRepository;
         this.userEssenceRepository = userEssenceRepository;
+    }
+
+    @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
+    public String getUserNicknameView(HttpSession session) {
+        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+        return user.getRole().toString().toLowerCase();
+
     }
 
     @RequestMapping(value = "find_friend", method = RequestMethod.GET)
@@ -80,14 +87,14 @@ public class FriendController {
         if (friends != null) {
             this.friendsRepository.delete(friends.getPrimaryKey());
             session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "friend_request", method = RequestMethod.PUT)
-    public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId,
-                                              HttpSession session, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
+    public ResponseEntity putStateFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId,
+                                                HttpSession session, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
         UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
         FriendId friendId = new FriendId(friend, user);
@@ -95,7 +102,7 @@ public class FriendController {
         if (friends != null) {
             this.friendsRepository.save(friends.setState(new StateFriend(stateFriendEnum)));
             session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

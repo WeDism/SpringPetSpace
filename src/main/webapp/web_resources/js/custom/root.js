@@ -1,7 +1,8 @@
 var deleteUser = function () {
     var tr = this.closest('tr');
+    var path = $(this).closest('tbody')[0];
     $.ajax({
-        url: window.location.href + '?' + $.param({user: tr.dataset.essenceId}),
+        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({user: tr.dataset.essenceId}),
         async: false,
         type: "DELETE",
         success: function () {
@@ -14,8 +15,12 @@ var deleteUser = function () {
 };
 var changeRoleUserEssence = function () {
     var tr = this.closest('tr');
+    var path = $(this).closest('tbody')[0];
     $.ajax({
-        url: window.location.href + '?' + $.param({user: tr.dataset.essenceId, role: $(this).find(':selected')[0].value}),
+        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({
+            userId: tr.dataset.essenceId,
+            roleEssenceEnum: $(this).find(':selected')[0].value
+        }),
         async: false,
         type: "PUT",
         success: function () {
@@ -27,9 +32,10 @@ var changeRoleUserEssence = function () {
             var select = $(tr).find('.user-essence-roles')[0];
             var options = $(select).children();
             for (var i = 0; options.length; i++) {
-                if (options[i].value == previewValue)
+                if (options[i].value == previewValue) {
                     select.selectedIndex = i;
-                break;
+                    break;
+                }
             }
             alert(xhr.status);
         }

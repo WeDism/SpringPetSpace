@@ -18,9 +18,4 @@ public class UserController {
         return "redirect:/user/" + auth.getName();
     }
 
-    @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
-    public String getUserNicknameView() {
-        return "user";
-    }
-
 }

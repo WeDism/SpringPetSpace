@@ -31,6 +31,6 @@ public class PetSpaceController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserEssence userEssence = this.userEssenceRepository.findByNickname(auth.getName());
         session.setAttribute(USER.name().toLowerCase(), userEssence);
-        return String.format("redirect:/%s/%s", userEssence.getRole().getRoleEssenceEnum().name().toLowerCase(), auth.getName());
+        return "redirect:/" + userEssence.getRole().getRoleEssenceEnum().name().toLowerCase();
     }
 }

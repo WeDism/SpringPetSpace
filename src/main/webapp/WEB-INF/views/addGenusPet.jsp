@@ -19,14 +19,14 @@
                 <div class="col-8">
                     <sf:errors path="name" cssClass="error"/>
                     <c:choose>
-                        <c:when test="${not empty genusPetIsAdded and not genusPetIsAdded}">
+                        <c:when test="${not empty requestScope.genusPetIsAdded and not requestScope.genusPetIsAdded}">
                             <div class="row">
                                 <div class="col-4 offset-4 bg-danger">
                                     <span>Genus pet already exists</span>
                                 </div>
                             </div>
                         </c:when>
-                        <c:when test="${not empty genusPetIsAdded and genusPetIsAdded}">
+                        <c:when test="${not empty requestScope.genusPetIsAdded and requestScope.genusPetIsAdded}">
                             <div class="row">
                                 <div class="col-4 offset-4 bg-success">
                                     <span>Genus pet added</span>
