@@ -3,19 +3,19 @@ package com.pet_space.controllers;
 import com.pet_space.models.essences.RoleEssence;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;
+import com.pet_space.services.CustomUserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
+import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequestMapping(value = "root")
@@ -23,10 +23,12 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class RootController {
     private static final Logger LOG = getLogger(RootController.class);
     private final UserEssenceRepository userEssenceRepository;
+    private final CustomUserEssenceRepository customUserEssenceRepository;
 
     @Autowired
-    public RootController(UserEssenceRepository userEssenceRepository) {
+    public RootController(UserEssenceRepository userEssenceRepository, CustomUserEssenceRepository customUserEssenceRepository) {
         this.userEssenceRepository = userEssenceRepository;
+        this.customUserEssenceRepository = customUserEssenceRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -35,11 +37,21 @@ public class RootController {
         return "redirect:/root/" + auth.getName();
     }
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = {"{nickname}", ""}, method = RequestMethod.PUT)
-    public ResponseEntity putChangeRoleUserEssence(@RequestParam(name = "userId") UUID userId, RoleEssence roleEssence) {
+    public void putChangeRoleUserEssence(@RequestParam(name = "userId") UUID userId, RoleEssence roleEssence) {
         UserEssence user = this.userEssenceRepository.findOne(userId);
         this.userEssenceRepository.save(user.setRole(roleEssence));
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "profile/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteUserEssence(@PathVariable("id") UUID essenceId, HttpSession session) {
+        UserEssence userEssence = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+        if (!userEssence.getUserEssenceId().equals(essenceId)) {
+            this.customUserEssenceRepository.deleteCascadeById(essenceId);
+            session.setAttribute("users", this.userEssenceRepository.findAll());
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
 }

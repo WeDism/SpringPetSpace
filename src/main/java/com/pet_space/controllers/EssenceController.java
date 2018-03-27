@@ -26,7 +26,7 @@ public class EssenceController {
     }
 
     @RequestMapping(value = "profile/{nickname}", method = RequestMethod.GET)
-    public ModelAndView getUserNicknameView(@PathVariable String nickname, HttpSession session) {
+    public ModelAndView getUserNicknameView(@PathVariable("nickname") String nickname, HttpSession session) {
         UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
         if (user.getNickname().equals(nickname)) {
             return new ModelAndView("redirect:/" + user.getRole().toString().toLowerCase());

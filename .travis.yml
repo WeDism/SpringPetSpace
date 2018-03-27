@@ -1,0 +1,24 @@
+language: java
+sudo: false
+dist: trusty
+jdk: oraclejdk8
+addons:
+  apt:
+    packages:
+    - oracle-java8-installer
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: ZmZ06+1/W+DVzkJEZy72SZ8zPY544NDMgZQGZ4itLfozHlh/K3G20NjcyYLfgnv4umWhWU0iTpEBUOjrPsWqShSYpJCAbuk7JAErnohjinRN/SupSKzK5AV/atEBjPLaWkqRFkxtlHKmSLcWTzuQNGFBQhD5SC9uR+4ApYapLeU0Wpc1c9T9/mopsZ7RdOXGrYs2G6vXM8zKgpo66fPAuqBqVzeQ86HToxVQiVgji/VEYOroUvhBn92Gbn926Z1BlQfnBuPGZNmryXd7BsAVk5iFbM9kjnNvk8UNmz7mgN/1KH2ffEfcTO36oMAILulv6L9kJIUmE/uJuI4jvQc0TzIoRaT5DgBZkOybyqPMxbfi9XzWKlJzvuGr0giRwHQ4/61Mj/DDfHzDTcS2UnWW1YPaC8G0v0oTOUd/vpx5T6UbEqJfJrsXeQz5Mtkw/YdOrf2zsVh4+CQtcgxeKNrV04hkKwAisgq567KbqFWva5mzKNa1YDJOvfph2Sn3oucNz3aLzwHvNMBEmkQTCm8O+nENBet9ElJv/a+F4cDkElun3HcI8/1s49kSHC3jSREyV3bCNA6R3Lubmi2oIj/3ciqnyJAuavd8YJbVyaRJIAEOxwdiwaRphySwz8L0LLpmOza82X9v9ewYOpc26iQlnANGPAQI0ZdjHH3YqxG+RjU=
+  file: $TRAVIS_BUILD_DIR/target/SpringPetSpace-1.0.war
+  on:
+    repo: WeDism/SpringPetSpace
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+notifications:
+  email:
+    recipients:
+    - wedinakawer58@gnail.com
+    on_success: never
+    on_failure: always

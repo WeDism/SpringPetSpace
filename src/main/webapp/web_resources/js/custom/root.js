@@ -2,14 +2,24 @@ var deleteUser = function () {
     var tr = this.closest('tr');
     var path = $(this).closest('tbody')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({user: tr.dataset.essenceId}),
-        async: false,
+        url: location.protocol + '//' + window.location.host + path.dataset.pathForManageUserEssence + tr.dataset.essenceId,
         type: "DELETE",
         success: function () {
             tr.remove();
+            $.notify({
+                title: '<strong>Complete!</strong>',
+                message: 'Role Essence is deleted'
+            }, {
+                type: 'success'
+            });
         },
         error: function (xhr) {
-            alert(xhr.status);
+            $.notify({
+                title: '<strong>Error!</strong>',
+                message: 'Role Essence is not updated status: ' + xhr.status
+            }, {
+                type: 'danger'
+            });
         }
     })
 };
@@ -17,14 +27,18 @@ var changeRoleUserEssence = function () {
     var tr = this.closest('tr');
     var path = $(this).closest('tbody')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({
+        url: location.protocol + '//' + window.location.host + path.dataset.pathForChangeRoleEssence + '?' + $.param({
             userId: tr.dataset.essenceId,
             roleEssenceEnum: $(this).find(':selected')[0].value
         }),
-        async: false,
         type: "PUT",
         success: function () {
-            alert('Role Essence is updated');
+            $.notify({
+                title: '<strong>Complete!</strong>',
+                message: 'Role Essence is updated'
+            }, {
+                type: 'success'
+            });
         },
         error: function (xhr) {
             var previewValue = $(tr).find('.user-essence-roles')[0].dataset.previewValue;
@@ -37,7 +51,12 @@ var changeRoleUserEssence = function () {
                     break;
                 }
             }
-            alert(xhr.status);
+            $.notify({
+                title: '<strong>Error!</strong>',
+                message: 'Role Essence is not updated status: ' + xhr.status
+            }, {
+                type: 'danger'
+            });
         }
     })
 };

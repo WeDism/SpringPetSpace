@@ -6,10 +6,14 @@ var changeStateFriend = function () {
             user_essence_id: tr.dataset.essenceId,
             state_friend: $(this).find(':selected')[0].value
         }),
-        async: false,
         type: 'PUT',
         success: function () {
-            alert('State friend changed');
+            $.notify({
+                title: '<strong>Complete!</strong>',
+                message: 'State friend changed'
+            }, {
+                type: 'success'
+            });
         },
         error: function (xhr) {
             var select = $(tr).find('.action-friends')[0];
@@ -22,7 +26,12 @@ var changeStateFriend = function () {
                     break;
                 }
             }
-            alert('Error' + xhr.status);
+            $.notify({
+                title: '<strong>Error!</strong>',
+                message: 'State friend is not changed status: ' + xhr.status
+            }, {
+                type: 'danger'
+            });
         }
     })
 };

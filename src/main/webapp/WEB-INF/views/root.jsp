@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <c:set var="currentUserRole" value="${fn:toLowerCase(sessionScope.user.role)}"/>
-                <tbody data-path-for-state-friend="${pageContext.request.contextPath}/${currentUserRole}"/>
+                <tbody data-path-for-change-role-essence="${pageContext.request.contextPath}/${currentUserRole}" data-path-for-manage-user-essence="${pageContext.request.contextPath}/${currentUserRole}/profile/"/>
                 <c:set var="users" value="${sessionScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr data-essence-id="${user.userEssenceId}">
