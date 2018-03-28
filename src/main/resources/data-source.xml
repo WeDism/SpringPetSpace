@@ -4,10 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${database.driver_class_name}"/>
-        <property name="url" value="${database.url}"/>
-        <property name="username" value="${database.username}"/>
-        <property name="password" value="${database.password}"/>
+        <property name="driverClassName" value="#{'${database.driver_class_name}'}"/>
+        <property name="url" value="#{T(java.lang.System).getenv('JDBC_DATABASE_URL') ?: '${database.url}'}"/>
+        <property name="username" value="#{T(java.lang.System).getenv('JDBC_DATABASE_USERNAME') ?: '${database.username}'}"/>
+        <property name="password" value="#{T(java.lang.System).getenv('JDBC_DATABASE_PASSWORD') ?: '${database.password}'}"/>
     </bean>
 </beans>
