@@ -30,13 +30,5 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="springCache"/>
-            </set>
-        </property>
-    </bean>
-
     <jpa:repositories base-package="com.pet_space.repositories"/>
 </beans>

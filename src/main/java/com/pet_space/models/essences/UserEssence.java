@@ -42,7 +42,7 @@ public class UserEssence implements Serializable {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid2")
+    @GeneratedValue(generator = "uuid2", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "user_essence_id", columnDefinition = "uuid")
     public UUID getUserEssenceId() {
@@ -199,12 +199,12 @@ public class UserEssence implements Serializable {
         if (this == o) return true;
         if (!(o instanceof UserEssence)) return false;
         UserEssence userEssence = (UserEssence) o;
-        return Objects.equals(getUserEssenceId(), userEssence.getUserEssenceId());
+        return Objects.equals(this.getUserEssenceId(), userEssence.getUserEssenceId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserEssenceId());
+        return this.getUserEssenceId().hashCode();
     }
 
     public interface INickname {

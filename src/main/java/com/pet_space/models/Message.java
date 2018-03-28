@@ -32,6 +32,6 @@ public class Message {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getMessageId());
+        return this.getMessageId().hashCode();
     }
 }

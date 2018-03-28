@@ -69,12 +69,11 @@ public class Friends implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Friends)) return false;
         Friends friends = (Friends) o;
-        return Objects.equals(getPrimaryKey(), friends.getPrimaryKey());
+        return Objects.equals(this.getPrimaryKey(), friends.getPrimaryKey());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getPrimaryKey());
+        return this.getPrimaryKey().hashCode();
     }
 }

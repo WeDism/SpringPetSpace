@@ -2,8 +2,6 @@ package com.pet_space.services;
 
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.FriendsRepository;
-import com.pet_space.repositories.PetRepository;
-import com.pet_space.repositories.UserEssenceRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -23,38 +21,33 @@ import java.util.UUID;
 public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceRepository {
     private static final Logger LOG = LoggerFactory.getLogger(CustomUserEssenceRepositoryImpl.class);
 
-    private final UserEssenceRepository userEssenceRepository;
-    private final FriendsRepository friendsRepository;
-    private final PetRepository petRepository;
-    private final JpaTransactionManager entityManager;
+    private final SessionFactory sessionFactory;
 
     @Autowired
-    public CustomUserEssenceRepositoryImpl
-            (UserEssenceRepository userEssenceRepository, FriendsRepository friendsRepository, PetRepository petRepository, JpaTransactionManager entityManager) {
-        this.userEssenceRepository = userEssenceRepository;
-        this.friendsRepository = friendsRepository;
-        this.petRepository = petRepository;
-        this.entityManager = entityManager;
+    public CustomUserEssenceRepositoryImpl(JpaTransactionManager entityManager) {
+        this.sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
     }
 
     @Transactional
     @Override
     public void deleteCascadeById(UUID id) {
-        this.deleteCascade(this.userEssenceRepository.findOne(id));
+        this.deleteCascade(new UserEssence().setUserEssenceId(id));
     }
 
     @Transactional
     @Override
     public void deleteCascade(UserEssence entity) {
-        entity.getRequestedFriendsFrom().forEach(this.friendsRepository::delete);
-        entity.getPets().forEach(this.petRepository::delete);
-        this.userEssenceRepository.delete(entity);
+        try (Session session = sessionFactory.openSession()) {
+            UserEssence userEssence = session.find(UserEssence.class, entity.getUserEssenceId());
+            session.beginTransaction();
+            session.delete(userEssence);
+            session.getTransaction().commit();
+        }
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<UserEssence> fiendFriend(UserEssence userEssence, String name, String surname, String patronymic) {
-        SessionFactory sessionFactory = this.entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
         try (Session session = sessionFactory.openSession()) {
             Iterable pathEssenceForSearchFriend = new PathEssenceForSearchFriend(name, surname, patronymic);
             Iterator<String> iterator = pathEssenceForSearchFriend.iterator();

@@ -45,7 +45,7 @@ public class FriendControllerIntegrationTest extends ControllerInit {
         userEssenceFred.setPets(petsFred);
 
         this.session.setAttribute(USER.name().toLowerCase(), userEssenceFred);
-        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.OK));
+        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.CREATED));
         assertThat(((UserEssence) this.session.getAttribute(USER.name().toLowerCase())).getRequestedFriendsFrom().size(), is(1));
         assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.BAD_REQUEST));
 

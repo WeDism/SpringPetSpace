@@ -26,7 +26,7 @@
 			newest_on_top: false,
 			showProgressbar: false,
 			placement: {
-				from: "bottom",
+				from: "top",
 				align: "right"
 			},
 			offset: 20,

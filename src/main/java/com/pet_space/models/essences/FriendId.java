@@ -45,12 +45,12 @@ public class FriendId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof FriendId)) return false;
         FriendId friendId = (FriendId) o;
-        return Objects.equals(getUserEssence(), friendId.getUserEssence()) &&
-                Objects.equals(getFriend(), friendId.getFriend());
+        return Objects.equals(this.getUserEssence(), friendId.getUserEssence()) &&
+                Objects.equals(this.getFriend(), friendId.getFriend());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserEssence(), getFriend());
+        return Objects.hash(this.getUserEssence().getUserEssenceId(), this.getFriend().getUserEssenceId());
     }
 }

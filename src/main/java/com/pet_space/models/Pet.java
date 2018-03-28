@@ -38,7 +38,7 @@ public class Pet implements Serializable {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid2")
+    @GeneratedValue(generator = "uuid2", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "pet_id", columnDefinition = "uuid")
     public UUID getPetId() {
@@ -119,7 +119,7 @@ public class Pet implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getPetId());
+        return this.getPetId().hashCode();
     }
 
     public interface IName {
