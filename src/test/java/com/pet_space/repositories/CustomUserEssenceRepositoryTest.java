@@ -16,7 +16,6 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
 
     @Test
     public void deleteCascade() {
-        //3c0fca6c-95b7-4a06-8a56-3c9f5074f6ee 3804de7a-8331-47a8-b460-7d1137c0f634 18676776-fc9f-4986-a495-ffe4479cf24a
         UserEssence userEssenceFred = this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId());
         UserEssence userEssenceJohn = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
         UserEssence userEssenceSimon = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());

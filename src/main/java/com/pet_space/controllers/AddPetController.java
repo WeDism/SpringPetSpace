@@ -8,6 +8,7 @@ import com.pet_space.repositories.UserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.UUID;
 
@@ -39,21 +39,20 @@ public class AddPetController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getAddPetView(HttpSession session, Model model) {
-        session.removeAttribute("petIsAdded");
+    public String getAddPetView(Model model) {
         model.addAttribute("genusPet", this.genusPetRepository.findAll());
         return "addPet";
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public String postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, HttpSession session, Model model) {
+    public String postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, Authentication authentication, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("genusPet", this.genusPetRepository.findAll());
             return "addPet";
         }
 
-        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         if (this.petRepository.findByNameAndOwner(pet.getName(), user) != null) {
             model.addAttribute("genusPet", this.genusPetRepository.findAll());
             model.addAttribute("genusPetName", String.format("This is %s name you already use", pet.getName()));
@@ -63,8 +62,8 @@ public class AddPetController {
         pet.setPetId(UUID.randomUUID());
         pet.setOwner(user);
         this.petRepository.save(pet);
-        session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
-        session.setAttribute("petIsAdded", true);
+        model.addAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
+        model.addAttribute("petIsAdded", true);
         return "addPet";
     }
 }

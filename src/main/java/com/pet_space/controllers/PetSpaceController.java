@@ -27,10 +27,9 @@ public class PetSpaceController {
     }
 
     @RequestMapping(value = "pet_space", method = RequestMethod.GET)
-    public String getRole(HttpSession session) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserEssence userEssence = this.userEssenceRepository.findByNickname(auth.getName());
-        session.setAttribute(USER.name().toLowerCase(), userEssence);
+    public String getRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
         return "redirect:/" + userEssence.getRole().getRoleEssenceEnum().name().toLowerCase();
     }
 }

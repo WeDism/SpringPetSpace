@@ -40,7 +40,7 @@
     </div>
     <c:if test="${friends != null}">
         <div>
-            <table class="table">
+            <table class="table table-hover">
                 <caption>Friends</caption>
                 <thead>
                 <tr>

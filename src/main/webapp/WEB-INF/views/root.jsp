@@ -27,7 +27,7 @@
                     <th>Pets</th>
                 </tr>
                 </thead>
-                <c:set var="currentUserRole" value="${fn:toLowerCase(sessionScope.user.role)}"/>
+                <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
                 <tbody data-path-for-change-role-essence="${pageContext.request.contextPath}/${currentUserRole}" data-path-for-manage-user-essence="${pageContext.request.contextPath}/${currentUserRole}/profile/"/>
                 <c:set var="users" value="${sessionScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">

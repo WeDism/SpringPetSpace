@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,10 +42,10 @@ public class FriendController {
     }
 
     @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
-    public String getUserNicknameView(HttpSession session) {
-        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+    public String getUserNicknameView(Authentication authentication,HttpSession session) {
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
+        session.setAttribute("role", user.getRole().getRoleEssenceEnum().name().toLowerCase());
         return user.getRole().toString().toLowerCase();
-
     }
 
     @RequestMapping(value = "find_friend", method = RequestMethod.GET)
@@ -56,16 +57,16 @@ public class FriendController {
     @RequestMapping(value = "find_friend", method = RequestMethod.POST)
     public String postFindFriends(@RequestParam(name = "name") String name,
                                   @RequestParam(name = "surname") String surname,
-                                  @RequestParam(name = "patronymic") String patronymic, Model model, HttpSession session) {
-        List<UserEssence> userEssences
-                = customUserEssenceRepository.fiendFriend(((UserEssence) session.getAttribute("user")), name, surname, patronymic);
+                                  @RequestParam(name = "patronymic") String patronymic, Model model, Authentication authentication) {
+        List<UserEssence> userEssences = customUserEssenceRepository.fiendFriend(
+                this.userEssenceRepository.findByNickname(authentication.getName()), name, surname, patronymic);
         model.addAttribute("friends", userEssences);
         return "findFriends";
     }
 
     @RequestMapping(value = "friend_request", method = RequestMethod.POST)
-    public ResponseEntity postFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, HttpSession session) {
-        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+    public ResponseEntity postFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication) {
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
         FriendId friendId = new FriendId(user, friend);
         StateFriend state = new StateFriend(StateFriend.StateFriendEnum.REQUESTED);
@@ -73,20 +74,18 @@ public class FriendController {
         if (friends == null) {
             friends = new Friends(friendId, state);
             this.friendsRepository.save(friends);
-            session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
             return new ResponseEntity(HttpStatus.CREATED);
         } else return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "friend_request", method = RequestMethod.DELETE)
-    public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, HttpSession session) {
-        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+    public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication) {
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
         FriendId friendId = new FriendId(user, friend);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends != null) {
             this.friendsRepository.delete(friends.getPrimaryKey());
-            session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
             return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -94,14 +93,13 @@ public class FriendController {
 
     @RequestMapping(value = "friend_request", method = RequestMethod.PUT)
     public ResponseEntity putStateFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId,
-                                                HttpSession session, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
-        UserEssence user = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+                                                Authentication authentication, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
         FriendId friendId = new FriendId(friend, user);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends != null) {
             this.friendsRepository.save(friends.setState(new StateFriend(stateFriendEnum)));
-            session.setAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
             return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
