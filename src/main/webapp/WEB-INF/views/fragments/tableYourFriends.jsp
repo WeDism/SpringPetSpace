@@ -10,11 +10,11 @@
         <th>Surname</th>
         <th>Role</th>
         <th>Friend State</th>
-        <th>Delete Request</th>
     </tr>
     </thead>
     <c:set var="user" value="${requestScope.user}"/>
-    <tbody>
+    <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
+    <tbody data-path-for-state-friend="${pageContext.request.contextPath}/${currentUserRole}/friend_request">
     <c:forEach items="${user != null ? ctg:getFriends(user) : null}" var="userFriend">
         <c:set var="user" value="${requestScope.user.requestedFriendsTo.contains(userFriend) ? userFriend.userEssence : userFriend.friend}"/>
         <tr data-essence-id="${user.userEssenceId}">
@@ -27,7 +27,7 @@
             <td>
                 <c:choose>
                     <c:when test="${requestScope.user.requestedFriendsTo.contains(userFriend)}">
-                        <select class="action-friends custom-select" name="action-friends" required>
+                        <select class="action-friends" name="action-friends" required>
                             <c:set var="stateFriendSet" value="<%=com.pet_space.models.essences.StateFriend.StateFriendEnum.values()%>"/>
                             <c:forEach items="${stateFriendSet}" var="stateFriend" varStatus="status">
                                 <option value="<c:out value="${stateFriend}"/>"
@@ -41,13 +41,6 @@
                         <label><c:out value="${userFriend.state}"/></label>
                     </c:otherwise>
                 </c:choose>
-            </td>
-            <td>
-                <c:if test="${not requestScope.user.requestedFriendsTo.contains(userFriend)}">
-                    <button class="delete-request-friend-of-button">
-                        <img src="<c:url value="/web_resources/images/delete.ico"/>" alt="delete request friend" width="8">
-                    </button>
-                </c:if>
             </td>
         </tr>
     </c:forEach>

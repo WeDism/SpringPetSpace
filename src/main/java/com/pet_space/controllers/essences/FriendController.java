@@ -1,4 +1,4 @@
-package com.pet_space.controllers.essences;
+package com.pet_space.controllers;
 
 import com.pet_space.models.essences.FriendId;
 import com.pet_space.models.essences.Friends;
@@ -6,7 +6,7 @@ import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.FriendsRepository;
 import com.pet_space.repositories.UserEssenceRepository;
-import com.pet_space.custom_repositories.CustomUserEssenceRepository;
+import com.pet_space.services.CustomUserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import static com.pet_space.models.essences.StateFriend.StateFriendEnum.REQUESTED;
+import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequestMapping(value = {"admin", "user", "root"})
@@ -42,16 +42,14 @@ public class FriendController {
     }
 
     @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
-    public String getUserNicknameView(Authentication authentication, Model model) {
+    public String getUserNicknameView(Authentication authentication,HttpSession session) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
-        model.addAttribute("user", user);
+        session.setAttribute("role", user.getRole().getRoleEssenceEnum().name().toLowerCase());
         return user.getRole().toString().toLowerCase();
     }
 
     @RequestMapping(value = "find_friend", method = RequestMethod.GET)
-    public String getFindFriendView(Authentication authentication, Model model) {
-        UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
-        model.addAttribute("user", userEssence);
+    public String getFindFriendView() {
         return "findFriends";
     }
 
@@ -60,12 +58,9 @@ public class FriendController {
     public String postFindFriends(@RequestParam(name = "name") String name,
                                   @RequestParam(name = "surname") String surname,
                                   @RequestParam(name = "patronymic") String patronymic, Model model, Authentication authentication) {
-        UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
-        List<UserEssence> userEssences = customUserEssenceRepository.fiendFriend(userEssence, name, surname, patronymic);
+        List<UserEssence> userEssences = customUserEssenceRepository.fiendFriend(
+                this.userEssenceRepository.findByNickname(authentication.getName()), name, surname, patronymic);
         model.addAttribute("friends", userEssences);
-        model.addAttribute("user", userEssence);
-        model.addAttribute("userFriends", userEssence.getRequestedFriendsFrom()
-                .stream().map(Friends::getFriend).collect(Collectors.toSet()));
         return "findFriends";
     }
 
@@ -73,8 +68,8 @@ public class FriendController {
     public ResponseEntity postFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = FriendId.of(user, friend);
-        StateFriend state = StateFriend.of(REQUESTED);
+        FriendId friendId = new FriendId(user, friend);
+        StateFriend state = new StateFriend(StateFriend.StateFriendEnum.REQUESTED);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends == null) {
             friends = new Friends(friendId, state);
@@ -87,7 +82,7 @@ public class FriendController {
     public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = FriendId.of(user, friend);
+        FriendId friendId = new FriendId(user, friend);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends != null) {
             this.friendsRepository.delete(friends.getPrimaryKey());
@@ -101,10 +96,10 @@ public class FriendController {
                                                 Authentication authentication, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = FriendId.of(friend, user);
+        FriendId friendId = new FriendId(friend, user);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends != null) {
-            this.friendsRepository.save(friends.setState(StateFriend.of(stateFriendEnum)));
+            this.friendsRepository.save(friends.setState(new StateFriend(stateFriendEnum)));
             return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

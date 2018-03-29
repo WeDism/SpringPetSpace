@@ -5,8 +5,7 @@
     <script src='<c:url value="/web_resources/js/custom/root.js"/>'></script>
 </head>
 <body>
-<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
+<div class="container">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row">
         <c:import url="fragments/userCard.jsp"/>
@@ -28,7 +27,8 @@
                     <th>Pets</th>
                 </tr>
                 </thead>
-                <tbody>
+                <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
+                <tbody data-path-for-change-role-essence="${pageContext.request.contextPath}/${currentUserRole}" data-path-for-manage-user-essence="${pageContext.request.contextPath}/${currentUserRole}/profile/"/>
                 <c:set var="users" value="${sessionScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr data-essence-id="${user.userEssenceId}">
@@ -47,7 +47,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${'ROOT' != user.role}">
-                                    <select class="user-essence-roles custom-select" name="user-essence-roles">
+                                    <select class="user-essence-roles" name="user-essence-roles">
                                         <c:forEach items="<%=com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.values()%>" var="role" varStatus="status">
                                             <option value="<c:out value="${role}"/>" <c:if test="${role == user.role.roleEssenceEnum}">selected</c:if>>
                                                 <c:out value="${role}"/>
@@ -74,7 +74,7 @@
     </div>
     <div class="row">
         <div class="col-3 offset-7">
-            <a class="btn btn-lg btn-primary btn-block" href=${pageContext.request.contextPath}/${currentUserRole}/add_genus_pet>Add genus pet</a>
+            <c:import url="fragments/addGenusPetPart.jsp"/>
         </div>
     </div>
 </div>

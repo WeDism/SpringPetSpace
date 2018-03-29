@@ -1,4 +1,4 @@
-package com.pet_space.controllers.essences;
+package com.pet_space.controllers;
 
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;
@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +24,8 @@ public class EssenceController {
     }
 
     @RequestMapping(value = "profile/{nickname}", method = RequestMethod.GET)
-    public ModelAndView getUserNicknameView(@PathVariable("nickname") String nickname, Authentication authentication, Model model) {
+    public ModelAndView getUserNicknameView(@PathVariable("nickname") String nickname, Authentication authentication) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
-        model.addAttribute("user", user);
         if (user.getNickname().equals(nickname)) {
             return new ModelAndView("redirect:/" + user.getRole().toString().toLowerCase());
         }
