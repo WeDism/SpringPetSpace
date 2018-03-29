@@ -14,7 +14,7 @@ public class AdminController {
     private static final Logger LOG = getLogger(AdminController.class);
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getAdminView(Authentication auth) {
-        return "redirect:/admin/" + auth.getName();
+    public String getAdminView(Authentication authentication) {
+        return "redirect:/admin/" + authentication.getName();
     }
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
-import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequestMapping(value = "root")
@@ -45,8 +44,8 @@ public class RootController {
     }
 
     @RequestMapping(value = "profile/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteUserEssence(@PathVariable("id") UUID essenceId, HttpSession session) {
-        UserEssence userEssence = (UserEssence) session.getAttribute(USER.name().toLowerCase());
+    public ResponseEntity deleteUserEssence(@PathVariable("id") UUID essenceId, Authentication authentication, HttpSession session) {
+        UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
         if (!userEssence.getUserEssenceId().equals(essenceId)) {
             this.customUserEssenceRepository.deleteCascadeById(essenceId);
             session.setAttribute("users", this.userEssenceRepository.findAll());

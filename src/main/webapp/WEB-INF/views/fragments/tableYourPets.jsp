@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:set var="user" value="${sessionScope.user}"/>
+    <c:set var="user" value="${requestScope.user}"/>
     <c:forEach items="${user.pets}" var="pet" varStatus="status">
         <tr>
             <td><c:out value="${pet.name}"/></td>

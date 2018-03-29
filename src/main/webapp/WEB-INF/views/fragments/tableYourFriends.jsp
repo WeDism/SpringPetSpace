@@ -12,11 +12,11 @@
         <th>Friend State</th>
     </tr>
     </thead>
-    <c:set var="user" value="${sessionScope.user}"/>
-    <c:set var="currentUserRole" value="${fn:toLowerCase(sessionScope.user.role)}"/>
+    <c:set var="user" value="${requestScope.user}"/>
+    <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
     <tbody data-path-for-state-friend="${pageContext.request.contextPath}/${currentUserRole}/friend_request">
     <c:forEach items="${user != null ? ctg:getFriends(user) : null}" var="userFriend">
-        <c:set var="user" value="${sessionScope.user.requestedFriendsTo.contains(userFriend) ? userFriend.userEssence : userFriend.friend}"/>
+        <c:set var="user" value="${requestScope.user.requestedFriendsTo.contains(userFriend) ? userFriend.userEssence : userFriend.friend}"/>
         <tr data-essence-id="${user.userEssenceId}">
             <td>
                 <a href="${pageContext.request.contextPath}/profile/<c:out value="${user.nickname}"/>">${user.nickname}</a>
@@ -26,7 +26,7 @@
             <td><c:out value="${user.role}"/></td>
             <td>
                 <c:choose>
-                    <c:when test="${sessionScope.user.requestedFriendsTo.contains(userFriend)}">
+                    <c:when test="${requestScope.user.requestedFriendsTo.contains(userFriend)}">
                         <select class="action-friends" name="action-friends" required>
                             <c:set var="stateFriendSet" value="<%=com.pet_space.models.essences.StateFriend.StateFriendEnum.values()%>"/>
                             <c:forEach items="${stateFriendSet}" var="stateFriend" varStatus="status">

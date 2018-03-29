@@ -1,13 +1,13 @@
 package com.pet_space.services;
 
 import com.pet_space.models.essences.UserEssence;
-import com.pet_space.repositories.FriendsRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,12 +28,14 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
         this.sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
     }
 
+    @CacheEvict(value = "userEssence", allEntries = true)
     @Transactional
     @Override
     public void deleteCascadeById(UUID id) {
         this.deleteCascade(new UserEssence().setUserEssenceId(id));
     }
 
+    @CacheEvict(value = "userEssence", allEntries = true)
     @Transactional
     @Override
     public void deleteCascade(UserEssence entity) {

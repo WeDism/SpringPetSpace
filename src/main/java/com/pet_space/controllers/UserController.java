@@ -14,8 +14,8 @@ public class UserController {
     private static final Logger LOG = getLogger(UserController.class);
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getUserView(Authentication auth) {
-        return "redirect:/user/" + auth.getName();
+    public String getUserView(Authentication authentication) {
+        return "redirect:/user/" + authentication.getName();
     }
 
 }
