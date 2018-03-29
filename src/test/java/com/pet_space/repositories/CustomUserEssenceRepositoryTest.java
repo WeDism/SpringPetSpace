@@ -1,5 +1,8 @@
 package com.pet_space.repositories;
 
+import com.pet_space.models.essences.FriendId;
+import com.pet_space.models.essences.Friends;
+import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import org.junit.Test;
 
@@ -16,17 +19,25 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
 
     @Test
     public void deleteCascade() {
-        UserEssence userEssenceFred = this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId());
-        UserEssence userEssenceJohn = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
-        UserEssence userEssenceSimon = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
+        final UserEssence userEssenceFred = this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId());
+        final UserEssence userEssenceJohn = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
+        final UserEssence userEssenceSimon = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
+
+        FriendId friendId = new FriendId(userEssenceJohn, userEssenceSimon);
+        StateFriend state = new StateFriend(StateFriend.StateFriendEnum.REQUESTED);
+        Friends friends = new Friends(friendId, state);
+        this.friendsRepository.save(friends);
 
         assertThat(userEssenceFred.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceFred)).collect(Collectors.toSet())));
         assertThat(userEssenceJohn.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceJohn)).collect(Collectors.toSet())));
         assertThat(userEssenceSimon.getPets(), is(SET_PETS.stream().filter(pet -> pet.getOwner().equals(userEssenceSimon)).collect(Collectors.toSet())));
 
-        this.customUserEssenceRepository.deleteCascade(userEssenceFred);
-        this.customUserEssenceRepository.deleteCascade(userEssenceJohn);
-        this.customUserEssenceRepository.deleteCascade(userEssenceSimon);
+        UserEssence userEssenceJohnUpd = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
+        UserEssence userEssenceSimonUpd = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
+
+        this.customUserEssenceRepository.deleteCascadeById(userEssenceFred.getUserEssenceId());
+        this.customUserEssenceRepository.deleteCascadeById(userEssenceJohnUpd.getUserEssenceId());
+        this.customUserEssenceRepository.deleteCascadeById(userEssenceSimonUpd.getUserEssenceId());
 
         assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId()));
         assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId()));

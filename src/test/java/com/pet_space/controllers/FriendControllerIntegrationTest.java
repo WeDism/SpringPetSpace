@@ -4,19 +4,17 @@ import com.pet_space.models.Pet;
 import com.pet_space.models.essences.UserEssence;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
 import java.util.Set;
 
-import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_FRED;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_JOHN;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class FriendControllerIntegrationTest extends ControllerInit {
 

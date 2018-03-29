@@ -2,7 +2,6 @@ package com.pet_space.services;
 
 
 import com.pet_space.models.essences.UserEssence;
-import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 import java.util.UUID;

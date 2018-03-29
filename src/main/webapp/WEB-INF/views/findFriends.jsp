@@ -55,7 +55,7 @@
                     <th>Pets</th>
                 </tr>
                 </thead>
-                <tbody data-path-for-essence-friend="${pageContext.request.contextPath}${homepage}/${fn:toLowerCase(user.role)}/friend_request">
+                <tbody data-path-for-essence-friend="${pageContext.request.contextPath}${homepage}/${role}/friend_request">
                 <c:forEach items="${friends}" var="userFriend" varStatus="status">
                     <tr data-essence-id="${userFriend.userEssenceId}">
                         <td>
