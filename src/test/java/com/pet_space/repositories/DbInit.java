@@ -37,6 +37,8 @@ public class DbInit {
     protected StateFriendRepository stateFriendRepository;
     @Autowired
     protected PetRepository petRepository;
+    @Autowired
+    protected FriendsRepository friendsRepository;
 
     @Before
     public void setUp() {

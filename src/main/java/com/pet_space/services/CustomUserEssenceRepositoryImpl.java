@@ -1,6 +1,9 @@
 package com.pet_space.services;
 
 import com.pet_space.models.essences.UserEssence;
+import com.pet_space.repositories.FriendsRepository;
+import com.pet_space.repositories.PetRepository;
+import com.pet_space.repositories.UserEssenceRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,41 +13,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional
+//@Transactional
 @Repository
 public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceRepository {
     private static final Logger LOG = LoggerFactory.getLogger(CustomUserEssenceRepositoryImpl.class);
 
+    private final UserEssenceRepository userEssenceRepository;
+    private final FriendsRepository friendsRepository;
+    private final PetRepository petRepository;
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public CustomUserEssenceRepositoryImpl(JpaTransactionManager entityManager) {
+    public CustomUserEssenceRepositoryImpl(UserEssenceRepository userEssenceRepository, FriendsRepository friendsRepository, JpaTransactionManager entityManager, PetRepository petRepository) {
+        this.userEssenceRepository = userEssenceRepository;
+        this.friendsRepository = friendsRepository;
         this.sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
+        this.petRepository = petRepository;
     }
 
     @CacheEvict(value = "userEssence", allEntries = true)
-    @Transactional
+//    @Transactional
     @Override
     public void deleteCascadeById(UUID id) {
         this.deleteCascade(new UserEssence().setUserEssenceId(id));
     }
 
     @CacheEvict(value = "userEssence", allEntries = true)
-    @Transactional
+//    @Transactional
     @Override
     public void deleteCascade(UserEssence entity) {
-        try (Session session = sessionFactory.openSession()) {
-            UserEssence userEssence = session.find(UserEssence.class, entity.getUserEssenceId());
-            session.beginTransaction();
-            session.delete(userEssence);
-            session.getTransaction().commit();
-        }
+        UserEssence userEssence = this.userEssenceRepository.findOne(entity.getUserEssenceId());
+        this.friendsRepository.delete(userEssence.getRequestedFriendsFrom());
+        this.friendsRepository.delete(userEssence.getRequestedFriendsTo());
+        this.petRepository.delete(userEssence.getPets());
+        this.userEssenceRepository.delete(userEssence);
     }
 
     @SuppressWarnings("unchecked")
