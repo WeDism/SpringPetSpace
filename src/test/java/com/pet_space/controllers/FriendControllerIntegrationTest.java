@@ -4,6 +4,7 @@ import com.pet_space.models.Pet;
 import com.pet_space.models.essences.UserEssence;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
@@ -15,6 +16,7 @@ import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSE
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class FriendControllerIntegrationTest extends ControllerInit {
 
@@ -44,10 +46,10 @@ public class FriendControllerIntegrationTest extends ControllerInit {
         this.petRepository.save(petsFred);
         userEssenceFred.setPets(petsFred);
 
-        this.session.setAttribute(USER.name().toLowerCase(), userEssenceFred);
-        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.CREATED));
-        assertThat(((UserEssence) this.session.getAttribute(USER.name().toLowerCase())).getRequestedFriendsFrom().size(), is(1));
-        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.session).getStatusCode(), is(HttpStatus.BAD_REQUEST));
+        when(this.authentication.getName()).thenReturn(userEssenceFred.getNickname());
+        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.authentication).getStatusCode(), is(HttpStatus.CREATED));
+        assertThat(this.userEssenceRepository.findOne(userEssenceFred.getUserEssenceId()).getRequestedFriendsFrom().size(), is(1));
+        assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.authentication).getStatusCode(), is(HttpStatus.BAD_REQUEST));
 
     }
 
