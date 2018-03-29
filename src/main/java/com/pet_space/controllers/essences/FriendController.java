@@ -42,9 +42,10 @@ public class FriendController {
     }
 
     @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
-    public String getUserNicknameView(Authentication authentication,HttpSession session) {
+    public String getUserNicknameView(Authentication authentication, HttpSession session, Model model) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         session.setAttribute("role", user.getRole().getRoleEssenceEnum().name().toLowerCase());
+        model.addAttribute(USER.name().toLowerCase(), user);
         return user.getRole().toString().toLowerCase();
     }
 
