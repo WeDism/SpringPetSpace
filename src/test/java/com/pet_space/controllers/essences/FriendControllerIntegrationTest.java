@@ -1,25 +1,24 @@
-package com.pet_space.controllers.essences;
+package com.pet_space.controllers;
 
-import com.pet_space.controllers.ControllerInit;
+import com.pet_space.models.Pet;
 import com.pet_space.models.essences.UserEssence;
-import com.pet_space.models.pets.Pet;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
 import java.util.Set;
 
+import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_FRED;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_JOHN;
+import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class FriendControllerIntegrationTest extends ControllerInit {
-    @Autowired
-    private FriendController friendController;
 
     @Test
     public void postFriendRequest() {
@@ -30,18 +29,18 @@ public class FriendControllerIntegrationTest extends ControllerInit {
         UserEssence userEssenceFred = SerializationUtils.clone(USER_ESSENCE_FRED).setNickname("FRED_CLONE");
         Set<Pet> petsFred = userEssenceFred.getPets();
         userEssenceFred.setPets(Collections.emptySet());
-        this.userEssenceRepository.save(userEssenceJohn.setUserEssenceId(null));
-        this.userEssenceRepository.save(userEssenceFred.setUserEssenceId(null));
+        this.userEssenceRepository.save(userEssenceJohn);
+        this.userEssenceRepository.save(userEssenceFred);
 
         petsJohn.forEach(e -> {
-            e.setPetId(null);
+            e.setPetId(randomUUID());
             e.setOwner(userEssenceJohn);
         });
         this.petRepository.save(petsJohn);
         userEssenceJohn.setPets(petsJohn);
 
         petsFred.forEach(e -> {
-            e.setPetId(null);
+            e.setPetId(randomUUID());
             e.setOwner(userEssenceFred);
         });
         this.petRepository.save(petsFred);
