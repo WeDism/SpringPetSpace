@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.Iterator;
@@ -20,7 +22,7 @@ import java.util.List;
 import java.util.UUID;
 
 //TODO solve transactional problem
-//@Transactional
+@Transactional(propagation = Propagation.SUPPORTS)
 @Repository
 public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceRepository {
     private static final Logger LOG = LoggerFactory.getLogger(CustomUserEssenceRepositoryImpl.class);
