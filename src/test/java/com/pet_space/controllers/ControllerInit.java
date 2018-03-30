@@ -18,8 +18,6 @@ public class ControllerInit extends DbInit{
     @Autowired
     protected MockHttpSession mockHttpSession;
     @Mock
-    protected HttpSession httpSession;
-    @Mock
     protected Authentication authentication;
 
     @Override

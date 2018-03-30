@@ -7,11 +7,29 @@ var doFriend = function (input, typeRequest, bool) {
         type: typeRequest,
         success: function () {
             $(input).prop('checked', bool);
-            bool ? alert('Friend requested') : alert('Delete request');
+            bool ?
+                $.notify({
+                    title: '<strong>Complete!</strong>',
+                    message: 'Friend requested'
+                }, {
+                    type: 'success'
+                })
+                :
+                $.notify({
+                    title: '<strong>Complete!</strong>',
+                    message: 'Delete request'
+                }, {
+                    type: 'success'
+                })
         },
         error: function (xhr) {
             $(input).prop('checked', !bool);
-            alert('Error' + xhr.status);
+            $.notify({
+                title: '<strong>Error!</strong>',
+                message: 'Role Essence is not updated status: ' + xhr.status
+            }, {
+                type: 'danger'
+            });
         }
     })
 };
