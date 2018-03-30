@@ -14,10 +14,12 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+//TODO solve transactional problem
 //@Transactional
 @Repository
 public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceRepository {

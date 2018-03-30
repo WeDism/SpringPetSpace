@@ -35,9 +35,9 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
         UserEssence userEssenceJohnUpd = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
         UserEssence userEssenceSimonUpd = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
 
-        this.customUserEssenceRepository.deleteCascadeById(userEssenceFred.getUserEssenceId());
-        this.customUserEssenceRepository.deleteCascadeById(userEssenceJohnUpd.getUserEssenceId());
-        this.customUserEssenceRepository.deleteCascadeById(userEssenceSimonUpd.getUserEssenceId());
+        this.customUserEssenceRepository.deleteCascade(userEssenceFred);
+        this.customUserEssenceRepository.deleteCascade(userEssenceJohnUpd);
+        this.customUserEssenceRepository.deleteCascade(userEssenceSimonUpd);
 
         assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_JOHN.getUserEssenceId()));
         assertNull(this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId()));
