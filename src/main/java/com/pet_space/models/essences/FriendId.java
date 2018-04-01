@@ -45,8 +45,7 @@ public class FriendId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof FriendId)) return false;
         FriendId friendId = (FriendId) o;
-        return Objects.equals(this.getUserEssence(), friendId.getUserEssence()) &&
-                Objects.equals(this.getFriend(), friendId.getFriend());
+        return Objects.equals(this.getUserEssence(), friendId.getUserEssence()) && Objects.equals(this.getFriend(), friendId.getFriend());
     }
 
     @Override
