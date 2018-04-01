@@ -14,14 +14,10 @@ public class FriendId implements Serializable {
     public FriendId() {
     }
 
-    private FriendId(UserEssence userEssence, UserEssence friend) {
+    public FriendId(UserEssence userEssence, UserEssence friend) {
         this();
         this.userEssence = userEssence;
         this.friend = friend;
-    }
-
-    public static FriendId of(UserEssence userEssence, UserEssence friend) {
-        return new FriendId(userEssence, friend);
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -48,12 +44,12 @@ public class FriendId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof FriendId)) return false;
-        FriendId that = (FriendId) o;
-        return Objects.equals(this.getUserEssence(), that.getUserEssence()) && Objects.equals(this.getFriend(), that.getFriend());
+        FriendId friendId = (FriendId) o;
+        return Objects.equals(this.getUserEssence(), friendId.getUserEssence()) && Objects.equals(this.getFriend(), friendId.getFriend());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getUserEssence(), this.getFriend());
+        return Objects.hash(this.getUserEssence().getUserEssenceId(), this.getFriend().getUserEssenceId());
     }
 }

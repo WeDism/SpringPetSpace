@@ -16,12 +16,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-//TODO solve transactional problem
 @Transactional(propagation = Propagation.SUPPORTS)
 @Repository
 public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceRepository {
@@ -41,14 +39,14 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
     }
 
     @CacheEvict(value = "userEssence", allEntries = true)
-//    @Transactional
+    @Transactional
     @Override
     public void deleteCascadeById(UUID id) {
         this.deleteCascade(new UserEssence().setUserEssenceId(id));
     }
 
     @CacheEvict(value = "userEssence", allEntries = true)
-//    @Transactional
+    @Transactional
     @Override
     public void deleteCascade(UserEssence entity) {
         UserEssence userEssence = this.userEssenceRepository.findOne(entity.getUserEssenceId());
