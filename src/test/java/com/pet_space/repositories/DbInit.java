@@ -1,5 +1,6 @@
 package com.pet_space.repositories;
 
+import com.pet_space.services.CustomMessageRepository;
 import com.pet_space.services.CustomUserEssenceRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +13,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
+import static com.pet_space.repositories.MessageTestData.MESSAGE_FIRST;
+import static com.pet_space.repositories.MessageTestData.MESSAGE_SECOND;
 import static com.pet_space.repositories.PetRepositoryTestData.*;
 import static com.pet_space.repositories.RoleEssenceRepositoryTestData.*;
 import static com.pet_space.repositories.StateFriendRepositoryTestData.*;
@@ -39,6 +42,10 @@ public class DbInit {
     protected PetRepository petRepository;
     @Autowired
     protected FriendsRepository friendsRepository;
+    @Autowired
+    protected MessageRepository messageRepository;
+    @Autowired
+    protected CustomMessageRepository customMessageRepository;
 
     @Before
     public void setUp() {
@@ -65,10 +72,16 @@ public class DbInit {
         this.petRepository.save(PET_PERS.setPetId(null));
         this.petRepository.save(PET_TIMON.setPetId(null));
         this.petRepository.save(PET_TOSH.setPetId(null));
+
+        this.customMessageRepository.save(MESSAGE_FIRST.setMessageId(null));
+        this.customMessageRepository.save(MESSAGE_SECOND.setMessageId(null));
+
     }
 
     @After
     public void cleanUp() {
+        this.customMessageRepository.deleteAll();
+
         this.userEssenceRepository.deleteAll();
 
         this.petRepository.deleteAll();

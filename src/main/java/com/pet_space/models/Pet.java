@@ -38,7 +38,7 @@ public class Pet implements Serializable {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid2", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "pet_id", columnDefinition = "uuid")
     public UUID getPetId() {
