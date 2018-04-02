@@ -67,14 +67,10 @@ CREATE TABLE follow_pets (
   CONSTRAINT pk_follow_pets_id PRIMARY KEY (pet_id, user_essence_id)
 );
 
-CREATE TABLE date_of_message (
-  date TIMESTAMP PRIMARY KEY  DEFAULT now()
-);
-
 CREATE TABLE message (
   message_id UUID PRIMARY KEY,
   text       TEXT,
-  date       TIMESTAMP REFERENCES date_of_message (date),
+  date       TIMESTAMP DEFAULT now(),
   author_id  UUID NULL REFERENCES user_essence (user_essence_id)
 );
 
@@ -82,8 +78,7 @@ CREATE TABLE message (
 CREATE TABLE message_of_user (
   message_id UUID REFERENCES message (message_id),
   owner_id   UUID REFERENCES user_essence (user_essence_id),
-  date       TIMESTAMP REFERENCES date_of_message (date),
-  CONSTRAINT pk_message_of_user_id PRIMARY KEY (message_id, owner_id, date)
+  CONSTRAINT pk_message_of_user_id PRIMARY KEY (message_id, owner_id)
 );
 
 INSERT INTO role_essence VALUES ('ROOT'), ('ADMIN'), ('USER');

@@ -1,5 +1,6 @@
 package com.pet_space.models.essences;
 
+import com.pet_space.models.Message;
 import com.pet_space.models.Pet;
 import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,8 @@ public class UserEssence implements Serializable {
     private StatusEssence statusEssence;
     private Set<Pet> pets = new HashSet<>();
     private Set<Pet> followByPets = new HashSet<>();
+    private Set<Message> messagesFrom = new HashSet<>();
+    private Set<Message> messagesTo = new HashSet<>();
     private Set<Friends> requestedFriendsFrom = new HashSet<>();
     private Set<Friends> requestedFriendsTo = new HashSet<>();
 
@@ -42,7 +45,7 @@ public class UserEssence implements Serializable {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid2", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "user_essence_id", columnDefinition = "uuid")
     public UUID getUserEssenceId() {
@@ -160,17 +163,33 @@ public class UserEssence implements Serializable {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "follow_pets",
-            joinColumns = {@JoinColumn(name = "user_essence_id")},
-            inverseJoinColumns = {@JoinColumn(name = "pet_id")}
-    )
+    @JoinTable(name = "follow_pets", joinColumns = {@JoinColumn(name = "user_essence_id")}, inverseJoinColumns = {@JoinColumn(name = "pet_id")})
     public Set<Pet> getFollowByPets() {
         return this.followByPets;
     }
 
     public UserEssence setFollowByPets(Set<Pet> followByPets) {
         this.followByPets = followByPets;
+        return this;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
+    public Set<Message> getMessagesFrom() {
+        return this.messagesFrom;
+    }
+
+    public UserEssence setMessagesFrom(Set<Message> messagesFrom) {
+        this.messagesFrom = messagesFrom;
+        return this;
+    }
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "owners", fetch = FetchType.EAGER)
+    public Set<Message> getMessagesTo() {
+        return this.messagesTo;
+    }
+
+    public UserEssence setMessagesTo(Set<Message> messagesTo) {
+        this.messagesTo = messagesTo;
         return this;
     }
 

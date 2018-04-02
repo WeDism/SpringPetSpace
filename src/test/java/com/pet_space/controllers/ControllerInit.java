@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.core.Authentication;
 
-import javax.servlet.http.HttpSession;
-
 @Ignore
 public class ControllerInit extends DbInit{
 

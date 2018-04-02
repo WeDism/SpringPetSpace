@@ -2,10 +2,10 @@
 <html>
 <head><c:import url="../fragments/htmlHeadTags.jsp"/></head>
 <body>
-<div>
-    <h2>Request error
-        <a href="<c:url value="/login"/>">Go to login</a>
-    </h2>
+<div class="row">
+    <div class="col">
+        <h2>Your request has error <a href="<c:url value="/pet_space"/>">Go to home page</a></h2>
+    </div>
 </div>
 </body>
 </html>

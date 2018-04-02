@@ -1,10 +1,9 @@
 package com.pet_space.controllers;
 
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_FRED;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
