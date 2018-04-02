@@ -53,7 +53,7 @@ public class Message {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_essence_id")
+    @JoinColumn(name = "author_id")
     public UserEssence getAuthor() {
         return this.author;
     }
