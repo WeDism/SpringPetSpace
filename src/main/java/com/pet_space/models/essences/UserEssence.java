@@ -1,8 +1,7 @@
 package com.pet_space.models.essences;
 
-import com.pet_space.models.messages.Message;
-import com.pet_space.models.messages.MessageOfUser;
-import com.pet_space.models.pets.Pet;
+import com.pet_space.models.Message;
+import com.pet_space.models.Pet;
 import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +33,7 @@ public class UserEssence implements Serializable {
     private Set<Pet> pets = new HashSet<>();
     private Set<Pet> followByPets = new HashSet<>();
     private Set<Message> messagesFrom = new HashSet<>();
-    private Set<MessageOfUser> messagesTo = new HashSet<>();
+    private Set<Message> messagesTo = new HashSet<>();
     private Set<Friends> requestedFriendsFrom = new HashSet<>();
     private Set<Friends> requestedFriendsTo = new HashSet<>();
 
@@ -163,11 +162,8 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "follow_pets",
-            joinColumns = {@JoinColumn(name = "user_essence_id")}, inverseJoinColumns = {@JoinColumn(name = "pet_id")},
-            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "follow_pets", joinColumns = {@JoinColumn(name = "user_essence_id")}, inverseJoinColumns = {@JoinColumn(name = "pet_id")})
     public Set<Pet> getFollowByPets() {
         return this.followByPets;
     }
@@ -177,7 +173,7 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
     public Set<Message> getMessagesFrom() {
         return this.messagesFrom;
     }
@@ -187,12 +183,12 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @OneToMany(mappedBy = "primaryKey.owner", cascade = CascadeType.ALL)
-    public Set<MessageOfUser> getMessagesTo() {
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "owners", fetch = FetchType.EAGER)
+    public Set<Message> getMessagesTo() {
         return this.messagesTo;
     }
 
-    public UserEssence setMessagesTo(Set<MessageOfUser> messagesTo) {
+    public UserEssence setMessagesTo(Set<Message> messagesTo) {
         this.messagesTo = messagesTo;
         return this;
     }
@@ -221,13 +217,13 @@ public class UserEssence implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserEssence)) return false;
-        UserEssence that = (UserEssence) o;
-        return Objects.equals(this.getUserEssenceId(), that.getUserEssenceId());
+        UserEssence userEssence = (UserEssence) o;
+        return Objects.equals(this.getUserEssenceId(), userEssence.getUserEssenceId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getUserEssenceId());
+        return this.getUserEssenceId().hashCode();
     }
 
     public interface INickname {
