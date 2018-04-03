@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -47,19 +46,16 @@ public class AddPetController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public String postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, Authentication authentication, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("genusPet", this.genusPetRepository.findAll());
-            return "addPet";
-        }
+        model.addAttribute("genusPet", this.genusPetRepository.findAll());
+
+        if (result.hasErrors()) return "addPet";
 
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         if (this.petRepository.findByNameAndOwner(pet.getName(), user) != null) {
-            model.addAttribute("genusPet", this.genusPetRepository.findAll());
             model.addAttribute("genusPetName", String.format("This is %s name you already use", pet.getName()));
             return "addPet";
         }
 
-        pet.setPetId(UUID.randomUUID());
         pet.setOwner(user);
         this.petRepository.save(pet);
         model.addAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));

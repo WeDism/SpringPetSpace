@@ -1,12 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
-<head><c:import url="fragments/htmlHeadTags.jsp"/>
-    <script src='<c:url value="/web_resources/js/custom/initMessageNotification.js"/>'></script>
-</head>
+<head><c:import url="fragments/htmlHeadTags.jsp"/></head>
 <body>
-<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
+<div class="container">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row c-row">
         <div class="col">

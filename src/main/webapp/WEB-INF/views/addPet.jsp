@@ -1,15 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
-<head><c:import url="fragments/htmlHeadTags.jsp"/>
-    <script src='<c:url value="/web_resources/js/custom/initMessageNotification.js"/>'></script>
-    <link rel="stylesheet" href="${applicationScope['datetimepicker.css']}">
-    <script src="${applicationScope['datetimepicker']}"></script>
-</head>
+<head><c:import url="fragments/htmlHeadTags.jsp"/></head>
 <body>
-<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
+<div class="container">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row c-row">
         <div class="col">
@@ -42,9 +36,9 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group row">
-                                <label class="col-4 col-form-label" for="datetimepicker">Birthday</label>
+                                <label class="col-4 col-form-label" for="petBirthday">Birthday</label>
                                 <div class="col-8">
-                                    <input class="form-control" id="datetimepicker" type="text" name="birthday">
+                                    <input class="form-control" id="petBirthday" type="datetime-local" name="birthday">
                                 </div>
                             </div>
                         </div>
@@ -96,12 +90,6 @@
             </div>
         </div>
     </div>
-    <script>
-        $.datetimepicker.setDateFormatter('moment');
-        $('#datetimepicker').datetimepicker({
-            format: 'YYYY-MM-DDTHH:mm'
-        });
-    </script>
 </div>
 </body>
 </html>

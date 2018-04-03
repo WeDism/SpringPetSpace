@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-                <tbody data-path-for-change-role-essence="${pageContext.request.contextPath}/${currentUserRole}" data-path-for-manage-user-essence="${pageContext.request.contextPath}/${currentUserRole}/profile/"/>
+                <tbody data-path-for-change-role-essence="${pageContext.request.contextPath}/${currentUserRole}" data-path-for-manage-user-essence="${pageContext.request.contextPath}/${currentUserRole}/profile/">
                 <c:set var="users" value="${sessionScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr data-essence-id="${user.userEssenceId}">
@@ -47,7 +47,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${'ROOT' != user.role}">
-                                    <select class="user-essence-roles" name="user-essence-roles">
+                                    <select class="user-essence-roles custom-select" name="user-essence-roles">
                                         <c:forEach items="<%=com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.values()%>" var="role" varStatus="status">
                                             <option value="<c:out value="${role}"/>" <c:if test="${role == user.role.roleEssenceEnum}">selected</c:if>>
                                                 <c:out value="${role}"/>

@@ -7,6 +7,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "state_friend")
 public class StateFriend implements Serializable {
+    public enum StateFriendEnum {
+        REQUESTED, REJECTED, APPROVED
+    }
+
+    public static StateFriend of(StateFriendEnum stateFriendEnum) {
+        return new StateFriend(stateFriendEnum);
+    }
+
     @Id
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
@@ -15,13 +23,9 @@ public class StateFriend implements Serializable {
     public StateFriend() {
     }
 
-    private StateFriend(StateFriendEnum stateFriendEnum) {
-        this();
+    public StateFriend(StateFriendEnum stateFriendEnum) {
+        super();
         this.stateFriendEnum = stateFriendEnum;
-    }
-
-    public static StateFriend of(StateFriendEnum stateFriendEnum) {
-        return new StateFriend(stateFriendEnum);
     }
 
     public StateFriendEnum getStateFriendEnum() {
@@ -38,20 +42,16 @@ public class StateFriend implements Serializable {
         if (this == o) return true;
         if (!(o instanceof StateFriend)) return false;
         StateFriend that = (StateFriend) o;
-        return this.getStateFriendEnum() == that.getStateFriendEnum();
+        return getStateFriendEnum() == that.getStateFriendEnum();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getStateFriendEnum());
+        return Objects.hash(getStateFriendEnum());
     }
 
     @Override
     public String toString() {
         return this.stateFriendEnum.name();
-    }
-
-    public enum StateFriendEnum {
-        REQUESTED, REJECTED, APPROVED
     }
 }
