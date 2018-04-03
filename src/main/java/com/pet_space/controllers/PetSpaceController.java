@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 
@@ -24,9 +26,10 @@ public class PetSpaceController {
     }
 
     @RequestMapping(value = "pet_space", method = RequestMethod.GET)
-    public String getRole() {
+    public String getRole(HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
+        session.setAttribute("role", userEssence.getRole().getRoleEssenceEnum().name().toLowerCase());
         return "redirect:/" + userEssence.getRole().getRoleEssenceEnum().name().toLowerCase();
     }
 }

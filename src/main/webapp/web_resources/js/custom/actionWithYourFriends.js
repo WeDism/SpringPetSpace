@@ -35,11 +35,38 @@ var changeStateFriend = function () {
         }
     })
 };
+var deleteRequestFriend = function () {
+    var tr = this.closest('tr');
+    var path = $(this).closest('tbody')[0];
+    $.ajax({
+        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({user_essence_id: tr.dataset.essenceId}),
+        type: "DELETE",
+        success: function () {
+            tr.remove();
+            $.notify({
+                title: '<strong>Complete!</strong>',
+                message: 'Request friend deleted'
+            }, {
+                type: 'success'
+            });
+        },
+        error: function (xhr) {
+            $.notify({
+                title: '<strong>Error!</strong>',
+                message: 'Request friend not deleted status: ' + xhr.status
+            }, {
+                type: 'danger'
+            });
+        }
+    })
+};
+
 var setPreviewDataValue = function () {
     this.dataset.previewValue = $(this).find(':selected')[0].value;
 };
 
 var init = function () {
     $('.action-friends').on('change', changeStateFriend).on('click', setPreviewDataValue);
+    $('.delete-request-friend-of-button').on('click', deleteRequestFriend);
 };
 $(window).on('load', init);

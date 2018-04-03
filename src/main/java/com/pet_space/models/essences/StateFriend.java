@@ -11,6 +11,10 @@ public class StateFriend implements Serializable {
         REQUESTED, REJECTED, APPROVED
     }
 
+    public static StateFriend of(StateFriendEnum stateFriendEnum) {
+        return new StateFriend(stateFriendEnum);
+    }
+
     @Id
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
