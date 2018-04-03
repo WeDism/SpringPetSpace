@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -42,9 +42,8 @@ public class FriendController {
     }
 
     @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
-    public String getUserNicknameView(Authentication authentication, HttpSession session, Model model) {
+    public String getUserNicknameView(Authentication authentication, Model model) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
-        session.setAttribute("role", user.getRole().getRoleEssenceEnum().name().toLowerCase());
         model.addAttribute(USER.name().toLowerCase(), user);
         return user.getRole().toString().toLowerCase();
     }
@@ -59,9 +58,11 @@ public class FriendController {
     public String postFindFriends(@RequestParam(name = "name") String name,
                                   @RequestParam(name = "surname") String surname,
                                   @RequestParam(name = "patronymic") String patronymic, Model model, Authentication authentication) {
-        List<UserEssence> userEssences = customUserEssenceRepository.fiendFriend(
-                this.userEssenceRepository.findByNickname(authentication.getName()), name, surname, patronymic);
+        UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
+        List<UserEssence> userEssences = customUserEssenceRepository.fiendFriend(userEssence, name, surname, patronymic);
         model.addAttribute("friends", userEssences);
+        model.addAttribute("userFriends", userEssence.getRequestedFriendsFrom()
+                .stream().map(Friends::getFriend).collect(Collectors.toSet()));
         return "findFriends";
     }
 
