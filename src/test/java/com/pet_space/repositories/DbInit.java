@@ -1,6 +1,5 @@
 package com.pet_space.repositories;
 
-import com.pet_space.services.CustomMessageRepository;
 import com.pet_space.services.CustomUserEssenceRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -11,8 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.HashSet;
+
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
+import static com.pet_space.repositories.MessageStateRepositoryTestData.MESSAGE_STATE_NEW;
+import static com.pet_space.repositories.MessageStateRepositoryTestData.MESSAGE_STATE_VIEWED;
 import static com.pet_space.repositories.MessageTestData.MESSAGE_FIRST;
 import static com.pet_space.repositories.MessageTestData.MESSAGE_SECOND;
 import static com.pet_space.repositories.PetRepositoryTestData.*;
@@ -43,9 +46,11 @@ public class DbInit {
     @Autowired
     protected FriendsRepository friendsRepository;
     @Autowired
+    protected MessageStateRepository messageStateRepository;
+    @Autowired
     protected MessageRepository messageRepository;
     @Autowired
-    protected CustomMessageRepository customMessageRepository;
+    protected MessageOfUserRepository messageOfUserRepository;
 
     @Before
     public void setUp() {
@@ -61,26 +66,29 @@ public class DbInit {
         this.stateFriendRepository.save(STATE_FRIEND_REJECTED);
         this.stateFriendRepository.save(STATE_FRIEND_REQUESTED);
 
+        this.messageStateRepository.save(MESSAGE_STATE_NEW);
+        this.messageStateRepository.save(MESSAGE_STATE_VIEWED);
+
         this.genusPetRepository.save(GENUS_CAT);
         this.genusPetRepository.save(GENUS_DOG);
 
-        this.userEssenceRepository.save(USER_ESSENCE_JOHN.setUserEssenceId(null));
-        this.userEssenceRepository.save(USER_ESSENCE_FRED.setUserEssenceId(null));
-        this.userEssenceRepository.save(USER_ESSENCE_SIMON.setUserEssenceId(null));
+        this.userEssenceRepository.save(USER_ESSENCE_JOHN.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
+        this.userEssenceRepository.save(USER_ESSENCE_FRED.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
+        this.userEssenceRepository.save(USER_ESSENCE_SIMON.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
 
-        this.petRepository.save(PET_LAYMA.setPetId(null));
-        this.petRepository.save(PET_PERS.setPetId(null));
-        this.petRepository.save(PET_TIMON.setPetId(null));
-        this.petRepository.save(PET_TOSH.setPetId(null));
+        this.petRepository.save(PET_LAYMA.setPetId(null).setFollowersPet(new HashSet<>()));
+        this.petRepository.save(PET_PERS.setPetId(null).setFollowersPet(new HashSet<>()));
+        this.petRepository.save(PET_TIMON.setPetId(null).setFollowersPet(new HashSet<>()));
+        this.petRepository.save(PET_TOSH.setPetId(null).setFollowersPet(new HashSet<>()));
 
-        this.customMessageRepository.save(MESSAGE_FIRST.setMessageId(null));
-        this.customMessageRepository.save(MESSAGE_SECOND.setMessageId(null));
+        this.messageRepository.save(MESSAGE_FIRST.setMessageId(null));
+        this.messageRepository.save(MESSAGE_SECOND.setMessageId(null));
 
     }
 
     @After
     public void cleanUp() {
-        this.customMessageRepository.deleteAll();
+        this.messageRepository.deleteAll();
 
         this.userEssenceRepository.deleteAll();
 

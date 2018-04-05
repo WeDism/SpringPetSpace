@@ -21,7 +21,7 @@ public class FollowersPetsTest extends DbInit {
         USER_ESSENCE_FRED.setFollowByPets(new HashSet<>(Arrays.asList(PET_PERS, PET_TIMON)));
         this.userEssenceRepository.save(USER_ESSENCE_FRED);
 
-        assertThat(this.userEssenceRepository.findOneWithEagerFollowedPets(USER_ESSENCE_FRED.getUserEssenceId()).getFollowByPets().size(), is(2));
+        assertThat(this.userEssenceRepository.findUserEssenceWithEagerFollowedPets(USER_ESSENCE_FRED.getUserEssenceId()).getFollowByPets().size(), is(2));
     }
 
     @Test

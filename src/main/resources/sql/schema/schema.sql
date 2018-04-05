@@ -74,10 +74,14 @@ CREATE TABLE message (
   author_id  UUID NULL REFERENCES user_essence (user_essence_id)
 );
 
+CREATE TABLE message_state (
+  state VARCHAR(100) PRIMARY KEY
+);
 
 CREATE TABLE message_of_user (
   message_id UUID REFERENCES message (message_id),
   owner_id   UUID REFERENCES user_essence (user_essence_id),
+  state VARCHAR(100) REFERENCES message_state (state),
   CONSTRAINT pk_message_of_user_id PRIMARY KEY (message_id, owner_id)
 );
 

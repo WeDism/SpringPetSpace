@@ -1,9 +1,10 @@
 package com.pet_space.controllers;
 
-import com.pet_space.models.Pet;
+import com.pet_space.models.pets.Pet;
 import com.pet_space.models.essences.UserEssence;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
@@ -17,6 +18,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 public class FriendControllerIntegrationTest extends ControllerInit {
+    @Autowired
+    private FriendController friendController;
 
     @Test
     public void postFriendRequest() {

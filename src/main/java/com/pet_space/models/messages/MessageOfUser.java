@@ -3,7 +3,6 @@ package com.pet_space.models.messages;
 import com.pet_space.models.essences.UserEssence;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Objects;
                 joinColumns = @JoinColumn(name = "owner_id")),
         @AssociationOverride(name = "primaryKey.message",
                 joinColumns = @JoinColumn(name = "message_id"))})
-public class MessageOfUser implements Serializable {
+public class MessageOfUser {
     private MessageOfUserId primaryKey = new MessageOfUserId();
     private MessageState state;
 
@@ -58,7 +57,7 @@ public class MessageOfUser implements Serializable {
     }
 
     @Transient
-    public Message getMessage() {
+    public Message getMessage(Message message) {
         return this.primaryKey.getMessage();
     }
 
@@ -77,7 +76,7 @@ public class MessageOfUser implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getPrimaryKey());
+        return Objects.hash(this.getPrimaryKey().hashCode());
     }
 }
 

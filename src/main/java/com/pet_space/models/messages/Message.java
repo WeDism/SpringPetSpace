@@ -2,25 +2,21 @@ package com.pet_space.models.messages;
 
 import com.pet_space.models.essences.UserEssence;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
-public class Message implements Serializable {
+public class Message {
     private UUID messageId;
-    @NotBlank
     private String text;
     private LocalDateTime date;
     private UserEssence author;
-    //TODO    @NotEmpty
-    private List<MessageOfUser> owners = new ArrayList<>();
+    private Set<MessageOfUser> owners = new HashSet<>();
 
     public Message() {
     }
@@ -56,8 +52,8 @@ public class Message implements Serializable {
         return this;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "user_essence_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
     public UserEssence getAuthor() {
         return this.author;
     }
@@ -68,11 +64,11 @@ public class Message implements Serializable {
     }
 
     @OneToMany(mappedBy = "primaryKey.message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<MessageOfUser> getOwners() {
+    public Set<MessageOfUser> getOwners() {
         return this.owners;
     }
 
-    public Message setOwners(List<MessageOfUser> owners) {
+    public Message setOwners(Set<MessageOfUser> owners) {
         this.owners = owners;
         return this;
     }
@@ -87,7 +83,7 @@ public class Message implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getMessageId());
+        return this.getMessageId().hashCode();
     }
 
 

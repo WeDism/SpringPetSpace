@@ -1,7 +1,8 @@
 package com.pet_space.models.essences;
 
-import com.pet_space.models.Message;
-import com.pet_space.models.Pet;
+import com.pet_space.models.pets.Pet;
+import com.pet_space.models.messages.Message;
+import com.pet_space.models.messages.MessageOfUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +34,7 @@ public class UserEssence implements Serializable {
     private Set<Pet> pets = new HashSet<>();
     private Set<Pet> followByPets = new HashSet<>();
     private Set<Message> messagesFrom = new HashSet<>();
-    private Set<Message> messagesTo = new HashSet<>();
+    private Set<MessageOfUser> messagesTo = new HashSet<>();
     private Set<Friends> requestedFriendsFrom = new HashSet<>();
     private Set<Friends> requestedFriendsTo = new HashSet<>();
 
@@ -162,8 +163,11 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "follow_pets", joinColumns = {@JoinColumn(name = "user_essence_id")}, inverseJoinColumns = {@JoinColumn(name = "pet_id")})
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "follow_pets",
+            joinColumns = {@JoinColumn(name = "user_essence_id")}, inverseJoinColumns = {@JoinColumn(name = "pet_id")},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     public Set<Pet> getFollowByPets() {
         return this.followByPets;
     }
@@ -183,12 +187,12 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "owners", fetch = FetchType.EAGER)
-    public Set<Message> getMessagesTo() {
+    @OneToMany(mappedBy = "primaryKey.owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public Set<MessageOfUser> getMessagesTo() {
         return this.messagesTo;
     }
 
-    public UserEssence setMessagesTo(Set<Message> messagesTo) {
+    public UserEssence setMessagesTo(Set<MessageOfUser> messagesTo) {
         this.messagesTo = messagesTo;
         return this;
     }
