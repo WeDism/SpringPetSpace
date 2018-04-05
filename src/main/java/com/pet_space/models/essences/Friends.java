@@ -74,6 +74,6 @@ public class Friends implements Serializable {
 
     @Override
     public int hashCode() {
-        return this.getPrimaryKey().hashCode();
+        return Objects.hash(this.getPrimaryKey());
     }
 }

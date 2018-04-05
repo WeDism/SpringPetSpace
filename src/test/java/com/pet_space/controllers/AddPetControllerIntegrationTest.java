@@ -97,7 +97,6 @@ public class AddPetControllerIntegrationTest extends ControllerInit {
     public void postUserPetBindingResultHasErrors() throws Exception {
         MockHttpServletRequestBuilder requestBuilderFirst = post("/admin/add_pet")
                 .params(new LinkedMultiValueMap<String, String>() {{
-                    put("petId", Arrays.asList(UUID.randomUUID().toString()));
                     put("name", Arrays.asList("p"));
                     put("weight", Arrays.asList(PET_LAYMA.getWeight().toString()));
                     put("genusPet", Arrays.asList(PET_LAYMA.getGenusPet().getName()));

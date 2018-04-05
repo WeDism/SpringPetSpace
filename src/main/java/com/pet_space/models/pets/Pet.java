@@ -117,13 +117,13 @@ public class Pet implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pet)) return false;
-        Pet pet = (Pet) o;
-        return Objects.equals(this.getPetId(), pet.getPetId());
+        Pet that = (Pet) o;
+        return Objects.equals(this.getPetId(), that.getPetId());
     }
 
     @Override
     public int hashCode() {
-        return this.getPetId().hashCode();
+        return Objects.hash(this.getPetId());
     }
 
     public interface IName {
