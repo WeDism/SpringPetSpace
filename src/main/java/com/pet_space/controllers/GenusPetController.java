@@ -1,6 +1,6 @@
 package com.pet_space.controllers;
 
-import com.pet_space.models.GenusPet;
+import com.pet_space.models.pets.GenusPet;
 import com.pet_space.repositories.GenusPetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

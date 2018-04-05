@@ -1,4 +1,4 @@
-package com.pet_space.models;
+package com.pet_space.models.pets;
 
 import org.hibernate.validator.constraints.NotBlank;
 

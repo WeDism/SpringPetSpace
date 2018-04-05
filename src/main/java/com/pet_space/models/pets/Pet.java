@@ -1,4 +1,4 @@
-package com.pet_space.models;
+package com.pet_space.models.pets;
 
 import com.pet_space.models.essences.UserEssence;
 import org.hibernate.annotations.GenericGenerator;
@@ -99,7 +99,11 @@ public class Pet implements Serializable {
         return this;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "followByPets", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "follow_pets",
+            joinColumns = {@JoinColumn(name = "pet_id")}, inverseJoinColumns = {@JoinColumn(name = "user_essence_id")},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     public Set<UserEssence> getFollowersPet() {
         return this.followersPet;
     }

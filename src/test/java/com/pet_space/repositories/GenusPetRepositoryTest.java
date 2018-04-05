@@ -1,6 +1,6 @@
 package com.pet_space.repositories;
 
-import com.pet_space.models.GenusPet;
+import com.pet_space.models.pets.GenusPet;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;

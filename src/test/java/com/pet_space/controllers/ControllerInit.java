@@ -12,8 +12,6 @@ import org.springframework.security.core.Authentication;
 public class ControllerInit extends DbInit{
 
     @Autowired
-    protected FriendController friendController;
-    @Autowired
     protected MockHttpSession mockHttpSession;
     @Mock
     protected Authentication authentication;

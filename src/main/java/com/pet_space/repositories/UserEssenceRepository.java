@@ -3,11 +3,17 @@ package com.pet_space.repositories;
 import com.pet_space.models.essences.UserEssence;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.UUID;
 
 public interface UserEssenceRepository extends CrudRepository<UserEssence, UUID> {
+
+    @Cacheable("userEssence")
+    @Query("from UserEssence ue join fetch ue.followByPets where ue.userEssenceId = :userEssenceId")
+    UserEssence findUserEssenceWithEagerFollowedPets(@Param("userEssenceId") UUID userEssenceId);
 
     @Cacheable("userEssence")
     UserEssence findByNickname(String nickname);

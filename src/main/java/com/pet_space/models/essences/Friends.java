@@ -68,8 +68,8 @@ public class Friends implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Friends)) return false;
-        Friends friends = (Friends) o;
-        return Objects.equals(this.getPrimaryKey(), friends.getPrimaryKey());
+        Friends that = (Friends) o;
+        return Objects.equals(this.getPrimaryKey(), that.getPrimaryKey());
     }
 
     @Override

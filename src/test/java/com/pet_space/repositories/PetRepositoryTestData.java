@@ -1,6 +1,6 @@
 package com.pet_space.repositories;
 
-import com.pet_space.models.Pet;
+import com.pet_space.models.pets.Pet;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
