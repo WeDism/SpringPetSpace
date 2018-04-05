@@ -83,7 +83,7 @@ public class Message {
 
     @Override
     public int hashCode() {
-        return this.getMessageId().hashCode();
+        return Objects.hash(this.getMessageId());
     }
 
 
