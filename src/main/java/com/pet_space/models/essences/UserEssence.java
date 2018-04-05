@@ -221,13 +221,13 @@ public class UserEssence implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserEssence)) return false;
-        UserEssence userEssence = (UserEssence) o;
-        return Objects.equals(this.getUserEssenceId(), userEssence.getUserEssenceId());
+        UserEssence that = (UserEssence) o;
+        return Objects.equals(this.getUserEssenceId(), that.getUserEssenceId());
     }
 
     @Override
     public int hashCode() {
-        return this.getUserEssenceId().hashCode();
+        return Objects.hash(this.getUserEssenceId());
     }
 
     public interface INickname {

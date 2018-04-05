@@ -37,12 +37,12 @@ public class RoleEssence implements Serializable {
         if (this == o) return true;
         if (!(o instanceof RoleEssence)) return false;
         RoleEssence that = (RoleEssence) o;
-        return getRoleEssenceEnum() == that.getRoleEssenceEnum();
+        return this.getRoleEssenceEnum() == that.getRoleEssenceEnum();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRoleEssenceEnum());
+        return Objects.hash(this.getRoleEssenceEnum());
     }
 
     @Override

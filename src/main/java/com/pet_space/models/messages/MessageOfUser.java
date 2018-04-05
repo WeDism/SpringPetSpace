@@ -76,7 +76,7 @@ public class MessageOfUser {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getPrimaryKey().hashCode());
+        return Objects.hash(this.getPrimaryKey());
     }
 }
 

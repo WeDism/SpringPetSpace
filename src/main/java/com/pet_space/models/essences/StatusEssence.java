@@ -38,12 +38,12 @@ public class StatusEssence implements Serializable {
         if (this == o) return true;
         if (!(o instanceof StatusEssence)) return false;
         StatusEssence that = (StatusEssence) o;
-        return getStatusEssenceEnum() == that.getStatusEssenceEnum();
+        return this.getStatusEssenceEnum() == that.getStatusEssenceEnum();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStatusEssenceEnum());
+        return Objects.hash(this.getStatusEssenceEnum());
     }
 
     @Override
