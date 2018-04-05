@@ -24,6 +24,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
+import static com.pet_space.models.essences.StateFriend.StateFriendEnum.REQUESTED;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequestMapping(value = {"admin", "user", "root"})
@@ -70,8 +71,8 @@ public class FriendController {
     public ResponseEntity postFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = new FriendId(user, friend);
-        StateFriend state = new StateFriend(StateFriend.StateFriendEnum.REQUESTED);
+        FriendId friendId = FriendId.of(user, friend);
+        StateFriend state = StateFriend.of(REQUESTED);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends == null) {
             friends = new Friends(friendId, state);
@@ -84,7 +85,7 @@ public class FriendController {
     public ResponseEntity deleteFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = new FriendId(user, friend);
+        FriendId friendId = FriendId.of(user, friend);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends != null) {
             this.friendsRepository.delete(friends.getPrimaryKey());
@@ -98,10 +99,10 @@ public class FriendController {
                                                 Authentication authentication, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = new FriendId(friend, user);
+        FriendId friendId = FriendId.of(friend, user);
         Friends friends = this.friendsRepository.findOne(friendId);
         if (friends != null) {
-            this.friendsRepository.save(friends.setState(new StateFriend(stateFriendEnum)));
+            this.friendsRepository.save(friends.setState(StateFriend.of(stateFriendEnum)));
             return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

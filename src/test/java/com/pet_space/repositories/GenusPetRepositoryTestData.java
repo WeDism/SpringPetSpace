@@ -1,6 +1,6 @@
 package com.pet_space.repositories;
 
-import com.pet_space.models.GenusPet;
+import com.pet_space.models.pets.GenusPet;
 
 public interface GenusPetRepositoryTestData {
     GenusPet GENUS_CAT = new GenusPet("cat");

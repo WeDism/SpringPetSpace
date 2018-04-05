@@ -1,4 +1,4 @@
-package com.pet_space.models;
+package com.pet_space.models.messages;
 
 import com.pet_space.models.essences.UserEssence;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,13 +16,13 @@ public class Message {
     private String text;
     private LocalDateTime date;
     private UserEssence author;
-    private Set<UserEssence> owners = new HashSet<>();
+    private Set<MessageOfUser> owners = new HashSet<>();
 
     public Message() {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid2", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "message_id", columnDefinition = "uuid")
     public UUID getMessageId() {
@@ -63,16 +63,12 @@ public class Message {
         return this;
     }
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "message_of_user",
-            joinColumns = {@JoinColumn(name = "message_id")}, inverseJoinColumns = {@JoinColumn(name = "owner_id")},
-            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
-    public Set<UserEssence> getOwners() {
+    @OneToMany(mappedBy = "primaryKey.message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public Set<MessageOfUser> getOwners() {
         return this.owners;
     }
 
-    public Message setOwners(Set<UserEssence> owners) {
+    public Message setOwners(Set<MessageOfUser> owners) {
         this.owners = owners;
         return this;
     }
@@ -81,8 +77,8 @@ public class Message {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Message)) return false;
-        Message message = (Message) o;
-        return Objects.equals(this.getMessageId(), message.getMessageId());
+        Message that = (Message) o;
+        return Objects.equals(this.getMessageId(), that.getMessageId());
     }
 
     @Override

@@ -23,8 +23,8 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
         final UserEssence userEssenceJohn = this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId());
         final UserEssence userEssenceSimon = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
 
-        FriendId friendId = new FriendId(userEssenceJohn, userEssenceSimon);
-        StateFriend state = new StateFriend(StateFriend.StateFriendEnum.REQUESTED);
+        FriendId friendId = FriendId.of(userEssenceJohn, userEssenceSimon);
+        StateFriend state = StateFriend.of(StateFriend.StateFriendEnum.REQUESTED);
         Friends friends = new Friends(friendId, state);
         this.friendsRepository.save(friends);
 

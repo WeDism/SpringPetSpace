@@ -1,6 +1,6 @@
 package com.pet_space.controllers;
 
-import com.pet_space.models.Pet;
+import com.pet_space.models.pets.Pet;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.GenusPetRepository;
 import com.pet_space.repositories.PetRepository;
@@ -15,7 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -43,23 +43,23 @@ public class AddPetController {
         return "addPet";
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public String postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, Authentication authentication, Model model) {
+    public ModelAndView postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, Authentication authentication, Model model) {
         model.addAttribute("genusPet", this.genusPetRepository.findAll());
-
-        if (result.hasErrors()) return "addPet";
-
-        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
-        if (this.petRepository.findByNameAndOwner(pet.getName(), user) != null) {
-            model.addAttribute("genusPetName", String.format("This is %s name you already use", pet.getName()));
-            return "addPet";
+        ModelAndView modelAndView = new ModelAndView("addPet");
+        modelAndView.setStatus(HttpStatus.BAD_REQUEST);
+        if (!result.hasErrors()) {
+            UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
+            if (this.petRepository.findByNameAndOwner(pet.getName(), user) != null) {
+                model.addAttribute("genusPetName", String.format("This is %s name you already use", pet.getName()));
+            } else {
+                pet.setOwner(user);
+                this.petRepository.save(pet);
+                model.addAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
+                model.addAttribute("petIsAdded", true);
+                modelAndView.setStatus(HttpStatus.CREATED);
+            }
         }
-
-        pet.setOwner(user);
-        this.petRepository.save(pet);
-        model.addAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
-        model.addAttribute("petIsAdded", true);
-        return "addPet";
+        return modelAndView;
     }
 }
