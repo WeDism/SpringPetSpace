@@ -1,5 +1,9 @@
 package com.pet_space.repositories;
 
+import com.pet_space.models.messages.MessageOfUser;
+import com.pet_space.models.messages.MessageOfUserId;
+import com.pet_space.models.messages.MessageState;
+import com.pet_space.services.CustomMessageRepository;
 import com.pet_space.services.CustomUserEssenceRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.HashSet;
 
+import static com.pet_space.models.messages.MessageState.MessageStateEnum.NEW;
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_CAT;
 import static com.pet_space.repositories.GenusPetRepositoryTestData.GENUS_DOG;
 import static com.pet_space.repositories.MessageStateRepositoryTestData.MESSAGE_STATE_NEW;
@@ -51,6 +56,8 @@ public class DbInit {
     protected MessageRepository messageRepository;
     @Autowired
     protected MessageOfUserRepository messageOfUserRepository;
+    @Autowired
+    protected CustomMessageRepository customMessageRepository;
 
     @Before
     public void setUp() {
@@ -83,6 +90,14 @@ public class DbInit {
 
         this.messageRepository.save(MESSAGE_FIRST.setMessageId(null));
         this.messageRepository.save(MESSAGE_SECOND.setMessageId(null));
+
+        MessageOfUser messageFirstForFred = new MessageOfUser(MessageOfUserId.of(USER_ESSENCE_FRED, MESSAGE_FIRST), MessageState.of(NEW));
+        MessageOfUser messageSecondForFred = new MessageOfUser(MessageOfUserId.of(USER_ESSENCE_FRED, MESSAGE_SECOND), MessageState.of(NEW));
+        MessageOfUser messageSecondForSimon = new MessageOfUser(MessageOfUserId.of(USER_ESSENCE_SIMON, MESSAGE_SECOND), MessageState.of(NEW));
+
+        this.messageOfUserRepository.save(messageFirstForFred);
+        this.messageOfUserRepository.save(messageSecondForFred);
+        this.messageOfUserRepository.save(messageSecondForSimon);
 
     }
 

@@ -11,4 +11,10 @@
         <function-class>com.pet_space.jstl_tags.functions.GetFriendsFunction</function-class>
         <function-signature>java.util.Set getFriends(com.pet_space.models.essences.UserEssence)</function-signature>
     </function>
+    <function>
+        <name>ownersToString</name>
+        <function-class>com.pet_space.jstl_tags.functions.OwnersToStringFunction</function-class>
+        <function-signature>java.lang.String ownersToString(com.pet_space.models.messages.Message,com.pet_space.models.essences.UserEssence,boolean))
+        </function-signature>
+    </function>
 </taglib>

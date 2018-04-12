@@ -1,7 +1,9 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.essences;
 
-import com.pet_space.models.pets.Pet;
+import com.pet_space.controllers.ControllerInit;
+import com.pet_space.controllers.essences.FriendController;
 import com.pet_space.models.essences.UserEssence;
+import com.pet_space.models.pets.Pet;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

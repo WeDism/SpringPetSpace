@@ -1,4 +1,4 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.essences;
 
 import com.pet_space.models.essences.RoleEssence;
 import com.pet_space.models.essences.UserEssence;

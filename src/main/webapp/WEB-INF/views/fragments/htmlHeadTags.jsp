@@ -8,4 +8,5 @@
 <script src="${applicationScope['popper']}"></script>
 <script src="${applicationScope['bootstrap.js']}"></script>
 <script src="${applicationScope['bootstrap-notify']}"></script>
+<script src="${applicationScope['moment']}"></script>
 <link rel="stylesheet" href="<c:url value="/web_resources/css/custom/c-bootstrap.css"/>"/>

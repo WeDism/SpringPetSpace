@@ -26,6 +26,7 @@ public class LoginController implements ServletConfigAware {
             config.getServletContext().setAttribute("popper", contextPath + "/web_resources/js/popper.js");
             config.getServletContext().setAttribute("bootstrap.js", contextPath + "/web_resources/js/bootstrap.js");
             config.getServletContext().setAttribute("bootstrap-notify", contextPath + "/web_resources/js/bootstrap-notify.js");
+            config.getServletContext().setAttribute("moment", contextPath + "/web_resources/js/moment.js");
         } else {
             config.getServletContext().setAttribute("bootstrap.css", contextPath + "/web_resources/css/bootstrap.min.css");
             config.getServletContext().setAttribute("bootstrap-grid.css", contextPath + "/web_resources/css/bootstrap-grid.min.css");
@@ -34,6 +35,7 @@ public class LoginController implements ServletConfigAware {
             config.getServletContext().setAttribute("popper", contextPath + "/web_resources/js/popper.min.js");
             config.getServletContext().setAttribute("bootstrap.js", contextPath + "/web_resources/js/bootstrap.min.js");
             config.getServletContext().setAttribute("bootstrap-notify", contextPath + "/web_resources/js/bootstrap-notify.min.js");
+            config.getServletContext().setAttribute("moment", contextPath + "/web_resources/js/moment.min.js");
         }
     }
 

@@ -1,4 +1,4 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.pets;
 
 import com.pet_space.models.pets.GenusPet;
 import com.pet_space.repositories.GenusPetRepository;

@@ -1,8 +1,8 @@
 package com.pet_space.models.essences;
 
-import com.pet_space.models.pets.Pet;
 import com.pet_space.models.messages.Message;
 import com.pet_space.models.messages.MessageOfUser;
+import com.pet_space.models.pets.Pet;
 import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
 
