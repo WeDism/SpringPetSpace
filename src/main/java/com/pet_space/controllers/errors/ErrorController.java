@@ -1,4 +1,4 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

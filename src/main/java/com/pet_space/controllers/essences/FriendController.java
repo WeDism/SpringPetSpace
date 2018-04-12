@@ -1,4 +1,4 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.essences;
 
 import com.pet_space.models.essences.FriendId;
 import com.pet_space.models.essences.Friends;
@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static com.pet_space.models.essences.StateFriend.StateFriendEnum.REQUESTED;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -45,7 +44,7 @@ public class FriendController {
     @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
     public String getUserNicknameView(Authentication authentication, Model model) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
-        model.addAttribute(USER.name().toLowerCase(), user);
+        model.addAttribute("user", user);
         return user.getRole().toString().toLowerCase();
     }
 

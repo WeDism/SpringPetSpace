@@ -1,7 +1,7 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.pets;
 
-import com.pet_space.models.pets.Pet;
 import com.pet_space.models.essences.UserEssence;
+import com.pet_space.models.pets.Pet;
 import com.pet_space.repositories.GenusPetRepository;
 import com.pet_space.repositories.PetRepository;
 import com.pet_space.repositories.UserEssenceRepository;
@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.USER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequestMapping(value = {"user/add_pet", "admin/add_pet"})
@@ -55,7 +54,7 @@ public class AddPetController {
             } else {
                 pet.setOwner(user);
                 this.petRepository.save(pet);
-                model.addAttribute(USER.name().toLowerCase(), this.userEssenceRepository.findOne(user.getUserEssenceId()));
+                model.addAttribute("user", this.userEssenceRepository.findOne(user.getUserEssenceId()));
                 model.addAttribute("petIsAdded", true);
                 modelAndView.setStatus(HttpStatus.CREATED);
             }

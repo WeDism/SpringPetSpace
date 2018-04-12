@@ -1,4 +1,4 @@
-package com.pet_space.controllers;
+package com.pet_space.controllers.essences;
 
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;

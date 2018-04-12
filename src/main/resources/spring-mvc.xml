@@ -11,7 +11,30 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+        <property name="deserializersByType">
+            <map key-type="java.lang.Class">
+                <entry key="com.pet_space.models.messages.Message">
+                    <bean class="com.pet_space.json_customs.json_deserializers.MessageDeserializer"/>
+                </entry>
+            </map>
+        </property>
+        <property name="serializersByType">
+            <map key-type="java.lang.Class">
+                <entry key="com.pet_space.models.messages.Message">
+                    <bean class="com.pet_space.json_customs.json_serializers.MessageSerializer"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
     <mvc:resources mapping="/web_resources/**" location="/web_resources/"/>
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="objectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <mvc:view-controller path="/" view-name="login"/>
 </beans>
