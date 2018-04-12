@@ -8,9 +8,9 @@
     <script src='<c:url value="/web_resources/js/custom/message.js"/>'></script>
 </head>
 <body>
-<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
+<div class="container">
     <c:import url="fragments/bodyHeader.jsp"/>
+    <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
     <div class="row c-row">
         <div class="col">
             <div class="card-deck col-12">

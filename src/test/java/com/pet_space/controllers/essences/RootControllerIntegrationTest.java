@@ -1,6 +1,7 @@
 package com.pet_space.controllers.essences;
 
 import com.pet_space.controllers.ControllerInit;
+import com.pet_space.controllers.essences.RootController;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

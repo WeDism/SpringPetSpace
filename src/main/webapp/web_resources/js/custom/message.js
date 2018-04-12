@@ -1,36 +1,7 @@
-const createMessage = function (textArea) {
-    const message = {};
-    message.messageId = null;
-    message.text = textArea.val();
-    message.date = null;
-    message.author = null;
-    const array = $("input:checked");
-    message.owners = [];
-    for (let i = 0; i < array.length; i++) {
-        message.owners.push(array[i].id);
-    }
-    return message;
-};
-
-const addLiInUl = function (message, authorNickname, pathToProfile) {
-    const date = moment();
-    $('.list-unstyled:last div:first')
-        .before($('<div></div>').addClass('row')
-            .append($('<div></div>').addClass('col-6 offset-6')
-                .append($('<li></li>').addClass('media')
-                    .append($('<div></div>').addClass('media-body')
-                        .append($('<div></div>').addClass('text-muted float-right')
-                            .append($('<small></small>')
-                                .append($('<div></div>').addClass('float-right').attr('title', date.format('HH:mm:ss')).html('&nbsp;' + date.format('YYYY-MM-DD')))
-                                .append($('<a></a>').addClass('float - right').attr('href', pathToProfile).text('author ' + authorNickname))))
-                        .append($('<strong></strong>').addClass('text-success').text('to ' + message.owners.sort((a, b) => a > b).toString()))
-                        .append($('<p></p>').text(message.text))))));
-};
-
-const sendMessage = function () {
-    const textArea = $("textarea:first");
-    const message = createMessage(textArea);
-    const path = $(this).closest('.card')[0];
+var sendMessage = function () {
+    var textArea = $("textarea:first");
+    var message = createMessage(textArea);
+    var path = $(this).closest('.card')[0];
     $.ajax({
         url: location.protocol + '//' + window.location.host + path.dataset.pathForMessage,
         type: "POST",
@@ -56,10 +27,34 @@ const sendMessage = function () {
         }
     })
 };
-
-const init = function () {
-    $('#sendMessage').on('click', sendMessage);
-    initMessageNotification();
+var createMessage = function (textArea) {
+    var message = {};
+    message.messageId = null;
+    message.text = textArea.val();
+    message.date = null;
+    message.author = null;
+    var array = $("input:checked");
+    message.owners = [];
+    for (var i = 0; i < array.length; i++) {
+        message.owners.push(array[i].id);
+    }
+    return message;
 };
-
+var addLiInUl = function (message, authorNickname, pathToProfile) {
+    var date = moment();
+    $('.list-unstyled:last div:first')
+        .before($('<div></div>').addClass('row')
+            .append($('<div></div>').addClass('col-6 offset-6')
+                .append($('<li></li>').addClass('media')
+                    .append($('<div></div>').addClass('media-body')
+                        .append($('<div></div>').addClass('text-muted float-right')
+                            .append($('<small></small>')
+                                .append($('<div></div>').addClass('float-right').attr('title', date.format('HH:mm:ss')).html('&nbsp;' + date.format('YYYY-MM-DD')))
+                                .append($('<a></a>').addClass('float - right').attr('href', pathToProfile).text('author ' + authorNickname))))
+                        .append($('<strong></strong>').addClass('text-success').text('to ' + message.owners.sort((a, b) => a > b).toString()))
+                        .append($('<p></p>').text(message.text))))));
+};
+var init = function () {
+    $('#sendMessage').on('click', sendMessage);
+};
 $(window).on('load', init);

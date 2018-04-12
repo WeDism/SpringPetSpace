@@ -6,7 +6,7 @@ import com.pet_space.models.essences.UserEssence;
 import com.pet_space.models.messages.Message;
 import com.pet_space.models.messages.MessageState;
 import com.pet_space.repositories.UserEssenceRepository;
-import com.pet_space.custom_repositories.CustomMessageRepository;
+import com.pet_space.services.CustomMessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static com.pet_space.models.messages.MessageState.MessageStateEnum.VIEWED;
+import static com.pet_space.models.messages.MessageState.MessageStateEnum.*;
 
 @RequestMapping(value = {"user/messages", "admin/messages", "root/messages"})
 @Controller
-public class MessageController {
+public class MessageController implements Cloneable, Serializable {
     private static final Logger LOG = LoggerFactory.getLogger(MessageController.class);
     private final UserEssenceRepository userEssenceRepository;
     private final CustomMessageRepository customMessageRepository;

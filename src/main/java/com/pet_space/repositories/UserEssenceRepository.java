@@ -1,8 +1,6 @@
 package com.pet_space.repositories;
 
 import com.pet_space.models.essences.UserEssence;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,42 +9,42 @@ import java.util.UUID;
 
 public interface UserEssenceRepository extends CrudRepository<UserEssence, UUID> {
 
-    @Cacheable("userEssence")
+//    @Cacheable("userEssence")
     @Query("from UserEssence ue join fetch ue.followByPets where ue.userEssenceId = :userEssenceId")
     UserEssence findUserEssenceWithEagerFollowedPets(@Param("userEssenceId") UUID userEssenceId);
 
-    @Cacheable("userEssence")
+//    @Cacheable("userEssence")
     UserEssence findByNickname(String nickname);
 
-    @Cacheable("userEssence")
+//    @Cacheable("userEssence")
     @Override
     UserEssence findOne(UUID uuid);
 
-    @Cacheable("userEssence")
+//    @Cacheable("userEssence")
     @Override
     boolean exists(UUID uuid);
 
-    @CacheEvict(value = "userEssence", allEntries = true)
+//    @CacheEvict(value = "userEssence", allEntries = true)
     @Override
     <S extends UserEssence> S save(S s);
 
-    @CacheEvict(value = "userEssence", allEntries = true)
+//    @CacheEvict(value = "userEssence", allEntries = true)
     @Override
     <S extends UserEssence> Iterable<S> save(Iterable<S> iterable);
 
-    @CacheEvict(value = "userEssence", allEntries = true)
+//    @CacheEvict(value = "userEssence", allEntries = true)
     @Override
     void delete(UUID uuid);
 
-    @CacheEvict(value = "userEssence", allEntries = true)
+//    @CacheEvict(value = "userEssence", allEntries = true)
     @Override
     void delete(UserEssence userEssence);
 
-    @CacheEvict(value = "userEssence", allEntries = true)
+//    @CacheEvict(value = "userEssence", allEntries = true)
     @Override
     void delete(Iterable<? extends UserEssence> iterable);
 
-    @CacheEvict(value = "userEssence", allEntries = true)
+//    @CacheEvict(value = "userEssence", allEntries = true)
     @Override
     void deleteAll();
 }

@@ -2,21 +2,25 @@ package com.pet_space.models.messages;
 
 import com.pet_space.models.essences.UserEssence;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
-public class Message {
+public class Message implements Serializable {
     private UUID messageId;
+    @NotBlank
     private String text;
     private LocalDateTime date;
     private UserEssence author;
-    private Set<MessageOfUser> owners = new HashSet<>();
+    //TODO    @NotEmpty
+    private List<MessageOfUser> owners = new ArrayList<>();
 
     public Message() {
     }
@@ -64,11 +68,11 @@ public class Message {
     }
 
     @OneToMany(mappedBy = "primaryKey.message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Set<MessageOfUser> getOwners() {
+    public List<MessageOfUser> getOwners() {
         return this.owners;
     }
 
-    public Message setOwners(Set<MessageOfUser> owners) {
+    public Message setOwners(List<MessageOfUser> owners) {
         this.owners = owners;
         return this;
     }
