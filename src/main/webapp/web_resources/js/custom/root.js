@@ -1,8 +1,8 @@
-var deleteUser = function () {
-    var tr = this.closest('tr');
-    var path = $(this).closest('tbody')[0];
+const deleteUser = function () {
+    const tr = this.closest('tr');
+    const path = $('.container')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForManageUserEssence + tr.dataset.essenceId,
+        url: location.protocol + '//' + window.location.host + path.dataset.contextPath + '/profile/' + tr.dataset.essenceId,
         type: "DELETE",
         success: function () {
             tr.remove();
@@ -23,11 +23,12 @@ var deleteUser = function () {
         }
     })
 };
-var changeRoleUserEssence = function () {
-    var tr = this.closest('tr');
-    var path = $(this).closest('tbody')[0];
+
+const changeRoleUserEssence = function () {
+    const tr = this.closest('tr');
+    const path = $('.container')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForChangeRoleEssence + '?' + $.param({
+        url: location.protocol + '//' + window.location.host + path.dataset.contextPath + '?' + $.param({
             userId: tr.dataset.essenceId,
             roleEssenceEnum: $(this).find(':selected')[0].value
         }),
@@ -41,12 +42,12 @@ var changeRoleUserEssence = function () {
             });
         },
         error: function (xhr) {
-            var previewValue = $(tr).find('.user-essence-roles')[0].dataset.previewValue;
+            const previewValue = $(tr).find('.user-essence-roles')[0].dataset.previewValue;
             $(tr).find('[value=' + previewValue + ']')[0].setAttribute('selected', true);
-            var select = $(tr).find('.user-essence-roles')[0];
-            var options = $(select).children();
-            for (var i = 0; options.length; i++) {
-                if (options[i].value == previewValue) {
+            const select = $(tr).find('.user-essence-roles')[0];
+            const options = $(select).children();
+            for (let i = 0; options.length; i++) {
+                if (options[i].value === previewValue) {
                     select.selectedIndex = i;
                     break;
                 }
@@ -60,12 +61,14 @@ var changeRoleUserEssence = function () {
         }
     })
 };
-var setPreviewDataValue = function () {
+
+const setPreviewDataValue = function () {
     this.dataset.previewValue = $(this).find(':selected')[0].value;
 };
 
-var init = function () {
+const init = function () {
     $('.delete-user-of-button').on('click', deleteUser);
     $('.user-essence-roles').on('change', changeRoleUserEssence).on('click', setPreviewDataValue);
+    initMessageNotification();
 };
 $(window).on('load', init);

@@ -10,3 +10,4 @@
 <script src="${applicationScope['bootstrap-notify']}"></script>
 <script src="${applicationScope['moment']}"></script>
 <link rel="stylesheet" href="<c:url value="/web_resources/css/custom/c-bootstrap.css"/>"/>
+<script src='<c:url value="/web_resources/js/custom/messageNotification.js"/>'></script>

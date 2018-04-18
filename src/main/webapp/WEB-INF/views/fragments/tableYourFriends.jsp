@@ -14,8 +14,7 @@
     </tr>
     </thead>
     <c:set var="user" value="${requestScope.user}"/>
-    <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-    <tbody data-path-for-state-friend="${pageContext.request.contextPath}/${currentUserRole}/friend_request">
+    <tbody>
     <c:forEach items="${user != null ? ctg:getFriends(user) : null}" var="userFriend">
         <c:set var="user" value="${requestScope.user.requestedFriendsTo.contains(userFriend) ? userFriend.userEssence : userFriend.friend}"/>
         <tr data-essence-id="${user.userEssenceId}">

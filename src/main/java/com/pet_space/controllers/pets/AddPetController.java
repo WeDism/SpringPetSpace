@@ -37,7 +37,9 @@ public class AddPetController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getAddPetView(Model model) {
+    public String getAddPetView(Authentication authentication, Model model) {
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
+        model.addAttribute("user", user);
         model.addAttribute("genusPet", this.genusPetRepository.findAll());
         return "addPet";
     }
