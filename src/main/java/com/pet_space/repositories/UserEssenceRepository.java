@@ -11,7 +11,7 @@ public interface UserEssenceRepository extends CrudRepository<UserEssence, UUID>
 
 //    @Cacheable("userEssence")
     @Query("from UserEssence ue join fetch ue.followByPets where ue.userEssenceId = :userEssenceId")
-    UserEssence findUserEssenceWithEagerFollowedPets(@Param("userEssenceId") UUID userEssenceId);
+    UserEssence findOneWithEagerFollowedPets(@Param("userEssenceId") UUID userEssenceId);
 
 //    @Cacheable("userEssence")
     UserEssence findByNickname(String nickname);

@@ -1,9 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
-<head><c:import url="fragments/htmlHeadTags.jsp"/></head>
+<head><c:import url="fragments/htmlHeadTags.jsp"/>
+    <script src='<c:url value="/web_resources/js/custom/initMessageNotification.js"/>'></script>
+</head>
 <body>
-<div class="container">
+<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
+<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row c-row">
         <div class="col">

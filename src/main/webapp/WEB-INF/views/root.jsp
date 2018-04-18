@@ -5,7 +5,8 @@
     <script src='<c:url value="/web_resources/js/custom/root.js"/>'></script>
 </head>
 <body>
-<div class="container">
+<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
+<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row">
         <c:import url="fragments/userCard.jsp"/>
@@ -27,8 +28,7 @@
                     <th>Pets</th>
                 </tr>
                 </thead>
-                <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
-                <tbody data-path-for-change-role-essence="${pageContext.request.contextPath}/${currentUserRole}" data-path-for-manage-user-essence="${pageContext.request.contextPath}/${currentUserRole}/profile/">
+                <tbody>
                 <c:set var="users" value="${sessionScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr data-essence-id="${user.userEssenceId}">
@@ -74,7 +74,7 @@
     </div>
     <div class="row">
         <div class="col-3 offset-7">
-            <c:import url="fragments/addGenusPetPart.jsp"/>
+            <a class="btn btn-lg btn-primary btn-block" href=${pageContext.request.contextPath}/${currentUserRole}/add_genus_pet>Add genus pet</a>
         </div>
     </div>
 </div>

@@ -1,7 +1,6 @@
 package com.pet_space.controllers.essences;
 
 import com.pet_space.controllers.ControllerInit;
-import com.pet_space.controllers.essences.FriendController;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.models.pets.Pet;
 import org.apache.commons.lang3.SerializationUtils;
@@ -14,7 +13,6 @@ import java.util.Set;
 
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_FRED;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_JOHN;
-import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
@@ -32,18 +30,18 @@ public class FriendControllerIntegrationTest extends ControllerInit {
         UserEssence userEssenceFred = SerializationUtils.clone(USER_ESSENCE_FRED).setNickname("FRED_CLONE");
         Set<Pet> petsFred = userEssenceFred.getPets();
         userEssenceFred.setPets(Collections.emptySet());
-        this.userEssenceRepository.save(userEssenceJohn);
-        this.userEssenceRepository.save(userEssenceFred);
+        this.userEssenceRepository.save(userEssenceJohn.setUserEssenceId(null));
+        this.userEssenceRepository.save(userEssenceFred.setUserEssenceId(null));
 
         petsJohn.forEach(e -> {
-            e.setPetId(randomUUID());
+            e.setPetId(null);
             e.setOwner(userEssenceJohn);
         });
         this.petRepository.save(petsJohn);
         userEssenceJohn.setPets(petsJohn);
 
         petsFred.forEach(e -> {
-            e.setPetId(randomUUID());
+            e.setPetId(null);
             e.setOwner(userEssenceFred);
         });
         this.petRepository.save(petsFred);

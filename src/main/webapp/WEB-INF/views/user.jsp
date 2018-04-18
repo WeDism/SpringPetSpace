@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
     <c:import url="fragments/htmlHeadAdminAndUserTags.jsp"/>
 </head>
 <body>
-<div class="container">
+<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
+<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row c-row">
         <c:import url="fragments/userCard.jsp"/>

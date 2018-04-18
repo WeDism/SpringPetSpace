@@ -1,8 +1,7 @@
 package com.pet_space.services;
 
+import com.google.common.base.Strings;
 import com.pet_space.models.essences.UserEssence;
-import com.pet_space.models.messages.MessageOfUser;
-import com.pet_space.models.messages.MessageState;
 import com.pet_space.repositories.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +27,6 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
     private final UserEssenceRepository userEssenceRepository;
     private final FriendsRepository friendsRepository;
     private final PetRepository petRepository;
-    private final MessageRepository messageRepository;
     private final MessageOfUserRepository messageOfUserRepository;
     private final SessionFactory sessionFactory;
 
@@ -37,7 +36,6 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
         this.friendsRepository = friendsRepository;
         this.sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
         this.petRepository = petRepository;
-        this.messageRepository = messageRepository;
         this.messageOfUserRepository = messageOfUserRepository;
     }
 
@@ -64,6 +62,7 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
     @SuppressWarnings("unchecked")
     @Override
     public List<UserEssence> fiendFriend(UserEssence userEssence, String name, String surname, String patronymic) {
+        if (Strings.isNullOrEmpty(name) && Strings.isNullOrEmpty(surname) && Strings.isNullOrEmpty(patronymic)) return new LinkedList<>();
         try (Session session = sessionFactory.openSession()) {
             Iterable pathEssenceForSearchFriend = new PathEssenceForSearchFriend(name, surname, patronymic);
             Iterator<String> iterator = pathEssenceForSearchFriend.iterator();

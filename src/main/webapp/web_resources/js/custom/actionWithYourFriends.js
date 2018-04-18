@@ -1,8 +1,8 @@
-var changeStateFriend = function () {
-    var tr = $(this).closest('tr')[0];
-    var path = $(this).closest('tbody')[0];
+const changeStateFriend = function () {
+    const tr = $(this).closest('tr')[0];
+    const path = $('.container')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({
+        url: location.protocol + '//' + window.location.host + path.dataset.contextPath + '/friend_request' + '?' + $.param({
             user_essence_id: tr.dataset.essenceId,
             state_friend: $(this).find(':selected')[0].value
         }),
@@ -16,12 +16,12 @@ var changeStateFriend = function () {
             });
         },
         error: function (xhr) {
-            var select = $(tr).find('.action-friends')[0];
-            var previewValue = select.dataset.previewValue;
+            const select = $(tr).find('.action-friends')[0];
+            const previewValue = select.dataset.previewValue;
             $(select).find('[value=' + previewValue + ']')[0].setAttribute('selected', true);
-            var options = $(select).children();
-            for (var i = 0; options.length; i++) {
-                if (options[i].value == previewValue) {
+            const options = $(select).children();
+            for (let i = 0; options.length; i++) {
+                if (options[i].value === previewValue) {
                     select.selectedIndex = i;
                     break;
                 }
@@ -35,11 +35,12 @@ var changeStateFriend = function () {
         }
     })
 };
-var deleteRequestFriend = function () {
-    var tr = this.closest('tr');
-    var path = $(this).closest('tbody')[0];
+
+const deleteRequestFriend = function () {
+    const tr = this.closest('tr');
+    const path = $('.container')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForStateFriend + '?' + $.param({user_essence_id: tr.dataset.essenceId}),
+        url: location.protocol + '//' + window.location.host + path.dataset.contextPath + '/friend_request' + '?' + $.param({user_essence_id: tr.dataset.essenceId}),
         type: "DELETE",
         success: function () {
             tr.remove();
@@ -61,12 +62,14 @@ var deleteRequestFriend = function () {
     })
 };
 
-var setPreviewDataValue = function () {
+const setPreviewDataValue = function () {
     this.dataset.previewValue = $(this).find(':selected')[0].value;
 };
 
-var init = function () {
+const init = function () {
     $('.action-friends').on('change', changeStateFriend).on('click', setPreviewDataValue);
     $('.delete-request-friend-of-button').on('click', deleteRequestFriend);
+    initMessageNotification();
 };
+
 $(window).on('load', init);

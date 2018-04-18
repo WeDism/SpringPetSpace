@@ -1,8 +1,8 @@
-var doFriend = function (input, typeRequest, bool) {
-    var tr = $(input).closest('tr')[0];
-    var path = $(input).closest('tbody')[0];
+const doFriend = function (input, typeRequest, bool) {
+    const tr = $(input).closest('tr')[0];
+    const path = $('.container')[0];
     $.ajax({
-        url: location.protocol + '//' + window.location.host + path.dataset.pathForEssenceFriend + '?' + $.param({user_essence_id: tr.dataset.essenceId}),
+        url: location.protocol + '//' + window.location.host + path.dataset.contextPath + '/friend_request' + '?' + $.param({user_essence_id: tr.dataset.essenceId}),
         async: false,
         type: typeRequest,
         success: function () {
@@ -33,21 +33,24 @@ var doFriend = function (input, typeRequest, bool) {
         }
     })
 };
-var requestFriend = function (input) {
+
+const requestFriend = function (input) {
     doFriend(input, 'POST', true);
 };
 
-var removeRequestFriend = function (input) {
+const removeRequestFriend = function (input) {
     doFriend(input, 'DELETE', false);
 };
 
-var friendController = function () {
+const friendController = function () {
     if (!this.checked)
         removeRequestFriend(this);
     else requestFriend(this);
 };
 
-var init = function () {
+const init = function () {
     $('.essence-friend-checkbox').on('change', friendController);
+    initMessageNotification();
 };
+
 $(window).on('load', init);

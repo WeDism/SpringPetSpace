@@ -1,5 +1,6 @@
 package com.pet_space.repositories;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pet_space.models.messages.MessageOfUser;
 import com.pet_space.models.messages.MessageOfUserId;
 import com.pet_space.models.messages.MessageState;
@@ -58,6 +59,8 @@ public class DbInit {
     protected MessageOfUserRepository messageOfUserRepository;
     @Autowired
     protected CustomMessageRepository customMessageRepository;
+    @Autowired
+    protected ObjectMapper objectMapper;
 
     @Before
     public void setUp() {
