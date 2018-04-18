@@ -49,7 +49,9 @@ public class FriendController {
     }
 
     @RequestMapping(value = "find_friend", method = RequestMethod.GET)
-    public String getFindFriendView() {
+    public String getFindFriendView(Authentication authentication, Model model) {
+        UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
+        model.addAttribute("user", userEssence);
         return "findFriends";
     }
 
@@ -61,6 +63,7 @@ public class FriendController {
         UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
         List<UserEssence> userEssences = customUserEssenceRepository.fiendFriend(userEssence, name, surname, patronymic);
         model.addAttribute("friends", userEssences);
+        model.addAttribute("user", userEssence);
         model.addAttribute("userFriends", userEssence.getRequestedFriendsFrom()
                 .stream().map(Friends::getFriend).collect(Collectors.toSet()));
         return "findFriends";

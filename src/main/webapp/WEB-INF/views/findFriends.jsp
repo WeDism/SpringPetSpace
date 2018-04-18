@@ -5,7 +5,8 @@
     <script src='<c:url value="/web_resources/js/custom/findFriend.js"/>'></script>
 </head>
 <body>
-<div class="container">
+<c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
+<div class="container" data-context-path="${pageContext.request.contextPath}/${currentUserRole}">
     <c:import url="fragments/bodyHeader.jsp"/>
     <div class="row c-row">
         <div class="col">
@@ -66,7 +67,7 @@
                             <th>Pets</th>
                         </tr>
                         </thead>
-                        <tbody data-path-for-essence-friend="${pageContext.request.contextPath}/${role}/friend_request">
+                        <tbody>
                         <c:forEach items="${friends}" var="userFriend" varStatus="status">
                             <tr data-essence-id="${userFriend.userEssenceId}">
                                 <td>

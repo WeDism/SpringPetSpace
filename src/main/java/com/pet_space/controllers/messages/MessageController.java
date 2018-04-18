@@ -20,15 +20,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static com.pet_space.models.messages.MessageState.MessageStateEnum.*;
+import static com.pet_space.models.messages.MessageState.MessageStateEnum.VIEWED;
 
 @RequestMapping(value = {"user/messages", "admin/messages", "root/messages"})
 @Controller
-public class MessageController implements Cloneable, Serializable {
+public class MessageController {
     private static final Logger LOG = LoggerFactory.getLogger(MessageController.class);
     private final UserEssenceRepository userEssenceRepository;
     private final CustomMessageRepository customMessageRepository;
