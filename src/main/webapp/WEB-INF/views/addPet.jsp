@@ -4,6 +4,8 @@
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
     <script src='<c:url value="/web_resources/js/custom/initMessageNotification.js"/>'></script>
+    <link rel="stylesheet" href="${applicationScope['datetimepicker.css']}">
+    <script src="${applicationScope['datetimepicker']}"></script>
 </head>
 <body>
 <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>
@@ -40,9 +42,9 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group row">
-                                <label class="col-4 col-form-label" for="petBirthday">Birthday</label>
+                                <label class="col-4 col-form-label" for="datetimepicker">Birthday</label>
                                 <div class="col-8">
-                                    <input class="form-control" id="petBirthday" type="datetime-local" name="birthday">
+                                    <input class="form-control" id="datetimepicker" type="text" name="birthday">
                                 </div>
                             </div>
                         </div>
@@ -94,6 +96,12 @@
             </div>
         </div>
     </div>
+    <script>
+        $.datetimepicker.setDateFormatter('moment');
+        $('#datetimepicker').datetimepicker({
+            format: 'YYYY-MM-DDTHH:mm'
+        });
+    </script>
 </div>
 </body>
 </html>

@@ -37,14 +37,14 @@ public class NewMessageRestController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Message> getNewMessages(Authentication authentication) {
-        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
+        UserEssence user = this.userEssenceRepository.findByNicknameWithEagerMessagesToAndFrom(authentication.getName());
         return MessageHelper.getNewMessages(user);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity putStateMessage(Authentication authentication, @RequestParam("messageId") UUID messageId, @RequestParam("state") MessageStateEnum messageStateEnum) {
-        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
+        UserEssence user = this.userEssenceRepository.findByNicknameWithEagerMessagesToAndFrom(authentication.getName());
         Optional<MessageOfUser> message = user.getMessagesTo().stream()
                 .filter(m -> m.getMessage().getMessageId().equals(messageId)).findFirst();
         if (message.isPresent()) {

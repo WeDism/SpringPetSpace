@@ -56,8 +56,8 @@ public class Message implements Serializable {
         return this;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "user_essence_id")
     public UserEssence getAuthor() {
         return this.author;
     }

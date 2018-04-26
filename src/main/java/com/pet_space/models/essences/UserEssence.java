@@ -177,7 +177,7 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     public Set<Message> getMessagesFrom() {
         return this.messagesFrom;
     }
@@ -187,7 +187,7 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-    @OneToMany(mappedBy = "primaryKey.owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "primaryKey.owner", cascade = CascadeType.ALL)
     public Set<MessageOfUser> getMessagesTo() {
         return this.messagesTo;
     }

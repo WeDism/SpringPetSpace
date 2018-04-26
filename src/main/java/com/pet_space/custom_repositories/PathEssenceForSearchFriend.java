@@ -1,4 +1,4 @@
-package com.pet_space.services;
+package com.pet_space.custom_repositories;
 
 import org.jetbrains.annotations.NotNull;
 

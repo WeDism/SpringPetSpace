@@ -6,7 +6,7 @@ import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.FriendsRepository;
 import com.pet_space.repositories.UserEssenceRepository;
-import com.pet_space.services.CustomUserEssenceRepository;
+import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
