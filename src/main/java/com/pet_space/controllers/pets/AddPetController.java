@@ -45,22 +45,24 @@ public class AddPetController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, Authentication authentication, Model model) {
-        model.addAttribute("genusPet", this.genusPetRepository.findAll());
+    public ModelAndView postUserPet(@ModelAttribute("pet") @Valid Pet pet, BindingResult result, Authentication authentication) {
+        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         ModelAndView modelAndView = new ModelAndView("addPet");
         modelAndView.setStatus(HttpStatus.BAD_REQUEST);
+
         if (!result.hasErrors()) {
-            UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
             if (this.petRepository.findByNameAndOwner(pet.getName(), user) != null) {
-                model.addAttribute("genusPetName", String.format("This is %s name you already use", pet.getName()));
+                modelAndView.addObject("genusPetName", String.format("This is %s name you already use", pet.getName()));
             } else {
                 pet.setOwner(user);
                 this.petRepository.save(pet);
-                model.addAttribute("user", this.userEssenceRepository.findOne(user.getUserEssenceId()));
-                model.addAttribute("petIsAdded", true);
+                modelAndView.addObject("petIsAdded", true);
                 modelAndView.setStatus(HttpStatus.CREATED);
             }
         }
+
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("genusPet", this.genusPetRepository.findAll());
         return modelAndView;
     }
 }

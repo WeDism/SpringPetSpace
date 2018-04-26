@@ -61,7 +61,7 @@ public class MessageControllerIntegrationTest extends ControllerInit {
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).session(this.mockHttpSession);
         ResultActions resultNew = this.mockMvc.perform(requestBuilder);
         resultNew.andExpect(status().isCreated());
-        Assert.assertThat(this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId()).getMessagesFrom().size(), is(1));
+        Assert.assertThat(this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(USER_ESSENCE_FRED.getUserEssenceId()).getMessagesFrom().size(), is(1));
 
         objectNode
                 .putArray("owners");
@@ -76,7 +76,7 @@ public class MessageControllerIntegrationTest extends ControllerInit {
 
     @Test
     public void getMessagesView() throws Exception{
-        this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId()).getMessagesTo()
+        this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(USER_ESSENCE_FRED.getUserEssenceId()).getMessagesTo()
                 .forEach(m -> assertThat(m.getState(), is(MessageState.of(NEW))));
 
         MockHttpServletRequestBuilder requestBuilder = get("/user/messages")
