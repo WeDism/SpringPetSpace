@@ -1,4 +1,4 @@
-package com.pet_space.services;
+package com.pet_space.custom_repositories;
 
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.models.messages.Message;

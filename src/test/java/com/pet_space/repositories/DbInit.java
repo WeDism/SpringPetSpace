@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pet_space.models.messages.MessageOfUser;
 import com.pet_space.models.messages.MessageOfUserId;
 import com.pet_space.models.messages.MessageState;
-import com.pet_space.services.CustomMessageRepository;
-import com.pet_space.services.CustomUserEssenceRepository;
+import com.pet_space.custom_repositories.CustomMessageRepository;
+import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -106,6 +106,8 @@ public class DbInit {
 
     @After
     public void cleanUp() {
+        this.messageOfUserRepository.deleteAll();
+
         this.messageRepository.deleteAll();
 
         this.userEssenceRepository.deleteAll();

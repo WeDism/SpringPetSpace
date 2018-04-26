@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -51,7 +52,7 @@ public class NewMessageRestControllerIntegrationTest extends ControllerInit {
     }
 
     private void updateClassFields() {
-        this.userEssenceSimon = this.userEssenceRepository.findOne(USER_ESSENCE_SIMON.getUserEssenceId());
+        this.userEssenceSimon = this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(USER_ESSENCE_SIMON.getUserEssenceId());
         this.messages = Lists.newArrayList(this.messageRepository.findAll(this.userEssenceSimon.getMessagesTo().stream()
                 .map(m -> m.getMessage().getMessageId()).collect(Collectors.toList())));
     }

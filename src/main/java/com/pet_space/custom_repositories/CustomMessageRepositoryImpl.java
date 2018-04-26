@@ -1,4 +1,4 @@
-package com.pet_space.services;
+package com.pet_space.custom_repositories;
 
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.models.messages.Message;
@@ -32,8 +32,8 @@ public class CustomMessageRepositoryImpl implements CustomMessageRepository {
     @Override
     public UserEssence updateAllMessagesOfUserEssence(UserEssence entity, MessageState messageState) {
         UserEssence userEssence = entity.getNickname() == null ?
-                this.userEssenceRepository.findOne(entity.getUserEssenceId()) :
-                this.userEssenceRepository.findByNickname(entity.getNickname());
+                this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(entity.getUserEssenceId()) :
+                this.userEssenceRepository.findByNicknameWithEagerMessagesToAndFrom(entity.getNickname());
         userEssence.getMessagesTo().forEach(e -> {
             this.messageOfUserRepository.update(e.getPrimaryKey(), messageState);
             e.setState(messageState);

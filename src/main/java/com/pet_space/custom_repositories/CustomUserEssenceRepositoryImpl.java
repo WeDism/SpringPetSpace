@@ -1,4 +1,4 @@
-package com.pet_space.services;
+package com.pet_space.custom_repositories;
 
 import com.google.common.base.Strings;
 import com.pet_space.models.essences.UserEssence;
@@ -50,7 +50,7 @@ public class CustomUserEssenceRepositoryImpl implements CustomUserEssenceReposit
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public void deleteCascade(UserEssence entity) {
-        UserEssence userEssence = this.userEssenceRepository.findOne(entity.getUserEssenceId());
+        UserEssence userEssence = this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(entity.getUserEssenceId());
         this.friendsRepository.delete(userEssence.getRequestedFriendsFrom());
         this.friendsRepository.delete(userEssence.getRequestedFriendsTo());
         this.petRepository.delete(userEssence.getPets());

@@ -16,7 +16,6 @@ public class MessageState implements Serializable {
     }
 
     public MessageState(MessageStateEnum messageStateEnum) {
-        this();
         this.messageStateEnum = messageStateEnum;
     }
 
