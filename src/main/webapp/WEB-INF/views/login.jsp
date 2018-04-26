@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
-    <link rel="stylesheet" href="<c:url value="/css/custom/login.css"/>">
+    <link rel="stylesheet" href="<c:url value="/web_resources/css/custom/login.css"/>">
 </head>
 <body>
 <div class="container">
