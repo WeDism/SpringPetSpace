@@ -1,12 +1,12 @@
 package com.pet_space.controllers.essences;
 
+import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import com.pet_space.models.essences.FriendId;
 import com.pet_space.models.essences.Friends;
 import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.FriendsRepository;
 import com.pet_space.repositories.UserEssenceRepository;
-import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.pet_space.models.essences.StateFriend.StateFriendEnum;
 import static com.pet_space.models.essences.StateFriend.StateFriendEnum.REQUESTED;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -97,8 +98,8 @@ public class FriendController {
     }
 
     @RequestMapping(value = "friend_request", method = RequestMethod.PUT)
-    public ResponseEntity putStateFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId,
-                                                Authentication authentication, @RequestParam(name = "state_friend") StateFriend.StateFriendEnum stateFriendEnum) {
+    public ResponseEntity putStateFriendRequest(@RequestParam(name = "user_essence_id") UUID userEssenceId, Authentication authentication,
+                                                @RequestParam(name = "state_friend") StateFriendEnum stateFriendEnum) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
         FriendId friendId = FriendId.of(friend, user);

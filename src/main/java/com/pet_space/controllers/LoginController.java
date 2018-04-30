@@ -9,7 +9,6 @@ import org.springframework.web.context.ServletConfigAware;
 
 import javax.servlet.ServletConfig;
 
-@RequestMapping(value = "login")
 @Controller
 public class LoginController implements ServletConfigAware {
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
@@ -43,7 +42,7 @@ public class LoginController implements ServletConfigAware {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public String getLoginView() {
         return "login";
     }

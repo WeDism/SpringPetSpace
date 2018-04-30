@@ -1,9 +1,9 @@
 package com.pet_space.controllers.essences;
 
+import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import com.pet_space.models.essences.RoleEssence;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;
-import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ public class RootController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = {"{nickname}", ""}, method = RequestMethod.PUT)
-    public void putChangeRoleUserEssence(@RequestParam(name = "userId") UUID userId, RoleEssence roleEssence) {
+    public void putChangeRoleUserEssence(@RequestParam(name = "userId") UUID userId, @ModelAttribute("roleEssence") RoleEssence roleEssence) {
         UserEssence user = this.userEssenceRepository.findOne(userId);
         this.userEssenceRepository.save(user.setRole(roleEssence));
     }

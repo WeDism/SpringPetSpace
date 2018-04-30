@@ -1,12 +1,12 @@
 package com.pet_space.controllers.messages;
 
+import com.pet_space.custom_repositories.CustomMessageRepository;
 import com.pet_space.helpers.FriendHelper;
 import com.pet_space.helpers.MessageHelper;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.models.messages.Message;
 import com.pet_space.models.messages.MessageState;
 import com.pet_space.repositories.UserEssenceRepository;
-import com.pet_space.custom_repositories.CustomMessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,10 +7,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "status_essence")
 public class StatusEssence implements Serializable {
-    public enum StatusEssenceEnum {
-        INACTIVE, DELETED, ACTIVE
-    }
-
     @Id
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -18,10 +14,13 @@ public class StatusEssence implements Serializable {
 
     public StatusEssence() {
     }
-
     public StatusEssence(StatusEssenceEnum statusEssenceEnum) {
         super();
         this.statusEssenceEnum = statusEssenceEnum;
+    }
+
+    public static StatusEssence of(StatusEssenceEnum statusEssenceEnum) {
+        return new StatusEssence(statusEssenceEnum);
     }
 
     public StatusEssenceEnum getStatusEssenceEnum() {
@@ -49,5 +48,9 @@ public class StatusEssence implements Serializable {
     @Override
     public String toString() {
         return this.statusEssenceEnum.name();
+    }
+
+    public enum StatusEssenceEnum {
+        INACTIVE, DELETED, ACTIVE
     }
 }

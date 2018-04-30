@@ -46,15 +46,22 @@ public class CustomUserEssenceRepositoryTest extends DbInit {
 
     @Test
     public void findFriend() {
-        List<UserEssence> userEssences = this.customUserEssenceRepository
-                .fiendFriend(USER_ESSENCE_JOHN, USER_ESSENCE_FRED.getName(), USER_ESSENCE_FRED.getSurname(), USER_ESSENCE_FRED.getPatronymic());
+        List<UserEssence> userEssences =
+                this.customUserEssenceRepository
+                        .fiendFriend(USER_ESSENCE_JOHN, USER_ESSENCE_FRED.getName(), USER_ESSENCE_FRED.getSurname(), USER_ESSENCE_FRED.getPatronymic());
         assertThat(userEssences.size(), is(1));
+
         userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_JOHN, USER_ESSENCE_SIMON.getName(), null, null);
         assertThat(userEssences.size(), is(1));
-        userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, USER_ESSENCE_SIMON.getName(), USER_ESSENCE_SIMON.getSurname(), null);
+
+        userEssences =
+                this.customUserEssenceRepository
+                        .fiendFriend(USER_ESSENCE_FRED, USER_ESSENCE_SIMON.getName(), USER_ESSENCE_SIMON.getSurname(), null);
         assertThat(userEssences.size(), is(1));
+
         userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, null, null, "test");
         assertThat(userEssences.size(), is(0));
+
         userEssences = this.customUserEssenceRepository.fiendFriend(USER_ESSENCE_FRED, null, "name", "test");
         assertThat(userEssences.size(), is(0));
     }

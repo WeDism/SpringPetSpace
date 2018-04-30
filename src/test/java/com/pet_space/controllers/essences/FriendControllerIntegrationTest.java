@@ -23,11 +23,11 @@ public class FriendControllerIntegrationTest extends ControllerInit {
 
     @Test
     public void postFriendRequest() {
-        UserEssence userEssenceJohn = SerializationUtils.clone(USER_ESSENCE_JOHN).setNickname("JOHN_CLONE");
+        UserEssence userEssenceJohn = SerializationUtils.clone(USER_ESSENCE_JOHN).setNickname("JOHN_CLONE").setEmail("jo-clone@jo-clone.com");
         Set<Pet> petsJohn = userEssenceJohn.getPets();
         userEssenceJohn.setPets(Collections.emptySet());
 
-        UserEssence userEssenceFred = SerializationUtils.clone(USER_ESSENCE_FRED).setNickname("FRED_CLONE");
+        UserEssence userEssenceFred = SerializationUtils.clone(USER_ESSENCE_FRED).setNickname("FRED_CLONE").setEmail("fr-clone@fr-clone.com");
         Set<Pet> petsFred = userEssenceFred.getPets();
         userEssenceFred.setPets(Collections.emptySet());
         this.userEssenceRepository.save(userEssenceJohn.setUserEssenceId(null));

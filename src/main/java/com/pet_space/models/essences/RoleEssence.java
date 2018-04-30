@@ -7,21 +7,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "role_essence")
 public class RoleEssence implements Serializable {
-    public enum RoleEssenceEnum {
-        ROOT, ADMIN, USER
-    }
-
     @Id
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private RoleEssenceEnum roleEssenceEnum;
-
     public RoleEssence() {
     }
 
     public RoleEssence(RoleEssenceEnum roleEssenceEnum) {
         super();
         this.roleEssenceEnum = roleEssenceEnum;
+    }
+
+    public static RoleEssence of(RoleEssenceEnum roleEssenceEnum) {
+        return new RoleEssence(roleEssenceEnum);
     }
 
     public RoleEssenceEnum getRoleEssenceEnum() {
@@ -48,5 +47,9 @@ public class RoleEssence implements Serializable {
     @Override
     public String toString() {
         return this.roleEssenceEnum.name();
+    }
+
+    public enum RoleEssenceEnum {
+        ROOT, ADMIN, USER
     }
 }

@@ -1,11 +1,11 @@
 package com.pet_space.repositories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pet_space.custom_repositories.CustomMessageRepository;
+import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import com.pet_space.models.messages.MessageOfUser;
 import com.pet_space.models.messages.MessageOfUserId;
 import com.pet_space.models.messages.MessageState;
-import com.pet_space.custom_repositories.CustomMessageRepository;
-import com.pet_space.custom_repositories.CustomUserEssenceRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -85,6 +85,7 @@ public class DbInit {
         this.userEssenceRepository.save(USER_ESSENCE_JOHN.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
         this.userEssenceRepository.save(USER_ESSENCE_FRED.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
         this.userEssenceRepository.save(USER_ESSENCE_SIMON.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
+        this.userEssenceRepository.save(USER_ESSENCE_BART.setUserEssenceId(null).setFollowByPets(new HashSet<>()));
 
         this.petRepository.save(PET_LAYMA.setPetId(null).setFollowersPet(new HashSet<>()));
         this.petRepository.save(PET_PERS.setPetId(null).setFollowersPet(new HashSet<>()));

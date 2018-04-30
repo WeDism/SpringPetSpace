@@ -23,4 +23,3 @@
         <a class="navbar-brand float-right" href="<c:url value="/logout"/>">Exit</a>
     </nav>
 </div>
-

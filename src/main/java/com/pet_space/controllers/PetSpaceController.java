@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-
 @Controller
 public class PetSpaceController {
     private static final Logger LOG = getLogger(PetSpaceController.class);
