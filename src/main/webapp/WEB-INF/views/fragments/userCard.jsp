@@ -3,7 +3,7 @@
     <div class="card text-white bg-info">
         <img src="<c:url value="/web_resources/images/user.png"/>" class="card-img-top" height="320" width="320">
         <c:set var="user" value="${requestScope.user}"/>
-        <h4 class="card-text">About of <c:out value="${user.name}"/> <c:out value="${user.surname}"/></h4>
+        <h4 class="card-text">About of <c:out value="${user.name}"/>&nbsp;<c:out value="${user.surname}"/></h4>
         <p class="card-text"><c:out value="${user.aboutOfSelf}"/></p>
     </div>
 </div>

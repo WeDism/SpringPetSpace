@@ -4,28 +4,29 @@ import com.pet_space.models.messages.Message;
 import com.pet_space.models.messages.MessageOfUser;
 import com.pet_space.models.pets.Pet;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 @Table(name = "user_essence")
 public class UserEssence implements Serializable {
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false, unique = true)
     private String email;
     private LocalDateTime birthday;
     private UUID userEssenceId;
-    @Column(nullable = false, unique = true)
     private String nickname;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String surname;
     private String patronymic;
     private String aboutOfSelf;
@@ -58,6 +59,9 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @NotBlank
+    @Size(min = 4, max = 200, message = "Password must be between 4 and 200 characters long.")
+    @Column(nullable = false)
     public String getPassword() {
         return this.password;
     }
@@ -67,6 +71,9 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+            message = "Mail isn't valid")
+    @Column(nullable = false, unique = true)
     public String getEmail() {
         return this.email;
     }
@@ -76,7 +83,7 @@ public class UserEssence implements Serializable {
         return this;
     }
 
-
+    @Column(nullable = false, unique = true)
     public String getNickname() {
         return this.nickname;
     }
@@ -86,6 +93,9 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @NotBlank
+    @Size(min = 2, max = 200, message = "Name must be between 2 and 200 characters long.")
+    @Column(nullable = false)
     public String getName() {
         return this.name;
     }
@@ -95,6 +105,9 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @NotBlank
+    @Size(min = 2, max = 200, message = "Name must be between 2 and 200 characters long.")
+    @Column(nullable = false)
     public String getSurname() {
         return this.surname;
     }
@@ -113,8 +126,9 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @javax.validation.constraints.NotNull
     @ManyToOne()
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "role", nullable = false)
     public RoleEssence getRole() {
         return this.role;
     }
@@ -135,7 +149,7 @@ public class UserEssence implements Serializable {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "status")
+    @JoinColumn(name = "status", nullable = false)
     public StatusEssence getStatusEssence() {
         return this.statusEssence;
     }
@@ -145,6 +159,7 @@ public class UserEssence implements Serializable {
         return this;
     }
 
+    @DateTimeFormat(iso = ISO.DATE_TIME)
     public LocalDateTime getBirthday() {
         return this.birthday;
     }

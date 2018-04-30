@@ -20,6 +20,10 @@ public interface UserEssenceRepository extends CrudRepository<UserEssence, UUID>
     @Query("from UserEssence ue left join fetch ue.messagesTo left join fetch ue.messagesFrom where ue.nickname = :nickname")
     UserEssence findByNicknameWithEagerMessagesToAndFrom(@Param("nickname") String nickname);
 
+    boolean existsByEmail(String email);
+
+    boolean existsByNickname(String nickname);
+
     @Cacheable("userEssence")
     UserEssence findByNickname(String nickname);
 

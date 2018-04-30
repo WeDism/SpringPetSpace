@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -94,6 +93,5 @@ public class NewMessageRestControllerIntegrationTest extends ControllerInit {
         assertThat(this.messages.size(), is(1));
         messageOfUser = this.userEssenceSimon.getMessagesTo().iterator().next();
         assertThat(messageOfUser.getState(), is(MessageState.of(VIEWED)));
-
     }
 }

@@ -4,8 +4,6 @@
 <html>
 <head><c:import url="fragments/htmlHeadTags.jsp"/>
     <script src='<c:url value="/web_resources/js/custom/initMessageNotification.js"/>'></script>
-    <link rel="stylesheet" href="${applicationScope['datetimepicker.css']}">
-    <script src="${applicationScope['datetimepicker']}"></script>
 </head>
 <body>
 <c:set var="currentUserRole" value="${fn:toLowerCase(requestScope.user.role)}"/>

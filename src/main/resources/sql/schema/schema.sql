@@ -28,7 +28,7 @@ CREATE TABLE user_essence (
   surname         VARCHAR(200)   NOT NULL,
   patronymic      VARCHAR(200),
   password        VARCHAR(32)  NOT NULL,
-  email           VARCHAR(255) NOT NULL,
+  email           VARCHAR(255) NOT NULL UNIQUE,
   phone           VARCHAR(15),
   birthday        TIMESTAMP,
   about_of_self   TEXT,
@@ -90,6 +90,7 @@ INSERT INTO message_state VALUES ('NEW'), ('VIEWED');
 INSERT INTO role_essence VALUES ('ROOT'), ('ADMIN'), ('USER');
 INSERT INTO status_essence VALUES ('ACTIVE'), ('INACTIVE'), ('DELETED');
 INSERT INTO state_friend VALUES ('REQUESTED'), ('REJECTED'), ('APPROVED');
+INSERT INTO genus_pet VALUES ('dog'), ('cat'), ('bird'), ('monkey'), ('parrot'), ('snake'), ('eagle'), ('rat');
 INSERT INTO user_essence (user_essence_id, nickname, password, name, surname, email, role, status)
 VALUES
-  (uuid('8ae453ef-4a97-46e9-803d-8502a446e6dc'), 'root', 'root', 'Carl', 'Stanley', 'root@root', 'ROOT', 'ACTIVE');
+  (uuid('8ae453ef-4a97-46e9-803d-8502a446e6dc'), 'root', 'root', 'Carl', 'Stanley', 'root@root.com', 'ROOT', 'ACTIVE');

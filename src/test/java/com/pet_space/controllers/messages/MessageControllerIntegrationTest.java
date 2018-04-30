@@ -58,16 +58,19 @@ public class MessageControllerIntegrationTest extends ControllerInit {
 
         MockHttpServletRequestBuilder requestBuilder = post("/user/messages")
                 .content(objectNode.toString())
-                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).session(this.mockHttpSession);
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .session(this.mockHttpSession);
         ResultActions resultNew = this.mockMvc.perform(requestBuilder);
         resultNew.andExpect(status().isCreated());
         Assert.assertThat(this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(USER_ESSENCE_FRED.getUserEssenceId()).getMessagesFrom().size(), is(1));
 
-        objectNode
-                .putArray("owners");
+        objectNode.putArray("owners");
         requestBuilder = post("/user/messages")
                 .content(objectNode.toString())
-                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).session(this.mockHttpSession);
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .session(this.mockHttpSession);
         resultNew = this.mockMvc.perform(requestBuilder);
         resultNew.andExpect(status().isBadRequest());
 
@@ -75,7 +78,7 @@ public class MessageControllerIntegrationTest extends ControllerInit {
 
 
     @Test
-    public void getMessagesView() throws Exception{
+    public void getMessagesView() throws Exception {
         this.userEssenceRepository.findOneWithEagerMessagesToAndFrom(USER_ESSENCE_FRED.getUserEssenceId()).getMessagesTo()
                 .forEach(m -> assertThat(m.getState(), is(MessageState.of(NEW))));
 

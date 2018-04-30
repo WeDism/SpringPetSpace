@@ -13,6 +13,7 @@
         <intercept-url pattern="/root/**" access="hasAuthority('ROOT')"/>
         <intercept-url pattern="/web_resources/**" access="permitAll()"/>
         <intercept-url pattern="/login/**" access="permitAll()"/>
+        <intercept-url pattern="/sign_up/**" access="permitAll()"/>
         <form-login login-page="/login"
                     default-target-url="/pet_space"
                     authentication-failure-url="/login?error=error"
