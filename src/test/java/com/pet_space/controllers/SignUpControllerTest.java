@@ -31,7 +31,7 @@ public class SignUpControllerTest extends ControllerInit {
         MockHttpServletRequestBuilder requestBuilder = post("/sign_up")
                 .params(valueMap);
         ResultActions resultNew = this.mockMvc.perform(requestBuilder);
-        resultNew.andExpect(status().isCreated());
+        resultNew.andExpect(status().is3xxRedirection());
         Assert.assertThat(this.userEssenceRepository.findOne(USER_ESSENCE_FRED.getUserEssenceId()), is(userEssenceFredClone));
 
     }
