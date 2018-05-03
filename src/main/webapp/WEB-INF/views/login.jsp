@@ -69,7 +69,8 @@
             title: '<strong>Complete!</strong>',
             message: 'You are success created login'
         }, {
-            type: 'success'
+            type: 'success',
+            delay: 15000
         });
         </c:when>
         <c:when test="${not empty requestScope.stateRegistration and not requestScope.stateRegistration.booleanValue()}">
@@ -77,10 +78,20 @@
             title: '<strong>Error!</strong>',
             message: 'You aren\'t created login'
         }, {
-            type: 'danger'
+            type: 'danger',
+            delay: 0
         });
         </c:when>
         </c:choose>
+        <c:forEach items="${errors}" var="error" varStatus="status">
+        $.notify({
+            title: '<strong>${error.left}</strong>',
+            message: '${error.right}'
+        }, {
+            type: 'danger',
+            delay: 0
+        });
+        </c:forEach>
     </script>
 </div>
 </body>

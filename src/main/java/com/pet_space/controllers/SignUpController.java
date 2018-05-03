@@ -34,17 +34,26 @@ public class SignUpController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "sign_up", method = RequestMethod.POST)
-    public String postUserEssence(@ModelAttribute("userEssence") @Valid UserEssence userEssence, BindingResult result, Model model) {
-        if (!result.hasErrors() && !this.userEssenceRepository.existsByNickname(userEssence.getNickname())
-                && !this.userEssenceRepository.existsByEmail(userEssence.getEmail())) {
-
+    public ModelAndView postUserEssence(@ModelAttribute("userEssence") @Valid UserEssence userEssence, BindingResult result, Model model) {
+        boolean existsByNickname = this.userEssenceRepository.existsByNickname(userEssence.getNickname());
+        boolean existsByEmail = this.userEssenceRepository.existsByEmail(userEssence.getEmail());
+        if (!result.hasErrors() && !existsByNickname && !existsByEmail) {
             if (userEssence.getRole().equals(RoleEssence.of(USER)))
                 userEssence.setStatusEssence(StatusEssence.of(ACTIVE));
             else userEssence.setStatusEssence(StatusEssence.of(INACTIVE));
 
             this.userEssenceRepository.save(userEssence);
             model.addAttribute("stateRegistration", Boolean.TRUE);
-        } else model.addAttribute("stateRegistration", Boolean.FALSE);
-        return "login";
+        } else {
+            List<ImmutablePair> errors = result.getFieldErrors().stream()
+                    .map(e -> ImmutablePair.of(WordUtils.capitalize(e.getField()), e.getDefaultMessage()))
+                    .collect(Collectors.toList());
+            if (existsByNickname) errors.add(ImmutablePair.of("Nickname", "This nickname already used"));
+            if (existsByEmail) errors.add(ImmutablePair.of("Email", "This email already used"));
+
+            model.addAttribute("errors", errors);
+            model.addAttribute("stateRegistration", Boolean.FALSE);
+        }
+        return new ModelAndView("redirect:/login", (Map<String, ?>) model);
     }
 }
