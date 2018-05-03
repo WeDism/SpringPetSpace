@@ -47,10 +47,10 @@ public class LoginController implements ServletConfigAware {
         return "login";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String postLoginView() {
-        return "login";
-    }
+//    @RequestMapping(method = RequestMethod.POST)
+//    public String postLoginView() {
+//        return "login";
+//    }
 
 }
 
