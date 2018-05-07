@@ -29,12 +29,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:set var="users" value="${sessionScope.users}"/>
+                <c:set var="users" value="${requestScope.users}"/>
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr data-essence-id="${user.userEssenceId}">
                         <td>
-                            <button class="delete-user-of-button">
-                                <img src="<c:url value="/web_resources/images/delete.ico"/>" alt="delete user" width="8">
+                            <button class="delete-user-of-button oi oi-circle-x" title="delete user">
                             </button>
                         </td>
                         <td>

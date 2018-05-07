@@ -21,3 +21,20 @@ body {
     padding-bottom: 40px;
     background-color: #eee;
 }
+
+.nav-link {
+    font-size: 1.25rem;
+}
+
+.navbar-brand:first-child {
+    font-size: 1.5rem;
+}
+
+button.delete-user-of-button, button.delete-request-friend-of-button {
+    background: Transparent no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: grey;
+}

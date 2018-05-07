@@ -28,6 +28,7 @@ public class LoginController implements ServletConfigAware {
             config.getServletContext().setAttribute("moment", contextPath + "/web_resources/js/moment.js");
             config.getServletContext().setAttribute("datetimepicker", contextPath + "/web_resources/js/jquery.datetimepicker.full.js");
             config.getServletContext().setAttribute("datetimepicker.css", contextPath + "/web_resources/css/jquery.datetimepicker.css");
+            config.getServletContext().setAttribute("open-iconic-bootstrap.css", contextPath + "/web_resources/css/open-iconic-bootstrap.css");
         } else {
             config.getServletContext().setAttribute("bootstrap.css", contextPath + "/web_resources/css/bootstrap.min.css");
             config.getServletContext().setAttribute("bootstrap-grid.css", contextPath + "/web_resources/css/bootstrap-grid.min.css");
@@ -39,6 +40,7 @@ public class LoginController implements ServletConfigAware {
             config.getServletContext().setAttribute("moment", contextPath + "/web_resources/js/moment.min.js");
             config.getServletContext().setAttribute("datetimepicker", contextPath + "/web_resources/js/jquery.datetimepicker.full.min.js");
             config.getServletContext().setAttribute("datetimepicker.css", contextPath + "/web_resources/css/jquery.datetimepicker.min.css");
+            config.getServletContext().setAttribute("open-iconic-bootstrap.css", contextPath + "/web_resources/css/open-iconic-bootstrap.min.css");
         }
     }
 

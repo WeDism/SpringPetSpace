@@ -24,7 +24,7 @@
                                         <div class="media-body">
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="${userFriend.nickname}">
-                                                <label class="custom-control-label" for="${userFriend.nickname}"> ${userFriend.surname} ${userFriend.name}
+                                                <label class="custom-control-label" for="${userFriend.nickname}">${userFriend.surname}&nbsp;${userFriend.name}&nbsp;
                                                     <small>(${userFriend.role})</small>
                                                 </label>
                                             </div>
@@ -50,7 +50,9 @@
                             <br/>
                             <div class="row">
                                 <div class="col">
-                                    <button id="sendMessage" type="button" class="btn float-right">Send message</button>
+                                    <button id="sendMessage" type="button" class="btn float-right">
+                                        <span class="oi oi-envelope-open"></span>&nbsp;Send message
+                                    </button>
                                 </div>
                             </div>
                             <br/>

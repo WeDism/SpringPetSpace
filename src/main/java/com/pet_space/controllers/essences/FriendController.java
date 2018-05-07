@@ -42,13 +42,6 @@ public class FriendController {
         this.userEssenceRepository = userEssenceRepository;
     }
 
-    @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
-    public String getUserNicknameView(Authentication authentication, Model model) {
-        UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
-        model.addAttribute("user", user);
-        return user.getRole().toString().toLowerCase();
-    }
-
     @RequestMapping(value = "find_friend", method = RequestMethod.GET)
     public String getFindFriendView(Authentication authentication, Model model) {
         UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());

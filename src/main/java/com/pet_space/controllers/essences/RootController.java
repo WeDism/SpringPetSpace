@@ -1,6 +1,7 @@
 package com.pet_space.controllers.essences;
 
 import com.pet_space.custom_repositories.CustomUserEssenceRepository;
+import com.pet_space.helpers.PathHelper;
 import com.pet_space.models.essences.RoleEssence;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.repositories.UserEssenceRepository;
@@ -10,9 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -31,9 +32,18 @@ public class RootController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getRootView(Authentication auth, HttpSession session) {
-        session.setAttribute("users", this.userEssenceRepository.findAll());
-        return "redirect:/root/" + auth.getName();
+    public String getRootView(Authentication authentication) {
+        return "redirect:/root/" + authentication.getName();
+    }
+
+    @RequestMapping(value = "{nickname}", method = RequestMethod.GET)
+    public String getRootNicknameView(Authentication authentication, Model model, @PathVariable("nickname") String nickname) {
+        return PathHelper.getPath(authentication, nickname, () -> {
+            UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
+            model.addAttribute("users", this.userEssenceRepository.findAll());
+            model.addAttribute("user", user);
+            return user;
+        });
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -44,11 +54,10 @@ public class RootController {
     }
 
     @RequestMapping(value = "profile/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteUserEssence(@PathVariable("id") UUID essenceId, Authentication authentication, HttpSession session) {
+    public ResponseEntity deleteUserEssence(@PathVariable("id") UUID essenceId, Authentication authentication) {
         UserEssence userEssence = this.userEssenceRepository.findByNickname(authentication.getName());
         if (!userEssence.getUserEssenceId().equals(essenceId)) {
             this.customUserEssenceRepository.deleteCascadeById(essenceId);
-            session.setAttribute("users", this.userEssenceRepository.findAll());
             return new ResponseEntity(HttpStatus.ACCEPTED);
         } else return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

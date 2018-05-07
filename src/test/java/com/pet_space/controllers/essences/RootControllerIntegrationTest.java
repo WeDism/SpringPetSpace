@@ -15,12 +15,10 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import static com.pet_space.models.essences.RoleEssence.RoleEssenceEnum.ADMIN;
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.*;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class RootControllerIntegrationTest extends ControllerInit {
     @Autowired
@@ -30,12 +28,13 @@ public class RootControllerIntegrationTest extends ControllerInit {
     @Before
     public void setUp() {
         super.setUp();
-        when(this.authentication.getName()).thenReturn(USER_ESSENCE_FRED.getNickname());
+        when(this.authentication.getName()).thenReturn(USER_ESSENCE_BART.getNickname());
 
         ResultActions auth = null;
         try {
             auth = this.mockMvc.perform(post("/login")
-                    .param("nickname", USER_ESSENCE_BART.getNickname()).param("password", USER_ESSENCE_BART.getPassword()));
+                    .param("nickname", USER_ESSENCE_BART.getNickname())
+                    .param("password", USER_ESSENCE_BART.getPassword()));
             auth.andExpect(redirectedUrl("/pet_space"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,10 +45,14 @@ public class RootControllerIntegrationTest extends ControllerInit {
     }
 
     @Test
-    public void getRootView() {
-        assertThat(this.rootController.getRootView(this.authentication, this.mockHttpSession), is("redirect:/root/" + this.authentication.getName()));
-        assertNotNull(this.mockHttpSession.getValue("users"));
-        assertThat(this.mockHttpSession.getValue("users"), is(this.userEssenceRepository.findAll()));
+    public void getRootView() throws Exception {
+        assertThat(this.rootController.getRootView(this.authentication), is("redirect:/root/" + this.authentication.getName()));
+        MockHttpServletRequestBuilder requestBuilder =
+                get("/root/" + this.authentication.getName()).session(this.mockHttpSession);
+
+        ResultActions resultNew = this.mockMvc.perform(requestBuilder);
+        resultNew.andExpect(model().attribute("users", is(this.userEssenceRepository.findAll())))
+                .andExpect(model().attribute("user", is(this.userEssenceRepository.findByNickname(this.authentication.getName()))));
     }
 
     @Test
