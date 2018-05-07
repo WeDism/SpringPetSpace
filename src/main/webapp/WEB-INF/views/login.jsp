@@ -8,14 +8,17 @@
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
-            <h2 class="form-sign-in-heading"><a href="<c:url value="/login"/>">Pet network</a></h2>
+            <h2 class="form-sign-in-heading"><a href="<c:url value="/login"/>"><span class="oi oi-bug" title="Pet network" aria-hidden="true"></span>
+                Pet network</a></h2>
             <div class="row">
                 <div class="col-3 left-col">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link active" id="v-pills-sign-in-tab" data-toggle="pill" href="#v-pills-sign-in" role="tab"
-                           aria-controls="v-pills-sign-in" aria-selected="true">Sign in</a>
+                           aria-controls="v-pills-sign-in" aria-selected="true"><span class="oi oi-account-login" title="sign-in" aria-hidden="true"></span>&nbsp;
+                            Sign in</a>
                         <a class="nav-link" id="v-pills-sign-up-tab" data-toggle="pill" href="#v-pills-sign-up" role="tab"
-                           aria-controls="v-pills-sign-up" aria-selected="false">Sign up</a>
+                           aria-controls="v-pills-sign-up" aria-selected="false"><span class="oi oi-pencil" title="sign-up" aria-hidden="true"></span>&nbsp;
+                            Sign up</a>
                     </div>
                 </div>
                 <div class="col-9 right-col">

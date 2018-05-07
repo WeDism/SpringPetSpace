@@ -73,7 +73,12 @@
                                 <td>
                                     <a href="${pageContext.request.contextPath}/profile/<c:out value="${userFriend.nickname}"/>">${userFriend.nickname}</a>
                                 </td>
-                                <td><input class="essence-friend-checkbox" type="checkbox" <c:if test="${userFriends.contains(userFriend)}">checked="true"</c:if>/>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="essence-friend-checkbox custom-control-input" type="checkbox" id="${userFriend.nickname}"
+                                               <c:if test="${userFriends.contains(userFriend)}">checked="true"</c:if>/>
+                                        <label class="custom-control-label" for="${userFriend.nickname}">Request</label>
+                                    </div>
                                 </td>
                                 <td><c:out value="${userFriend.name}"/></td>
                                 <td><c:out value="${userFriend.surname}"/></td>

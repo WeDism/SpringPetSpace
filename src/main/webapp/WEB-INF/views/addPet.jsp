@@ -12,7 +12,7 @@
     <div class="row c-row">
         <div class="col">
             <div class="row">
-                <div class="col-4 offset-4">
+                <div class="col-3 offset-5">
                     <h2>Add your pet</h2>
                 </div>
             </div>
@@ -21,7 +21,8 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group row">
-                                <label class="col-4 col-form-label" for="petName">Name</label>
+                                <label class="col-4 col-form-label" for="petName">
+                                    <span class="oi oi-bug" title="pet name" aria-hidden="true"></span>&nbsp;Name</label>
                                 <div class="col-8">
                                     <input class="form-control" type="text" id="petName" name="name" placeholder="name" required>
                                 </div>
@@ -30,7 +31,8 @@
                         <div class="col-4"><sf:errors path="name" cssClass="error"/></div>
                         <div class="col-4">
                             <div class="form-group row">
-                                <label class="col-4 col-form-label" for="petWeight">Weight</label>
+                                <label class="col-4 col-form-label" for="petWeight">
+                                    <span class="oi oi-webug" title="pet name" aria-hidden="true"></span>&nbsp;Weight</label>
                                 <div class="col-8">
                                     <input class="form-control" type="text" id="petWeight" name="weight" placeholder="3.14">
                                 </div>
@@ -42,7 +44,7 @@
                             <div class="form-group row">
                                 <label class="col-4 col-form-label" for="datetimepicker">Birthday</label>
                                 <div class="col-8">
-                                    <input class="form-control" id="datetimepicker" type="text" name="birthday">
+                                    <input class="form-control" id="datetimepicker" type="text" name="birthday" placeholder="input birthday your pet">
                                 </div>
                             </div>
                         </div>

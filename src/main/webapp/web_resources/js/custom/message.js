@@ -14,8 +14,10 @@ const createMessage = function (textArea) {
 
 const addLiInUl = function (message, authorNickname, pathToProfile) {
     const date = moment();
-    $('.list-unstyled:last div:first')
-        .before($('<div></div>').addClass('row')
+    const list = $('.list-unstyled:last div:first');
+
+    function getMessageElement() {
+        return $('<div></div>').addClass('row')
             .append($('<div></div>').addClass('col-6 offset-6')
                 .append($('<li></li>').addClass('media')
                     .append($('<div></div>').addClass('media-body')
@@ -24,7 +26,11 @@ const addLiInUl = function (message, authorNickname, pathToProfile) {
                                 .append($('<div></div>').addClass('float-right').attr('title', date.format('HH:mm:ss')).html('&nbsp;' + date.format('YYYY-MM-DD')))
                                 .append($('<a></a>').addClass('float - right').attr('href', pathToProfile).text('author ' + authorNickname))))
                         .append($('<strong></strong>').addClass('text-success').text('to ' + message.owners.sort((a, b) => a > b).toString()))
-                        .append($('<p></p>').text(message.text))))));
+                        .append($('<p></p>').text(message.text)))));
+    }
+
+    if (list.length === 1) list.before(getMessageElement());
+    else $('.list-unstyled:last').append(getMessageElement());
 };
 
 const sendMessage = function () {

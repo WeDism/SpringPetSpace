@@ -44,8 +44,7 @@
             </td>
             <td>
                 <c:if test="${not requestScope.user.requestedFriendsTo.contains(userFriend)}">
-                    <button class="delete-request-friend-of-button">
-                        <img src="<c:url value="/web_resources/images/delete.ico"/>" alt="delete request friend" width="8">
+                    <button class="delete-request-friend-of-button oi oi-circle-x" title="delete request friend">
                     </button>
                 </c:if>
             </td>
