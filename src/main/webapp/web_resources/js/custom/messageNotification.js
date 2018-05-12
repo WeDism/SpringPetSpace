@@ -17,7 +17,7 @@ const requestForGettingNewMessages = function () {
                         from: "bottom",
                         align: "right"
                     },
-                    type: 'success',
+                    type: 'info',
                     delay: DELAY * data.length,
                     template: '<div data-notify="container" data-message-id="' + value.messageId + '" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert">' +
                     '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button>' +
