@@ -54,7 +54,7 @@ Go to [Pet Space](https://spring-pet-space.herokuapp.com). You are see next imag
 
 ![Sign In](/readme_images/sign_up_and_sign_in/sign_in.png)
 
-Click to Sign Up button. You have to see next image with empty fields.
+Click to ___${Sign Up}___ button. You have to see next image with empty fields.
 
 ![Sign Up](/readme_images/sign_up_and_sign_in/sign_up.png)
 
@@ -65,6 +65,10 @@ Fill registration data. You can see example in the next image.
 If you enter verified data. You should be see next image.
 
 ![Success Sign Up](/readme_images/sign_up_and_sign_in/success_sign_up.png) 
+
+Click on ___${Sign In}___ left button. Enter your nickname and email.
+
+![Filled Sing In](/readme_images/sign_up_and_sign_in/filled_sign_in.png)
 
 After success registration you have to enter your sign up data and sign in.
 
