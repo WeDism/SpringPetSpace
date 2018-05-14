@@ -7,6 +7,7 @@
 1. [Tested systems](#tested-systems)
 1. [Tutorial](#use-case-tutorial)
     1. [Intro](#intro-by-design)
+        1. [Use Case diagram](#use-case-diagram)
     
 
 ## For run this app you have to do next steps
@@ -22,8 +23,17 @@
 
 ### Tested systems
 1. Windows 8
-1. [Heroku](https://www.heroku.com/)
+1. [Heroku](https://www.heroku.com/) PaaS
 
 ### Use case tutorial
 #### Intro by design
+##### Use Case diagram
+This is social network service [SNS](https://en.wikipedia.org/wiki/Social_networking_service).
+This system contains three type user essences: __USER__, __ADMIN__ and __ROOT__. These essences extends is an abstract essence.
+The __ROOT__ essence are main and most credential user. This essence may be management other essences. 
+The __USER__ is a most popular essences because it's contains main functions such as find friends and adding friend, 
+send messages few friends each shipment new message, follow and unfollow pets. The __ADMIN__ essence extend __USER__ adds
+function __${Add species}__. See all use cases at the next diagram.
+
+![Diagram of Use Case the social network](/design/UML/UseCase.png)
 
