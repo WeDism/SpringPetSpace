@@ -64,7 +64,7 @@ Fill registration data. You can see example in the next image.
 
 If you enter verified data. You should be see next image.
 
-![Success Sign Up](/readme_images/sign_up_and_sign_in/success_sign_in.png) 
+![Success Sign Up](/readme_images/sign_up_and_sign_in/success_sign_up.png) 
 
 After success registration you have to enter your sign up data and sign in.
 
