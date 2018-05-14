@@ -8,7 +8,11 @@
 1. [Tutorial](#tutorial)
     1. [Intro](#intro-by-design)
         1. [Use Case diagram](#use-case-diagram)
-        1. [IDEF1X DB Schema](#idef1x-db-schema)
+        1. [Logical DB Schema](#logical-db-schema)
+    1. [How Pet Space use](#how-pet-space-use)
+        1. [USER role](#user-role)
+        1. [ADMIN role](#admin-role)
+        1. [ROOT role](#root-role)
 
 ## For run this app you have to do next steps
 1. [Download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install java 9
@@ -32,14 +36,42 @@ This is social network service [SNS](https://en.wikipedia.org/wiki/Social_networ
 This system contains three type user essences: __USER__, __ADMIN__ and __ROOT__. These essences extends is an abstract essence.
 The __ROOT__ essence are main and most credential user. This essence may be management other essences. 
 The __USER__ is a most popular essences because it's contains main functions such as find friends and adding friend, 
-send messages few friends each shipment new message, follow and unfollow pets. The __ADMIN__ essence extend __USER__ adds
-function __${Add species}__. See all [use cases](https://en.wikipedia.org/wiki/Use_case) at the next diagram.
+send messages few friends each shipment new message, follow and unfollow pets. The __ADMIN__ essence extend the __USER__ 
+and adds a function ___${Add species}___. See all [use cases](https://en.wikipedia.org/wiki/Use_case) at the next diagram.
 
 ![Diagram of Use Case the social network](/design/UML/UseCase.png)
 
-##### IDEF1X DB Schema
+##### Logical DB schema
 DB schema build of using [IDEF1X](https://en.wikipedia.org/wiki/IDEF1X) data modeling language. 
 This logical db scheme was develop with restrictions which helps implements integrity of the database.
 See the details in the following scheme.
 
 ![DB Schema](/design/DB/Model_BD.png)
+
+#### How Pet Space use
+##### Sign Up and Sign In
+Go to [Pet Space](https://spring-pet-space.herokuapp.com). You are see next image.
+
+![Sign In](/readme_images/sign_up_and_sign_in/sign_in.png)
+
+Click to Sign Up button. You have to see next image with empty fields.
+
+![Sign Up](/readme_images/sign_up_and_sign_in/sign_up.png)
+
+Fill registration data. You can see example in the next image.
+
+![Sign Up with filled data](/readme_images/sign_up_and_sign_in/filled_sing_up.png)
+
+If you enter verified data. You should be see next image.
+
+![Success Sign Up](/readme_images/sign_up_and_sign_in/success_sign_in.png) 
+
+After success registration you have to enter your sign up data and sign in.
+
+![Success Sign In](/readme_images/sign_up_and_sign_in/success_sign_in.png)
+
+##### USER Role
+
+##### ADMIN Role
+
+##### ROOT Role

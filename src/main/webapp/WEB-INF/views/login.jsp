@@ -33,7 +33,7 @@
                         <div class="tab-pane fade" id="v-pills-sign-up" role="tabpanel" aria-labelledby="v-pills-sign-up-tab">
                             <form id="registerForm" class="form-sign-up" action="<c:url value="/sign_up"/>" method="post">
                                 <input class="form-control" type="email" name="email" placeholder="Email" required>
-                                <input class="form-control" type="text" name="nickname" placeholder="Nickname" required autofocus>
+                                <input class="form-control" type="text" name="nickname" placeholder="Nickname" required>
                                 <input class="form-control" type="text" name="name" placeholder="Name" required>
                                 <input class="form-control" type="text" name="surname" placeholder="Surname" required>
                                 <input class="form-control" type="text" name="patronymic" placeholder="Patronymic">
@@ -67,7 +67,7 @@
             format: 'YYYY-MM-DDTHH:mm'
         });
         <c:choose>
-        <c:when test="${not empty stateRegistration and requestScope.stateRegistration.booleanValue()}">
+        <c:when test="${not empty requestScope.stateRegistration and requestScope.stateRegistration.booleanValue()}">
         $.notify({
             title: '<strong>Complete!</strong>',
             message: 'You are success created login'
@@ -86,7 +86,7 @@
         });
         </c:when>
         </c:choose>
-        <c:forEach items="${errors}" var="error" varStatus="status">
+        <c:forEach items="${requestScope.errors}" var="error" varStatus="status">
         $.notify({
             title: '<strong>${error.left}</strong>',
             message: '${error.right}'
