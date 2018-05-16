@@ -70,7 +70,7 @@ Click on ___${Sign In}___ left button. Enter your nickname and email.
 
 ![Filled Sing In](/readme_images/sign_up_and_sign_in/filled_sign_in.png)
 
-After success registration you have to enter your sign up data and sign in.
+After success registration you have to enter your sign up data and click ___${Sign In}___.
 
 ![Success Sign In](/readme_images/sign_up_and_sign_in/success_sign_in.png)
 

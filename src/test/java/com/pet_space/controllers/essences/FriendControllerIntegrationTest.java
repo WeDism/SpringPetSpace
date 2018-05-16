@@ -1,6 +1,9 @@
 package com.pet_space.controllers.essences;
 
 import com.pet_space.controllers.ControllerInit;
+import com.pet_space.models.essences.FriendId;
+import com.pet_space.models.essences.Friends;
+import com.pet_space.models.essences.StateFriend;
 import com.pet_space.models.essences.UserEssence;
 import com.pet_space.models.pets.Pet;
 import org.apache.commons.lang3.SerializationUtils;
@@ -50,6 +53,8 @@ public class FriendControllerIntegrationTest extends ControllerInit {
         when(this.authentication.getName()).thenReturn(userEssenceFred.getNickname());
         assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.authentication).getStatusCode(), is(HttpStatus.CREATED));
         assertThat(this.userEssenceRepository.findOne(userEssenceFred.getUserEssenceId()).getRequestedFriendsFrom().size(), is(1));
+        assertThat(this.userEssenceRepository.findOne(userEssenceFred.getUserEssenceId()).getRequestedFriendsFrom().iterator().next(),
+                is(new Friends(FriendId.of(userEssenceFred, userEssenceJohn), StateFriend.of(StateFriend.StateFriendEnum.REQUESTED))));
         assertThat(friendController.postFriendRequest(userEssenceJohn.getUserEssenceId(), this.authentication).getStatusCode(), is(HttpStatus.BAD_REQUEST));
 
     }

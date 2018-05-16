@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
@@ -18,7 +16,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class RootControllerIntegrationTest extends ControllerInit {
     @Autowired
@@ -30,18 +29,7 @@ public class RootControllerIntegrationTest extends ControllerInit {
         super.setUp();
         when(this.authentication.getName()).thenReturn(USER_ESSENCE_BART.getNickname());
 
-        ResultActions auth = null;
-        try {
-            auth = this.mockMvc.perform(post("/login")
-                    .param("nickname", USER_ESSENCE_BART.getNickname())
-                    .param("password", USER_ESSENCE_BART.getPassword()));
-            auth.andExpect(redirectedUrl("/pet_space"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        MvcResult result = auth.andReturn();
-        this.mockHttpSession = (MockHttpSession) result.getRequest().getSession();
+       this.initMockSession(USER_ESSENCE_BART);
     }
 
     @Test

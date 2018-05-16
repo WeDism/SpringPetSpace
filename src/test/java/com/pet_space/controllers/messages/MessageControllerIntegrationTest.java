@@ -9,8 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
@@ -21,7 +19,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class MessageControllerIntegrationTest extends ControllerInit {
@@ -30,17 +27,7 @@ public class MessageControllerIntegrationTest extends ControllerInit {
     public void setUp() {
         super.setUp();
 
-        ResultActions auth = null;
-        try {
-            auth = this.mockMvc.perform(post("/login")
-                    .param("nickname", USER_ESSENCE_FRED.getNickname()).param("password", USER_ESSENCE_FRED.getPassword()));
-            auth.andExpect(redirectedUrl("/pet_space"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        MvcResult result = auth.andReturn();
-        this.mockHttpSession = (MockHttpSession) result.getRequest().getSession();
+        this.initMockSession(USER_ESSENCE_FRED);
     }
 
     @Test

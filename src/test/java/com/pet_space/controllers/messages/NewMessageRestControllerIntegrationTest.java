@@ -10,8 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
@@ -23,8 +21,10 @@ import static com.pet_space.models.messages.MessageState.MessageStateEnum.VIEWED
 import static com.pet_space.repositories.UserEssenceRepositoryTestData.USER_ESSENCE_SIMON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class NewMessageRestControllerIntegrationTest extends ControllerInit {
 
@@ -36,17 +36,7 @@ public class NewMessageRestControllerIntegrationTest extends ControllerInit {
     public void setUp() {
         super.setUp();
 
-        ResultActions auth = null;
-        try {
-            auth = this.mockMvc.perform(post("/login")
-                    .param("nickname", USER_ESSENCE_SIMON.getNickname()).param("password", USER_ESSENCE_SIMON.getPassword()));
-            auth.andExpect(redirectedUrl("/pet_space"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        MvcResult result = auth.andReturn();
-        this.mockHttpSession = (MockHttpSession) result.getRequest().getSession();
+        this.initMockSession(USER_ESSENCE_SIMON);
         this.updateClassFields();
     }
 
