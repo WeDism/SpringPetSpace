@@ -38,3 +38,11 @@ button.delete-user-of-button, button.delete-request-friend-of-button {
     outline: none;
     color: grey;
 }
+
+nav.col-2 {
+    border-radius: 0.5rem 0 0 0.5rem
+}
+
+nav.col-10 {
+    border-radius: 0 0.5rem 0.5rem 0
+}

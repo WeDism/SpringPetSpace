@@ -95,10 +95,13 @@ public class FriendController {
                                                 @RequestParam(name = "state_friend") StateFriendEnum stateFriendEnum) {
         UserEssence user = this.userEssenceRepository.findByNickname(authentication.getName());
         UserEssence friend = this.userEssenceRepository.findOne(userEssenceId);
-        FriendId friendId = FriendId.of(friend, user);
-        Friends friends = this.friendsRepository.findOne(friendId);
-        if (friends != null) {
-            this.friendsRepository.save(friends.setState(StateFriend.of(stateFriendEnum)));
+        Friends friendsFrom = this.friendsRepository.findOne(FriendId.of(user, friend));
+        Friends friendsTo = this.friendsRepository.findOne(FriendId.of(friend, user));
+        if (friendsFrom != null) {
+            this.friendsRepository.save(friendsFrom.setState(StateFriend.of(stateFriendEnum)));
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }if (friendsTo != null) {
+            this.friendsRepository.save(friendsTo.setState(StateFriend.of(stateFriendEnum)));
             return new ResponseEntity(HttpStatus.ACCEPTED);
         } else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

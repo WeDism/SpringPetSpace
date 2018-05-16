@@ -29,7 +29,7 @@ public class RootControllerIntegrationTest extends ControllerInit {
         super.setUp();
         when(this.authentication.getName()).thenReturn(USER_ESSENCE_BART.getNickname());
 
-       this.initMockSession(USER_ESSENCE_BART);
+        this.initMockSession(USER_ESSENCE_BART);
     }
 
     @Test

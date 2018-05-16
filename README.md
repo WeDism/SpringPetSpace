@@ -37,7 +37,7 @@ This system contains three type user essences: __USER__, __ADMIN__ and __ROOT__.
 The __ROOT__ essence are main and most credential user. This essence may be management other essences. 
 The __USER__ is a most popular essences because it's contains main functions such as find friends and adding friend, 
 send messages few friends each shipment new message, follow and unfollow pets. The __ADMIN__ essence extend the __USER__ 
-and adds a function ___${Add species}___. See all [use cases](https://en.wikipedia.org/wiki/Use_case) at the next diagram.
+and adds a ___${Add species}___ function. See all [use cases](https://en.wikipedia.org/wiki/Use_case) at the next diagram.
 
 ![Diagram of Use Case the social network](/design/UML/UseCase.png)
 
@@ -70,7 +70,7 @@ Click on ___${Sign In}___ left button. Enter your nickname and email.
 
 ![Filled Sing In](/readme_images/sign_up_and_sign_in/filled_sign_in.png)
 
-After success registration you have to enter your sign up data and click ___${Sign In}___.
+After success registration you have to enter your sign up data and click ___${Sign In}___ button.
 
 ![Success Sign In](/readme_images/sign_up_and_sign_in/success_sign_in.png)
 
