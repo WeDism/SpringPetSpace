@@ -15,12 +15,14 @@
             1. [How to find and request to friend](#how-to-find-and-request-to-friend)
             1. [How approve your friend request](#how-approve-your-friend-request)
             1. [How write message to your friend](#how-write-message-to-your-friend)
+            1. [How mark as read message](#how-mark-as-read-message)
         1. [ADMIN role](#admin-role)
-             1. [How to add pet](#how-to-add-pet)
-             1. [How to find and request to friend](#how-to-find-and-request-to-friend)
-             1. [How approve your friend request](#how-approve-your-friend-request)
-             1. [How write message to your friend](#how-write-message-to-your-friend)
-             1. [How add new species](#how-add-new-species)
+            1. [How to add pet](#how-to-add-pet)
+            1. [How to find and request to friend](#how-to-find-and-request-to-friend)
+            1. [How approve your friend request](#how-approve-your-friend-request)
+            1. [How write message to your friend](#how-write-message-to-your-friend)
+            1. [How add new species](#how-add-new-species)
+            1. [How mark as read message](#how-mark-as-read-message)
         1. [ROOT role](#root-role)
             1. [How add new species](#how-add-new-species)
 
@@ -120,17 +122,41 @@ ___${Your pets}___ table on your page as the next image.
 ![Requested friend of your account](/readme_images/user/friend_request/requested_friend_of_your_account.png)
 
 ##### How approve your friend request
-Requested account have to change in drop-down list state REQUSTED to APPOVED on the home page see as the next image.
+Requested account have to change in drop-down list state REQUSTED to APPOVED  
+in the table name ___${Your friends}___ and column name ___${Friend state}___ on the home page. 
+You can see as the next image.
 
 ![Change drop-down list](/readme_images/user/friend_request/change_drop_down_list_REQUESTED_to_APPOVED.gif)
 
 ##### How write message to your friend
+After success request your friend you have to see changed state REQUSTED to APPOVED as ahead chapter. 
+You should be see next presentation.
+
+![APPROVED state friend request](/readme_images/user/chat/APPROVED_state_friend_request.png)
+
+For send message your friend click ___${messages}___. After change location from ___${Home}___ page to ___${Messages}___
+page choose one or a lot of accounts and write new message. If you do preview steps you should be see success message 
+in the top right corner. These steps are present in the next presentation.
+
+![Send message my friend](/readme_images/user/chat/send_message_my_friend.gif)
+
+After success send your message your should me see next notification on the right bottom corner. 
+Your message notification you can see the next image.
+
+![Message notification about your message](/readme_images/user/chat/message_notification_about_your_message.png)
+
+##### How mark as read message
+After get your new message you can mark as read new message with two ways:
+1. First way click ___${✓}___ on the message notification.
+1. Second way click ___${Messages}___ on the top page and all messages will be marked as read.
 
 #### ADMIN Role
 ##### [How to add pet](#how-to-add-pet)
 ##### [How to find and request to friend](#how-to-find-and-request-to-friend)
 ##### [How approve your friend request](#how-approve-your-friend-request)
 ##### [How write message to your friend](#how-write-message-to-your-friend)
+##### [How mark as read message](#how-mark-as-read-message)
+
 ##### How add new species
 
 #### ROOT Role
