@@ -5,6 +5,7 @@
 ## Table of contents
 1. [How to run app](#for-run-this-app-you-have-to-do-next-steps)
 1. [Tested systems](#tested-systems)
+1. [Tested browsers](#tested-browsers)
 1. [Tutorial](#tutorial)
     1. [Intro](#intro-by-design)
         1. [Use Case diagram](#use-case-diagram)
@@ -16,15 +17,19 @@
             1. [How approve your friend request](#how-approve-your-friend-request)
             1. [How write message to your friend](#how-write-message-to-your-friend)
             1. [How mark as read message](#how-mark-as-read-message)
+            1. [How view another profile](#how-view-another-profile)
         1. [ADMIN role](#admin-role)
             1. [How to add pet](#how-to-add-pet)
             1. [How to find and request to friend](#how-to-find-and-request-to-friend)
             1. [How approve your friend request](#how-approve-your-friend-request)
             1. [How write message to your friend](#how-write-message-to-your-friend)
-            1. [How add new species](#how-add-new-species)
             1. [How mark as read message](#how-mark-as-read-message)
+            1. [How view another profile](#how-view-another-profile)
+            1. [How add new species](#how-add-new-species)
         1. [ROOT role](#root-role)
             1. [How add new species](#how-add-new-species)
+            1. [How view another profile](#how-view-another-profile)
+
 
 
 ## For run this app you have to do next steps
@@ -41,6 +46,10 @@
 ## Tested systems
 1. Windows 8
 1. [Heroku](https://www.heroku.com/) (PaaS)
+
+## Tested browsers
+1. Google chrome desktop 64 version and above
+1. Google chrome mobile 64 version and above
 
 ## Tutorial
 ### Intro by design
@@ -93,7 +102,7 @@ Sign in Pet Space. After success authentication you should be see the  next imag
 
 ![Success Sign In](/readme_images/user/first_success_sign_in.png)
 
-For adds your pet click on the ___${Add pet}___ button and fill data.
+To adds your pet click on the ___${Add pet}___ button and fill data.
 
 ![Empty add your pet](/readme_images/user/add_pet/filled_data_add_your_pet.png)
 
@@ -107,7 +116,7 @@ If you back to home page you can see your pet in a ___${Your pets}___ table of t
 ![Added your pet on the home page](/readme_images/user/add_pet/added_your_pet_on_the%20home_page.png)
 
 ##### How to find and request to friend
-For request to friend click on the ___${Find friend}___ button. After open new page fill data as the next image.
+To request to friend click on the ___${Find friend}___ button. After open new page fill data as the next image.
 
 ![Filled data of find friend](/readme_images/user/find_friend/filled_data_of_find_friend.png)
 
@@ -134,7 +143,7 @@ You should be see next presentation.
 
 ![APPROVED state friend request](/readme_images/user/chat/APPROVED_state_friend_request.png)
 
-For send message your friend click ___${messages}___. After change location from ___${Home}___ page to ___${Messages}___
+To send message your friend click ___${Messages}___ link. After change location from ___${Home}___ page to ___${Messages}___
 page choose one or a lot of accounts and write new message. If you do preview steps you should be see success message 
 in the top right corner. These steps are present in the next presentation.
 
@@ -147,8 +156,17 @@ Your message notification you can see the next image.
 
 ##### How mark as read message
 After get your new message you can mark as read new message with two ways:
-1. First way click ___${✓}___ on the message notification.
+1. First way click ___${✓}___ on the message notification. See as the next presentations.
+
+![First way mark as read](/readme_images/user/state_message/first_way_mark_as_read.gif)
+
 1. Second way click ___${Messages}___ on the top page and all messages will be marked as read.
+
+![Second way mark as read](/readme_images/user/state_message/second_way_mark_as_read.gif)
+
+##### How view another profile
+
+![View another profile](/readme_images/user/view_profile/view_profile_another_user.gif)
 
 #### ADMIN Role
 ##### [How to add pet](#how-to-add-pet)
@@ -158,6 +176,13 @@ After get your new message you can mark as read new message with two ways:
 ##### [How mark as read message](#how-mark-as-read-message)
 
 ##### How add new species
+To add new genus pet you should be has ___${ADMIN}___ role. Next go to ___$Home}___ page and click on the 
+___${Add genus pet}___ button. After redirect ___${Add genus pet}___ page input new ___${Genus pet}___ name and click 
+on the  ___${Submit}___ button. After valid data you have to see success ___${Genus pet added}___ message. New added 
+genus you can see in the ___{Genus pet}___ table. If your genus pet is success added you and other users can use your 
+genus pet name. See as the next presentation.
+
+![Add new genus pet](/readme_images/admin/add_new_genus_pet/adding_new_genus_pet.gif)
 
 #### ROOT Role
 ##### [How add new species](#how-add-new-species)
