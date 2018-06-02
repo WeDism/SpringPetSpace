@@ -10,6 +10,7 @@
     1. [Intro](#intro-by-design)
         1. [Use Case diagram](#use-case-diagram)
         1. [Logical DB Schema](#logical-db-schema)
+        1. [Physical DB Schema](#physical-db-schema)
     1. [How Pet Space use](#how-pet-space-use)
         1. [USER role](#user-role)
             1. [How to add pet](#how-to-add-pet)
@@ -68,7 +69,14 @@ DB schema build of using [IDEF1X](https://en.wikipedia.org/wiki/IDEF1X) data mod
 This logical db scheme was develop with restrictions which helps implements integrity of the database.
 See the details in the following scheme.
 
-![DB Schema](/design/DB/Model_BD.png)
+![Logical DB Schema](/design/DB/Model_BD.png)
+
+#### Physical DB schema
+In this project was tested postgres DBMS physical schema in the following image you can see physical diagram.
+
+![Physical DB Schema](/readme_images/db/physical_db.png)
+
+This physical db scheme was develop with restrictions which helps implements integrity of the database.
 
 ### How Pet Space use
 #### Sign Up and Sign In
@@ -186,3 +194,4 @@ genus pet name. See as the next presentation.
 
 #### ROOT Role
 ##### [How add new species](#how-add-new-species)
+##### [How view another profile](#how-view-another-profile)
