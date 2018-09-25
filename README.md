@@ -30,6 +30,8 @@
         1. [ROOT role](#root-role)
             1. [How add new species](#how-add-new-species)
             1. [How view another profile](#how-view-another-profile)
+            1. [How to delete user](#how-to-delete-user)
+            1. [How add new species](#how-add-new-species)
 
 
 
@@ -184,7 +186,7 @@ After get your new message you can mark as read new message with two ways:
 ##### [How mark as read message](#how-mark-as-read-message)
 
 ##### How add new species
-To add new genus pet you should be has ___${ADMIN}___ role. Next go to ___$Home}___ page and click on the 
+To add new genus pet you should be has ___${ADMIN}___ role. Next go to ___${Home}___ page and click on the 
 ___${Add genus pet}___ button. After redirect ___${Add genus pet}___ page input new ___${Genus pet}___ name and click 
 on the  ___${Submit}___ button. After valid data you have to see success ___${Genus pet added}___ message. New added 
 genus you can see in the ___{Genus pet}___ table. If your genus pet is success added you and other users can use your 
@@ -195,3 +197,6 @@ genus pet name. See as the next presentation.
 #### ROOT Role
 ##### [How add new species](#how-add-new-species)
 ##### [How view another profile](#how-view-another-profile)
+##### How to delete user
+##### [How add new species](#how-add-new-species)
+
