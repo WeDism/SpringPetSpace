@@ -14,6 +14,7 @@
     1. [How Pet Space use](#how-pet-space-use)
         1. [Sign Up and Sign In](#sign-up-and-sign-in)
         1. [USER role](#user-role)
+            1. [Intro USER Role](#intro-user-role)
             1. [How to add pet](#how-to-add-pet)
             1. [How to find and request to friend](#how-to-find-and-request-to-friend)
             1. [How approve your friend request](#how-approve-your-friend-request)
@@ -98,23 +99,19 @@ As a result you will sign in __Pet Space__ system.
 ![Success Sign In](/readme_images/sign_up_and_sign_in/sign_up_and_then_sigin_in.gif)
 
 #### USER Role
+##### Intro USER Role
+Sign in __Pet Space__ as user essence. After success authentication you should be see the next image.
+Your role should be __USER__.
+
+![Sign in as user](/readme_images/user/sign_in_as_user.png)
+
 ##### How to add pet
-Sign in Pet Space. After success authentication you should be see the next image.
-
-![Success Sign In](/readme_images/user/first_success_sign_in.png)
-
 To adds your pet click on the ___${Add pet}___ button and fill data.
+Click on the ___${Submit}___ button. If you enter valid data you should be see green ___${Pet added}___ message 
+in the left bottom part. If you back to home page you can see your pet in a ___${Your pets}___ table 
+of the bottom part your page.
 
-![Empty add your pet](/readme_images/user/add_pet/filled_data_add_your_pet.png)
-
-Click on the ___${Submit}___ button. If you enter valid data you should be see ___${Pet added}___ message 
-such as next image.
-
-![Success filled add pet](/readme_images/user/add_pet/success_filled_add_pet.png)
-
-If you back to home page you can see your pet in a ___${Your pets}___ table of the bottom part your page as the next image.
-
-![Added your pet on the home page](/readme_images/user/add_pet/added_your_pet_on_the%20home_page.png)
+![Add your pet](/readme_images/user/add_your_pet.gif)
 
 ##### How to find and request to friend
 To request to friend click on the ___${Find friend}___ button. After open new page fill data as the next image.
@@ -174,7 +171,7 @@ After get your new message you can mark as read new message with two ways:
 Sign in __Pet Space__ as admin essence. After success authentication you should be see the next image.
 Your role should be __ADMIN__.
 
-![Success sign in as admin](/readme_images/admin/sign_in_as_admin.png)
+![Sign in as admin](/readme_images/admin/sign_in_as_admin.png)
 
 ##### [How to add pet](#how-to-add-pet)
 ##### [How to find and request to friend](#how-to-find-and-request-to-friend)
@@ -196,7 +193,7 @@ genus pet name. See as the next presentation.
 Sign in __Pet Space__ as root essence. After success authentication you should be see the next image.
 Your role should be __ROOT__.
 
-![Success sign in as root](/readme_images/root/success_sign_in_as_root.png)
+![Sign in as root](/readme_images/root/sign_in_as_root.png)
 
 ##### [How add new species](#how-add-new-species)
 ##### [How view another profile](#how-view-another-profile)
