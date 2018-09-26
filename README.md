@@ -12,6 +12,7 @@
         1. [Logical DB Schema](#logical-db-schema)
         1. [Physical DB Schema](#physical-db-schema)
     1. [How Pet Space use](#how-pet-space-use)
+        1. [Sign Up and Sign In](#sign-up-and-sign-in)
         1. [USER role](#user-role)
             1. [How to add pet](#how-to-add-pet)
             1. [How to find and request to friend](#how-to-find-and-request-to-friend)
@@ -20,6 +21,7 @@
             1. [How mark as read message](#how-mark-as-read-message)
             1. [How view another profile](#how-view-another-profile)
         1. [ADMIN role](#admin-role)
+            1. [Intro ADMIN Role](#intro-admin-role)
             1. [How to add pet](#how-to-add-pet)
             1. [How to find and request to friend](#how-to-find-and-request-to-friend)
             1. [How approve your friend request](#how-approve-your-friend-request)
@@ -88,25 +90,12 @@ Go to [Pet Space](https://spring-pet-space.herokuapp.com). You are see next imag
 
 ![Sign In](/readme_images/sign_up_and_sign_in/sign_in.png)
 
-Click to ___${Sign Up}___ button. You have to see next image with empty fields.
+Click to ___${Sign Up}___ button. Fill registration data. You can see example in the next image. If you enter verified data. 
+You should be see green notification about completed action. Then click on ___${Sign In}___ left button and enter your 
+nickname and email. After success registration you have to enter your sign up data and click ___${Sign In}___ button. 
+As a result you will sign in __Pet Space__ system.
 
-![Sign Up](/readme_images/sign_up_and_sign_in/sign_up.png)
-
-Fill registration data. You can see example in the next image.
-
-![Sign Up with filled data](/readme_images/sign_up_and_sign_in/filled_sing_up.png)
-
-If you enter verified data. You should be see the next image.
-
-![Success Sign Up](/readme_images/sign_up_and_sign_in/success_sign_up.png) 
-
-Click on ___${Sign In}___ left button. Enter your nickname and email.
-
-![Filled Sing In](/readme_images/sign_up_and_sign_in/filled_sign_in.png)
-
-After success registration you have to enter your sign up data and click ___${Sign In}___ button.
-
-![Success Sign In](/readme_images/sign_up_and_sign_in/success_sign_in.png)
+![Success Sign In](/readme_images/sign_up_and_sign_in/sign_up_and_then_sigin_in.gif)
 
 #### USER Role
 ##### How to add pet
@@ -181,6 +170,12 @@ After get your new message you can mark as read new message with two ways:
 ![View another profile](/readme_images/user/view_profile/view_profile_another_user.gif)
 
 #### ADMIN Role
+##### Intro ADMIN Role
+Sign in __Pet Space__ as admin essence. After success authentication you should be see the next image.
+Your role should be __ADMIN__.
+
+![Success sign in as admin](/readme_images/admin/sign_in_as_admin.png)
+
 ##### [How to add pet](#how-to-add-pet)
 ##### [How to find and request to friend](#how-to-find-and-request-to-friend)
 ##### [How approve your friend request](#how-approve-your-friend-request)
@@ -194,7 +189,7 @@ on the  ___${Submit}___ button. After valid data you have to see success ___${Ge
 genus you can see in the ___{Genus pet}___ table. If your genus pet is success added you and other users can use your 
 genus pet name. See as the next presentation.
 
-![Add new genus pet](/readme_images/admin/add_new_genus_pet/adding_new_genus_pet.gif)
+![Add new genus pet](/readme_images/admin/adding_new_genus_pet.gif)
 
 #### ROOT Role
 ##### Intro ROOT Role
