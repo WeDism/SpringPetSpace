@@ -28,6 +28,7 @@
             1. [How view another profile](#how-view-another-profile)
             1. [How add new species](#how-add-new-species)
         1. [ROOT role](#root-role)
+            1. [Intro ROOT Role](#intro-root-role)
             1. [How add new species](#how-add-new-species)
             1. [How view another profile](#how-view-another-profile)
             1. [How to delete user](#how-to-delete-user)
@@ -109,7 +110,7 @@ After success registration you have to enter your sign up data and click ___${Si
 
 #### USER Role
 ##### How to add pet
-Sign in Pet Space. After success authentication you should be see the  next image.
+Sign in Pet Space. After success authentication you should be see the next image.
 
 ![Success Sign In](/readme_images/user/first_success_sign_in.png)
 
@@ -196,12 +197,25 @@ genus pet name. See as the next presentation.
 ![Add new genus pet](/readme_images/admin/add_new_genus_pet/adding_new_genus_pet.gif)
 
 #### ROOT Role
-Sign in ___Pet Space___ as root essence. After success authentication you should be see the next image.
-Your role should be root.
+##### Intro ROOT Role
+Sign in __Pet Space__ as root essence. After success authentication you should be see the next image.
+Your role should be __ROOT__.
+
 ![Success sign in as root](/readme_images/root/success_sign_in_as_root.png)
+
 ##### [How add new species](#how-add-new-species)
 ##### [How view another profile](#how-view-another-profile)
 ##### How to delete user
+Sign in __Pet Space__ and go to home page. Next search ___${Actions}___ column and click needed button in row. 
+After successful operation you saw green notification about completed action. See as the next presentation.
+
+![delete user from system](/readme_images/root/delete_user_from_system.gif)
+
 ##### How to change user role
+Sign in __Pet Space__ and go to home page. Next search ___${Role}___ column and choose needed option in few variants.
+After successful operation you saw green notification about completed action. See as the next presentation.
+
+![change role user](/readme_images/root/change_role_user.gif)
+
 ##### [How add new species](#how-add-new-species)
 
