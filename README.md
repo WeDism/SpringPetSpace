@@ -31,6 +31,7 @@
             1. [How add new species](#how-add-new-species)
             1. [How view another profile](#how-view-another-profile)
             1. [How to delete user](#how-to-delete-user)
+            1. [How to change user role](#how-to-change-user-role)
             1. [How add new species](#how-add-new-species)
 
 
@@ -195,8 +196,12 @@ genus pet name. See as the next presentation.
 ![Add new genus pet](/readme_images/admin/add_new_genus_pet/adding_new_genus_pet.gif)
 
 #### ROOT Role
+Sign in ___Pet Space___ as root essence. After success authentication you should be see the next image.
+Your role should be root.
+![Success sign in as root](/readme_images/root/success_sign_in_as_root.png)
 ##### [How add new species](#how-add-new-species)
 ##### [How view another profile](#how-view-another-profile)
 ##### How to delete user
+##### How to change user role
 ##### [How add new species](#how-add-new-species)
 
