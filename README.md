@@ -154,11 +154,11 @@ Your message notification you can see the next image.
 
 ##### How mark as read message
 After get your new message you can mark as read new message with two ways:
-1. First way click ___${✓}___ on the message notification. See as the next presentations.
+First way click ___${✓}___ on the message notification. See as the next presentations.
 
 ![First way mark as read](/readme_images/user/state_message/first_way_mark_as_read.gif)
 
-1. Second way click ___${Messages}___ on the top page and all messages will be marked as read.
+Second way click ___${Messages}___ on the top page and all messages will be marked as read.
 
 ![Second way mark as read](/readme_images/user/state_message/second_way_mark_as_read.gif)
 
