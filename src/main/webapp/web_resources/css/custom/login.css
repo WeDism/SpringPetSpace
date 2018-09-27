@@ -17,27 +17,37 @@ h2 {
     padding: 1rem;
 }
 
-.row .form-sign-up, .row .form-sign-in {
+.row .form-sign-up,
+.row .form-test-data,
+.row .form-sign-in {
     padding: 0.5rem;
 }
 
-.form-sign-in, .form-sign-up {
+.form-sign-in,
+.form-test-data,
+.form-sign-up {
     max-width: 23rem;
     margin: 0 auto;
 }
 
 .form-sign-in .form-sign-in-heading,
 .form-sign-in .checkbox,
+.form-test-data .form-sign-in-heading,
+.form-test-data .checkbox,
 .form-sign-up .form-sign-up-heading,
 .form-sign-up .checkbox {
     margin-bottom: 10rem;
 }
 
-.form-sign-in .checkbox, .form-sign-up .checkbox {
+.form-sign-in .checkbox,
+.form-test-data .checkbox,
+.form-sign-up .checkbox {
     font-weight: normal;
 }
 
-.form-sign-in .form-control, .form-sign-up .form-control {
+.form-sign-in .form-control,
+.form-test-data .form-control,
+.form-sign-up .form-control {
     position: relative;
     height: auto;
     -webkit-box-sizing: border-box;
@@ -46,12 +56,16 @@ h2 {
     font-size: 1rem;
 }
 
-.form-sign-in .form-control:focus, .form-sign-up .form-control:focus {
+.form-sign-in .form-control:focus,
+.form-test-data .form-control:focus,
+.form-sign-up .form-control:focus {
     z-index: 2;
 }
 
 .form-sign-in input[type="text"],
 .form-sign-in input[type="email"],
+.form-test-data input[type="text"],
+.form-test-data input[type="email"],
 .form-sign-up input[type="text"]:first-child,
 .form-sign-up input[type="email"]:first-child {
     margin-bottom: 0.15rem;
@@ -59,7 +73,7 @@ h2 {
     border-bottom-left-radius: 0;
 }
 
-.form-sign-in input[type="password"] {
+.form-sign-in input[type="password"], .form-test-data input[type="password"]{
     margin-bottom: 1rem;
     border-top-left-radius: 0;
     border-top-right-radius: 0;

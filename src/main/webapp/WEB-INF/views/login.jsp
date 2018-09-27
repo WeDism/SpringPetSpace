@@ -8,10 +8,11 @@
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
-            <h2 class="form-sign-in-heading"><a href="<c:url value="/login"/>"><span class="oi oi-bug" title="Pet network" aria-hidden="true"></span>
-                Pet network</a></h2>
+            <h2 class="form-sign-in-heading">
+                <a href="<c:url value="/login"/>"><span class="oi oi-bug" title="Pet network" aria-hidden="true"></span>Pet network</a>
+            </h2>
             <div class="row">
-                <div class="col-3 left-col">
+                <div class="col-4 left-col">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link active" id="v-pills-sign-in-tab" data-toggle="pill" href="#v-pills-sign-in" role="tab"
                            aria-controls="v-pills-sign-in" aria-selected="true"><span class="oi oi-account-login" title="sign-in" aria-hidden="true"></span>&nbsp;
@@ -19,9 +20,13 @@
                         <a class="nav-link" id="v-pills-sign-up-tab" data-toggle="pill" href="#v-pills-sign-up" role="tab"
                            aria-controls="v-pills-sign-up" aria-selected="false"><span class="oi oi-pencil" title="sign-up" aria-hidden="true"></span>&nbsp;
                             Sign up</a>
+                        <a class="nav-link" id="v-pills-test-data-tab" data-toggle="pill" href="#v-pills-test-data" role="tab"
+                           aria-controls="v-pills-test-data" aria-selected="false">
+                            <span class="oi oi-pencil" title="test-data" aria-hidden="true"></span>&nbsp;
+                            Test data</a>
                     </div>
                 </div>
-                <div class="col-9 right-col">
+                <div class="col-8 right-col">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-sign-in" role="tabpanel" aria-labelledby="v-pills-sign-in-tab">
                             <form id="loginForm" class="form-sign-in" action="<c:url value="/login"/>" method="post">
@@ -56,12 +61,34 @@
                                 <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register">
                             </form>
                         </div>
+                        <div class="tab-pane fade" id="v-pills-test-data" role="tabpanel" aria-labelledby="v-pills-test-data-tab">
+                            <form id="loginFormTest" class="form-test-data" action="<c:url value="/login"/>" method="post">
+                                <input class="form-control" type="text" name="nickname" placeholder="Nickname" required>
+                                <input class="form-control" type="password" name="password" placeholder="Password" required>
+                                <button class="btn btn-lg btn-success btn-block" type="button" value="user1">Sign as user1</button>
+                                <button class="btn btn-lg btn-success btn-block" type="button" value="user2">Sign as user2</button>
+                                <button class="btn btn-lg btn-success btn-block" type="button" value="admin">Sign as admin</button>
+                                <button class="btn btn-lg btn-success btn-block" type="button" value="root">Sign as root</button>
+                                <br>
+                                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        const $buttons = $("button.btn.btn-lg.btn-success.btn-block");
+        for (let i = 0; i < $buttons.length; i++) {
+            let $button = $buttons[i];
+            $button.onclick = function () {
+                const $loginFormTest = $("#loginFormTest input.form-control");
+                $loginFormTest[0].value = $button.value;
+                $loginFormTest[1].value = $button.value;
+            }
+        }
+
         $.datetimepicker.setDateFormatter('moment');
         $('#datetimepicker').datetimepicker({
             format: 'YYYY-MM-DDTHH:mm'
