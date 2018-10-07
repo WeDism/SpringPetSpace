@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/WeDism/SpringPetSpace.svg?branch=master)](https://travis-ci.org/WeDism/SpringPetSpace) 
 [![codecov](https://codecov.io/gh/WeDism/SpringPetSpace/branch/master/graph/badge.svg)](https://codecov.io/gh/WeDism/SpringPetSpace)
 
-# This is a social network for pets. You can click for test use next url: [SpringPetSpace](https://spring-pet-space.herokuapp.com) 
+# This is a social network for pets. It may be tested here: [SpringPetSpace](https://spring-pet-space.herokuapp.com) 
 ## Table of contents
-1. [How to run app](#for-run-this-app-you-have-to-do-next-steps)
+1. [How to run app](#the-following-steps-are-required-for-running-the-application)
 1. [Tested systems](#tested-systems)
 1. [Tested browsers](#tested-browsers)
 1. [Tutorial](#tutorial)
@@ -11,36 +11,36 @@
         1. [Use Case diagram](#use-case-diagram)
         1. [Logical DB Schema](#logical-db-schema)
         1. [Physical DB Schema](#physical-db-schema)
-    1. [How Pet Space use](#how-pet-space-use)
+    1. [How to use Pet Space](#how-to-use-pet-space)
         1. [Sign Up and Sign In](#sign-up-and-sign-in)
         1. [USER role](#user-role)
-            1. [Intro USER Role](#intro-user-role)
+            1. [USER Role Intro](#user-role-intro)
             1. [How to add pet](#how-to-add-pet)
-            1. [How to find and request to friend](#how-to-find-and-request-to-friend)
-            1. [How approve your friend request](#how-approve-your-friend-request)
-            1. [How write message to your friend](#how-write-message-to-your-friend)
-            1. [How mark as read message](#how-mark-as-read-message)
-            1. [How view another profile](#how-view-another-profile)
+            1. [How to find people and send them friend requests](#how-to-find-people-and-send-them-friend-requests)
+            1. [How to approve your friend request](#how-to-approve-your-friend-request)
+            1. [How to write a message to your friend](#how-to-write-a-message-to-your-friend)
+            1. [How to mark message as read](#how-to-mark-message-as-read)
+            1. [How to view another profile](#how-to-view-another-profile)
         1. [ADMIN role](#admin-role)
-            1. [Intro ADMIN Role](#intro-admin-role)
+            1. [ADMIN Role Intro](#admin-role-intro)
             1. [How to add pet](#how-to-add-pet)
-            1. [How to find and request to friend](#how-to-find-and-request-to-friend)
-            1. [How approve your friend request](#how-approve-your-friend-request)
-            1. [How write message to your friend](#how-write-message-to-your-friend)
-            1. [How mark as read message](#how-mark-as-read-message)
-            1. [How view another profile](#how-view-another-profile)
-            1. [How add new species](#how-add-new-species)
+            1. [How to find people and send them friend requests](#how-to-find-people-and-send-them-friend-requests)
+            1. [How to approve your friend request](#how-to-approve-your-friend-request)
+            1. [How to write a message to your friend](#how-to-write-a-message-to-your-friend)
+            1. [How to mark message as read](#how-to-mark-message-as-read)
+            1. [How to view another profile](#how-to-view-another-profile)
+            1. [How to add new species](#how-to-add-new-species)
         1. [ROOT role](#root-role)
-            1. [Intro ROOT Role](#intro-root-role)
-            1. [How add new species](#how-add-new-species)
-            1. [How view another profile](#how-view-another-profile)
+            1. [ROOT Role Intro](#root-role-intro)
+            1. [How to add new species](#how-to-add-new-species)
+            1. [How to view another profile](#how-to-view-another-profile)
             1. [How to delete user](#how-to-delete-user)
             1. [How to change user role](#how-to-change-user-role)
-            1. [How add new species](#how-add-new-species)
+            1. [How to add new species](#how-add-new-species)
 
 
 
-## For run this app you have to do next steps
+## The following steps are required for running the application
 1. [Download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install java 9
 1. [Download](https://www.postgresql.org/download/) and install postgres 10
 1. [Download](https://tomcat.apache.org/download-80.cgi#8.5.31) and install tomcat 8.5
@@ -63,8 +63,8 @@
 ### Intro by design
 #### Use Case diagram
 This is social network service [SNS](https://en.wikipedia.org/wiki/Social_networking_service).
-This system contains three type user essences: __USER__, __ADMIN__ and __ROOT__. These essences extends is an abstract essence. 
-The __ROOT__ essence are main and most credential user. This essence may be management other essences. 
+This system contains three types of user entities: __USER__, __ADMIN__ and __ROOT__. These entities extends is an abstract essence. 
+The __ROOT__ entity is the main and most credential user. This essence may be management other essences. 
 The __USER__ is a most popular essences because it's contains main functions such as find friends and adding friend, 
 send messages few friends each shipment new message, follow and unfollow pets. The __ADMIN__ essence extend the __USER__ 
 and adds a ___${Add species}___ function. See all [use cases](https://en.wikipedia.org/wiki/Use_case) at the next diagram. 
@@ -99,7 +99,7 @@ As a result you will sign in __Pet Space__ system.
 ![Success Sign In](/readme_images/sign_up_and_sign_in/sign_up_and_then_sigin_in.gif)
 
 #### USER Role
-##### Intro USER Role
+##### USER Role Intro
 User role is a base role. The role can use main system capabilities. All capabilities see in [Use Case diagram](#use-case-diagram).
 
 Sign in __Pet Space__ as user essence. After success authentication you should be see the next image. 
