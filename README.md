@@ -7,7 +7,7 @@
 1. [Tested systems](#tested-systems)
 1. [Tested browsers](#tested-browsers)
 1. [Tutorial](#tutorial)
-    1. [Intro](#intro-by-design)
+    1. [Intro](#intro-to-design)
         1. [Use Case diagram](#use-case-diagram)
         1. [Logical DB Schema](#logical-db-schema)
         1. [Physical DB Schema](#physical-db-schema)
@@ -60,7 +60,7 @@
 1. Google chrome mobile 64 version and above
 
 ## Tutorial
-### Intro by design
+### Intro ещ design
 #### Use Case diagram
 This is social network service [SNS](https://en.wikipedia.org/wiki/Social_networking_service).
 This system contains three types of user entities: __USER__, __ADMIN__ and __ROOT__. These entities extends is an abstract essence. 
